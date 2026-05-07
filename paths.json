@@ -1,8 +1,4 @@
 {
-  "mappings": [
-    "/content/aem-boilerplate/:/"
-  ],
-  "includes": [
-    "/content/aem-boilerplate/"
-  ]
+  "mappings": ["/content/gum-reborn/:/"],
+  "includes": ["/content/gum-reborn/"]
 }
