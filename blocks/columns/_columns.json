@@ -1,16 +1,14 @@
 {
   "definitions": [
     {
-      "title": "Columns",
-      "id": "columns",
+      "title": "Column",
+      "id": "column",
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/columns/v1/columns",
+            "resourceType": "core/franklin/components/column/v1/column",
             "template": {
-              "model": "columns",
-              "columns": "2",
-              "rows": "1"
+              "model": "column"
             }
           }
         }
@@ -19,116 +17,34 @@
   ],
   "models": [
     {
-      "id": "columns",
+      "id": "column",
       "fields": [
         {
           "component": "text",
-          "valueType": "number",
-          "name": "columns",
-          "value": "",
-          "label": "Columns"
+          "name": "content",
+          "label": "Content"
         },
         {
           "component": "text",
-          "valueType": "number",
-          "name": "rows",
-          "value": "",
-          "label": "Rows"
-        },
-        {
-          "component": "multiselect",
-          "name": "style",
-          "label": "Style",
+          "name": "alignment",
+          "label": "Alignment",
           "options": [
             {
-              "name": "Inset",
-              "value": "columns-inset"
+              "name": "Left",
+              "value": "left"
             },
             {
-              "name": "Full Width",
-              "value": "columns-full"
+              "name": "Center",
+              "value": "center"
             },
             {
-              "name": "Dark",
-              "value": "columns-dark"
-            },
-            {
-              "name": "Reverse On Mobile",
-              "value": "columns-reverse-mobile"
-            },
-            {
-              "name": "Spacer S",
-              "value": "columns-spacer-s"
-            },
-            {
-              "name": "Spacer M",
-              "value": "columns-spacer-m"
-            },
-            {
-              "name": "Spacer L",
-              "value": "columns-spacer-l"
-            },
-            {
-              "name": "Spacer XL",
-              "value": "columns-spacer-xl"
-            },
-            {
-              "name": "Align Top",
-              "value": "columns-align-top"
-            },
-            {
-              "name": "Align Center",
-              "value": "columns-align-center"
-            },
-            {
-              "name": "Align Bottom",
-              "value": "columns-align-bottom"
-            },
-            {
-              "name": "4 / 8",
-              "value": "columns-ratio-four-eight"
-            },
-            {
-              "name": "4 / 6",
-              "value": "columns-ratio-four-six"
-            },
-            {
-              "name": "6 / 4",
-              "value": "columns-ratio-six-four"
-            },
-            {
-              "name": "7 / 3",
-              "value": "columns-ratio-seven-three"
-            },
-            {
-              "name": "7 / 2",
-              "value": "columns-ratio-seven-two"
-            },
-            {
-              "name": "Wide Gap",
-              "value": "columns-wide-gap"
+              "name": "Right",
+              "value": "right"
             }
           ]
         }
       ]
     }
   ],
-  "filters": [
-    {
-      "id": "columns",
-      "components": ["column"]
-    },
-    {
-      "id": "column",
-      "components": [
-        "text",
-        "image",
-        "button",
-        "title",
-        "cards",
-        "hero",
-        "fragment"
-      ]
-    }
-  ]
+  "filters": []
 }
