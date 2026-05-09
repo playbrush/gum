@@ -1,0 +1,25 @@
+{
+  "extends": ["airbnb-base", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "parser": "@babel/eslint-parser",
+  "plugins": ["json", "prettier"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-console": "warn"
+  },
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": "*.json",
+      "parser": "json-eslint-parser"
+    }
+  ]
+}

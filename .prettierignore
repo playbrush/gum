@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+.cache/
+coverage/
+.git/
+.gitignore
+*.min.js
+*.min.css
+dompurify.min.js
+scripts/dompurify.min.js
