@@ -75,10 +75,6 @@
           {
             "name": "h6",
             "value": "h6"
-          },
-          {
-            "name": "p",
-            "value": "p"
           }
         ]
       }
@@ -188,71 +184,71 @@
         "options": [
           {
             "name": "Inset",
-            "value": "columns--inset"
+            "value": "columns-inset"
           },
           {
             "name": "Full Width",
-            "value": "columns--full"
+            "value": "columns-full"
           },
           {
             "name": "Dark",
-            "value": "columns--dark"
+            "value": "columns-dark"
           },
           {
             "name": "Reverse On Mobile",
-            "value": "columns--reverse-mobile"
+            "value": "columns-reverse-mobile"
           },
           {
             "name": "Spacer S",
-            "value": "columns--spacer-s"
+            "value": "columns-spacer-s"
           },
           {
             "name": "Spacer M",
-            "value": "columns--spacer-m"
+            "value": "columns-spacer-m"
           },
           {
             "name": "Spacer L",
-            "value": "columns--spacer-l"
+            "value": "columns-spacer-l"
           },
           {
             "name": "Spacer XL",
-            "value": "columns--spacer-xl"
+            "value": "columns-spacer-xl"
           },
           {
             "name": "Align Top",
-            "value": "columns--align-top"
+            "value": "columns-align-top"
           },
           {
             "name": "Align Center",
-            "value": "columns--align-center"
+            "value": "columns-align-center"
           },
           {
             "name": "Align Bottom",
-            "value": "columns--align-bottom"
+            "value": "columns-align-bottom"
           },
           {
             "name": "4 / 8",
-            "value": "columns--4-8"
+            "value": "columns-ratio-four-eight"
           },
           {
             "name": "4 / 6",
-            "value": "columns--4-6"
+            "value": "columns-ratio-four-six"
           },
           {
             "name": "6 / 4",
-            "value": "columns--6-4"
+            "value": "columns-ratio-six-four"
           },
           {
             "name": "7 / 3",
-            "value": "columns--7-3"
+            "value": "columns-ratio-seven-three"
           },
           {
             "name": "7 / 2",
-            "value": "columns--7-2"
+            "value": "columns-ratio-seven-two"
           },
           {
             "name": "Wide Gap",
-            "value": "columns--wide-gap"
+            "value": "columns-wide-gap"
           }
         ]
       }

@@ -1,0 +1,9 @@
+{
+  "css.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": ["css"],
+  "stylelint.lintOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "explicit"
+  }
+}
