@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
 :root {
     /* colors */
     --background-color: white;
@@ -20,7 +22,7 @@
     --link-hover-color: #1d3ecf;
 
     /* ===== FUNDAMENTALS: COLORS (ALIAS) ===== */
-    --color-black: #000000;
+    --color-black: #000;
     --color-blue-100: #9adbe8;
     --color-blue-200: #74d1ea;
     --color-blue-300: #3dcfff;
@@ -37,7 +39,7 @@
     --color-neutral-200: #e9e9e9;
     --color-neutral-300: #d6d6d6;
     --color-neutral-400: #a4a4a4;
-    --color-neutral-600: #666666;
+    --color-neutral-600: #666;
     --color-pink: #ea0089;
     --color-purple-100: #aec0ff;
     --color-purple-200: #7559a6;
@@ -46,13 +48,14 @@
     --color-teal-300: #00b388;
     --color-teal-400: #009d85;
     --color-teal-500: #057065;
-    --color-white: #ffffff;
+    --color-white: #fff;
     --color-yellow-100: #ffd100;
     --color-yellow-200: #fcb61c;
     --color-yellow-green-100: #a5dc43;
     --color-yellow-green-200: #7fbb00;
 
     /* ===== FUNDAMENTALS: THEME ===== */
+
     /* theme/background */
     --background-primary: var(--color-green-500);
     --background-primary-inverse: var(--color-white);
@@ -96,6 +99,7 @@
     --input-placeholder: var(--color-neutral-600);
 
     /* ===== FUNDAMENTALS: COLOR + SHADOW STYLES ===== */
+
     /* gradients */
     --gradient-g100-b100: linear-gradient(
         -16.166deg,
@@ -122,6 +126,7 @@
     --shadow-1: 0 12px 60px 0 rgb(0 0 0 / 18%);
 
     /* ===== FUNDAMENTALS: LOGOS ===== */
+
     /* gum full logo */
     --logo-gum-full-rgb: url("/icons/logo-gum-full-rgb.svg");
     --logo-gum-full-black: url("/icons/logo-gum-full-black.svg");
@@ -141,7 +146,7 @@
     --logo-gum-avatar-wordmark: url("/icons/logo-gum-avatar-wordmark.svg");
 
     /* ===== TYPOGRAPHY: FONTS ===== */
-    --font-family-poppins: Poppins, sans-serif;
+    --font-family-poppins: poppins, sans-serif;
 
     /* ===== TYPOGRAPHY: HEADLINE SIZES (DESKTOP) ===== */
     --font-size-display: 96px;
@@ -151,6 +156,15 @@
     --font-size-h4: 35px;
     --font-size-h5: 28px;
     --font-size-h6: 24px;
+
+    /* ===== TYPOGRAPHY: HEADLINE SIZES (MOBILE) ===== */
+    --font-size-display-mobile: 60px;
+    --font-size-h1-mobile: 46px;
+    --font-size-h2-mobile: 40px;
+    --font-size-h3-mobile: 35px;
+    --font-size-h4-mobile: 28px;
+    --font-size-h5-mobile: 26px;
+    --font-size-h6-mobile: 22px;
 
     /* ===== TYPOGRAPHY: BODY SIZES ===== */
     --font-size-large: 18px;
@@ -213,21 +227,6 @@
 
     /* nav height */
     --nav-height: 64px;
-}
-
-/* Poppins font family - Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-
-/* ===== RESPONSIVE TYPOGRAPHY FOR MOBILE ===== */
-:root {
-    /* ===== HEADLINE SIZES (MOBILE) ===== */
-    --font-size-display-mobile: 60px;
-    --font-size-h1-mobile: 46px;
-    --font-size-h2-mobile: 40px;
-    --font-size-h3-mobile: 35px;
-    --font-size-h4-mobile: 28px;
-    --font-size-h5-mobile: 26px;
-    --font-size-h6-mobile: 22px;
 }
 
 @media (width >= 900px) {
@@ -301,23 +300,28 @@ h1 {
     line-height: var(--line-height-headline-lg);
     letter-spacing: -1.5px;
 }
+
 h2 {
     font-size: var(--font-size-h2);
     line-height: var(--line-height-headline-lg);
     letter-spacing: var(--letter-spacing-h2);
 }
+
 h3 {
     font-size: var(--font-size-h3);
     letter-spacing: 0;
 }
+
 h4 {
     font-size: var(--font-size-h4);
     letter-spacing: 0;
 }
+
 h5 {
     font-size: var(--font-size-h5);
     letter-spacing: 0;
 }
+
 h6 {
     font-size: var(--font-size-h6);
     letter-spacing: 0;
@@ -370,7 +374,7 @@ a:hover {
 }
 
 /* buttons */
-a.button:any-link,
+a.button,
 button {
     box-sizing: border-box;
     display: inline-flex;
@@ -405,8 +409,7 @@ button:focus {
     cursor: pointer;
 }
 
-button:disabled,
-button:disabled:hover {
+button:disabled {
     background-color: var(--color-neutral-300);
     color: var(--color-neutral-600);
     cursor: not-allowed;
@@ -463,12 +466,6 @@ a.button.xsmall,
 button.xsmall {
     padding: 0.25em 0.8em;
     font-size: 12px;
-}
-
-/* Pill-shaped button (default) */
-a.button,
-button {
-    border-radius: 2.4em;
 }
 
 /* ===== INPUTS ===== */
