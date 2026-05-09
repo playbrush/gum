@@ -1,33 +1,144 @@
 .columns > div {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    gap: var(--columns-spacer-s);
+    padding: var(--spacing-15) var(--spacing-6);
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .columns img {
-  width: 100%;
+    width: 100%;
 }
 
 .columns > div > div {
-  order: 1;
+    order: 1;
+    min-width: 0;
 }
 
 .columns > div > .columns-img-col {
-  order: 0;
+    order: 0;
 }
 
 .columns > div > .columns-img-col img {
-  display: block;
+    display: block;
+}
+
+/* Mobile feature: invert stack order */
+.columns.columns--reverse-mobile > div {
+    flex-direction: column-reverse;
+}
+
+/* Background variants */
+.columns.columns--dark {
+    background-color: var(--background-primary);
+    color: var(--text-primary-inverse);
+}
+
+/* Spacing/layout variants */
+.columns.columns--wide-gap > div {
+    gap: var(--spacing-layout-gap-wide);
+}
+
+.columns.columns--spacer-s > div {
+    gap: var(--columns-spacer-s);
+}
+
+.columns.columns--spacer-m > div {
+    gap: var(--columns-spacer-m);
+}
+
+.columns.columns--spacer-l > div {
+    gap: var(--columns-spacer-l);
+}
+
+.columns.columns--spacer-xl > div {
+    gap: var(--columns-spacer-xl);
+}
+
+.columns.columns--full > div {
+    padding-left: var(--spacing-0);
+    padding-right: var(--spacing-0);
 }
 
 @media (width >= 900px) {
-  .columns > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
-  }
+    .columns > div {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: var(--columns-spacer-s);
+        padding-left: var(--spacing-layout-margin);
+        padding-right: var(--spacing-layout-margin);
+    }
 
-  .columns > div > div {
-    flex: 1;
-    order: unset;
-  }
+    .columns > div > div {
+        order: unset;
+        flex: 1 0 0;
+        min-width: 0;
+    }
+
+    .columns.columns--inset > div {
+        padding-left: var(--spacing-layout-margin-inset);
+        padding-right: var(--spacing-layout-margin-inset);
+    }
+
+    .columns.columns--full > div {
+        padding-left: var(--spacing-0);
+        padding-right: var(--spacing-0);
+    }
+
+    .columns.columns--reverse-mobile > div {
+        flex-direction: row;
+    }
+
+    /* Vertical alignment variants */
+    .columns.columns--align-top > div {
+        align-items: flex-start;
+    }
+
+    .columns.columns--align-center > div {
+        align-items: center;
+    }
+
+    .columns.columns--align-bottom > div {
+        align-items: flex-end;
+    }
+
+    /* Equal columns */
+    .columns.columns--2 > div > div,
+    .columns.columns-2-cols > div > div,
+    .columns.columns--3 > div > div,
+    .columns.columns-3-cols > div > div,
+    .columns.columns--4 > div > div,
+    .columns.columns-4-cols > div > div,
+    .columns.columns--5 > div > div,
+    .columns.columns-5-cols > div > div {
+        flex: 1 0 0;
+    }
+
+    /* Asymmetric layouts from Figma */
+    .columns.columns--4-8 > div {
+        display: grid;
+        grid-template-columns: 4fr 8fr;
+    }
+
+    .columns.columns--4-6 > div {
+        display: grid;
+        grid-template-columns: 4fr 6fr;
+    }
+
+    .columns.columns--6-4 > div {
+        display: grid;
+        grid-template-columns: 6fr 4fr;
+    }
+
+    .columns.columns--7-3 > div {
+        display: grid;
+        grid-template-columns: 7fr 3fr;
+    }
+
+    .columns.columns--7-2 > div {
+        display: grid;
+        grid-template-columns: 7fr 2fr;
+    }
 }

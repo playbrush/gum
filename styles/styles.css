@@ -171,6 +171,39 @@
     --letter-spacing-display: -2px;
     --letter-spacing-h2: -2px;
 
+    /* ===== SPACING (FOUNDATION) ===== */
+    --spacing-0: 0px;
+    --spacing-0-5: 2px;
+    --spacing-1: 4px;
+    --spacing-1-5: 6px;
+    --spacing-2: 8px;
+    --spacing-3: 12px;
+    --spacing-4: 16px;
+    --spacing-5: 20px;
+    --spacing-6: 24px;
+    --spacing-7: 28px;
+    --spacing-8: 32px;
+    --spacing-9: 36px;
+    --spacing-10: 40px;
+    --spacing-11: 44px;
+    --spacing-12: 48px;
+    --spacing-14: 56px;
+    --spacing-15: 60px;
+    --spacing-16: 64px;
+    --spacing-20: 80px;
+    --spacing-24: 96px;
+
+    /* Layout spacing aliases used by structural blocks */
+    --spacing-layout-margin: 72px;
+    --spacing-layout-margin-inset: 182px;
+    --spacing-layout-gap-wide: 134px;
+
+    /* Columns spacer variants (mobile first, from design spec) */
+    --columns-spacer-s: var(--spacing-6);
+    --columns-spacer-m: var(--spacing-9);
+    --columns-spacer-l: var(--spacing-12);
+    --columns-spacer-xl: var(--spacing-20);
+
     /* ===== RADIUS (MOBILE) ===== */
     --radius-xs: 20px;
     --radius-s: 34px;
@@ -211,6 +244,12 @@
         /* Override mobile radius with desktop radius at breakpoint */
         --radius-l: 160px;
         --radius-xl: 232px;
+
+        /* Columns spacer variants (desktop, from design spec) */
+        --columns-spacer-s: var(--spacing-6);
+        --columns-spacer-m: var(--spacing-10);
+        --columns-spacer-l: var(--spacing-15);
+        --columns-spacer-xl: var(--spacing-24);
     }
 }
 
@@ -873,178 +912,6 @@ main img {
 
 .radius-xl {
     border-radius: var(--radius-xl);
-}
-
-/* ============================================================
-   COLUMNS / GRID SYSTEM
-   ============================================================
-   Figma tokens:
-     --col-margin        72px  (standard horizontal padding)
-     --col-margin-inset  182px (narrower/inset horizontal padding)
-     --col-gap           24px  (column gutter, --spacer/s)
-     --col-gap-wide      134px (wide gutter, --gap-col)
-     --col-padding-v     60px  (vertical padding, --spacer/l)
-
-   Layout modifiers   .cols--inset       Use inset margin (182px)
-                      .cols--full        No horizontal padding (full bleed)
-                      .cols--dark        Dark green background
-                      .cols--wide-gap    Wide gap between columns (134px)
-                      .cols--reverse-mobile  Reverse stacking order on mobile
-
-   Column variants    .cols--2           2 equal columns (6+6)
-                      .cols--3           3 equal columns (4+4+4)
-                      .cols--4           4 equal columns (3+3+3+3)
-                      .cols--5           5 equal columns (2+2+2+2+2)
-                      .cols--4-8         Asymmetric 4+8 (standard margin)
-                      .cols--4-6         Asymmetric 4+6 (inset)
-                      .cols--6-4         Asymmetric 6+4 (inset)
-                      .cols--7-3         Asymmetric 7+3 (inset)
-                      .cols--7-2         Asymmetric 7+2 (inset + wide gap)
-
-   Single-column      Default .cols      Full-width content (12 cols)
-                      .cols--inset       Narrow content (10 cols, 182px pad)
-                      .cols--full        Full bleed (no padding)
-   ============================================================ */
-
-/* Column design tokens */
-:root {
-    --col-margin: 72px;
-    --col-margin-inset: 182px;
-    --col-gap: 24px;
-    --col-gap-wide: 134px;
-    --col-padding-v: 60px;
-}
-
-/* Base wrapper — mobile: single column, vertically stacked */
-.cols {
-    display: flex;
-    flex-direction: column;
-    gap: var(--col-gap);
-    padding: var(--col-padding-v) 24px;
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-/* Dark background — #006341 green */
-.cols--dark {
-    background-color: var(--background-primary, #006341);
-    color: var(--text-primary-inverse, #fff);
-}
-
-/* Wide gap between columns */
-.cols--wide-gap {
-    gap: var(--col-gap-wide);
-}
-
-/* Invert column stacking order on mobile */
-.cols--reverse-mobile {
-    flex-direction: column-reverse;
-}
-
-/* ── Desktop: activate multi-column layouts ────────────── */
-@media (width >= 900px) {
-    /* Standard horizontal margin */
-    .cols {
-        padding-left: var(--col-margin);
-        padding-right: var(--col-margin);
-    }
-
-    /* Inset: narrower content area */
-    .cols--inset {
-        padding-left: var(--col-margin-inset);
-        padding-right: var(--col-margin-inset);
-    }
-
-    /* Full bleed: no horizontal padding */
-    .cols--full {
-        padding-left: 0;
-        padding-right: 0;
-    }
-
-    /* Reset mobile reverse order on desktop */
-    .cols--reverse-mobile {
-        flex-direction: row;
-    }
-
-    /* 2 equal columns — col-6/col-6 or col-5/col-5 */
-    /* nodes: 1:124 (standard), 7:22 (inset) */
-    .cols--2 {
-        flex-direction: row;
-    }
-
-    .cols--2 > * {
-        flex: 1 0 0;
-        min-width: 0;
-    }
-
-    /* 3 equal columns — col-4/col-4/col-4 */
-    /* node: 1:131 */
-    .cols--3 {
-        flex-direction: row;
-    }
-
-    .cols--3 > * {
-        flex: 1 0 0;
-        min-width: 0;
-    }
-
-    /* 4 equal columns — col-3/col-3/col-3/col-3 */
-    /* node: 9:43 */
-    .cols--4 {
-        flex-direction: row;
-    }
-
-    .cols--4 > * {
-        flex: 1 0 0;
-        min-width: 0;
-    }
-
-    /* 5 equal columns — col-2/col-2/col-2/col-2/col-2 (inset) */
-    /* node: 144:4502 */
-    .cols--5 {
-        flex-direction: row;
-    }
-
-    .cols--5 > * {
-        flex: 1 0 0;
-        min-width: 0;
-    }
-
-    /* Asymmetric 2-col: 4+8 (standard margin) */
-    /* node: 9:56 */
-    .cols--4-8 {
-        display: grid;
-        grid-template-columns: 4fr 8fr;
-    }
-
-    /* Asymmetric 2-col: 4+6 (inset) */
-    /* node: 9:69 */
-    .cols--4-6 {
-        display: grid;
-        grid-template-columns: 4fr 6fr;
-    }
-
-    /* Asymmetric 2-col: 6+4 (inset) */
-    /* node: 81:6361 */
-    .cols--6-4 {
-        display: grid;
-        grid-template-columns: 6fr 4fr;
-    }
-
-    /* Asymmetric 2-col: 7+3 (inset) */
-    /* node: 139:4425 */
-    .cols--7-3 {
-        display: grid;
-        grid-template-columns: 7fr 3fr;
-    }
-
-    /* Asymmetric 2-col: 7+2 (inset + wide gap 134px) */
-    /* node: 142:4467 — combine with .cols--wide-gap */
-    .cols--7-2 {
-        display: grid;
-        grid-template-columns: 7fr 2fr;
-    }
 }
 
 .icon {
