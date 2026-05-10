@@ -1060,27 +1060,6 @@ main .section.highlight {
   padding-bottom: var(--spacing-20);
 }
 
-/* section optional margin variants */
-.section.margin-s {
-  margin-top: var(--spacing-6);
-  margin-bottom: var(--spacing-6);
-}
-
-.section.margin-m {
-  margin-top: var(--spacing-9);
-  margin-bottom: var(--spacing-9);
-}
-
-.section.margin-l {
-  margin-top: var(--spacing-12);
-  margin-bottom: var(--spacing-12);
-}
-
-.section.margin-xl {
-  margin-top: var(--spacing-20);
-  margin-bottom: var(--spacing-20);
-}
-
 /* section background variants */
 .section[data-background='dark'] {
   background-color: var(--background-primary);
@@ -1107,20 +1086,5 @@ main > .section[data-width='inset'] > div {
       100%,
       calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-inset-desktop)))
     );
-  }
-
-  .section.margin-m {
-    margin-top: var(--spacing-10);
-    margin-bottom: var(--spacing-10);
-  }
-
-  .section.margin-l {
-    margin-top: var(--spacing-15);
-    margin-bottom: var(--spacing-15);
-  }
-
-  .section.margin-xl {
-    margin-top: var(--spacing-24);
-    margin-bottom: var(--spacing-24);
   }
 }

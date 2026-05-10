@@ -38,4 +38,28 @@
     flex: 1;
     order: unset;
   }
+
+  .columns.columns-2-cols.layout-60-40 > div {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    align-items: center;
+  }
+
+  .columns.columns-2-cols.layout-40-60 > div {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+  }
+
+  .columns.columns-2-cols.layout-70-30 > div {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    align-items: center;
+  }
+
+  .columns.columns-2-cols.layout-30-70 > div {
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    align-items: center;
+  }
 }

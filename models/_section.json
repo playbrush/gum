@@ -26,11 +26,14 @@
           "description": "The label shown for this section in the Content Tree"
         },
         {
-          "component": "multiselect",
+          "component": "select",
           "name": "style",
           "label": "Spacing",
-          "maxSize": 2,
           "options": [
+            {
+              "name": "None",
+              "value": ""
+            },
             {
               "name": "Padding S",
               "value": "spacing-s"
@@ -46,22 +49,6 @@
             {
               "name": "Padding XL",
               "value": "spacing-xl"
-            },
-            {
-              "name": "Margin S",
-              "value": "margin-s"
-            },
-            {
-              "name": "Margin M",
-              "value": "margin-m"
-            },
-            {
-              "name": "Margin L",
-              "value": "margin-l"
-            },
-            {
-              "name": "Margin XL",
-              "value": "margin-xl"
             }
           ]
         },

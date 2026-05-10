@@ -56,10 +56,9 @@
           ]
         },
         {
-          "component": "multiselect",
+          "component": "select",
           "name": "classes",
-          "label": "Visual Size",
-          "maxSize": 1,
+          "label": "Heading Style",
           "options": [
             {
               "name": "Semantic Default",

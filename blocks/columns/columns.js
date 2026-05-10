@@ -1,6 +1,12 @@
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
-  block.classList.add(`columns-${cols.length}-cols`);
+  const colCount = cols.length;
+  block.classList.add(`columns-${colCount}-cols`);
+
+  const layout2 = block.dataset.layout2 || 'equal';
+  if (colCount === 2 && layout2 !== 'equal') {
+    block.classList.add(layout2);
+  }
 
   // setup image columns
   [...block.children].forEach((row) => {

@@ -79,10 +79,9 @@
         ]
       },
       {
-        "component": "multiselect",
+        "component": "select",
         "name": "classes",
-        "label": "Visual Size",
-        "maxSize": 1,
+        "label": "Heading Style",
         "options": [
           {
             "name": "Semantic Default",
@@ -177,11 +176,14 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
-        "component": "multiselect",
+        "component": "select",
         "name": "style",
         "label": "Spacing",
-        "maxSize": 2,
         "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
           {
             "name": "Padding S",
             "value": "spacing-s"
@@ -197,22 +199,6 @@
           {
             "name": "Padding XL",
             "value": "spacing-xl"
-          },
-          {
-            "name": "Margin S",
-            "value": "margin-s"
-          },
-          {
-            "name": "Margin M",
-            "value": "margin-m"
-          },
-          {
-            "name": "Margin L",
-            "value": "margin-l"
-          },
-          {
-            "name": "Margin XL",
-            "value": "margin-xl"
           }
         ]
       },
@@ -308,6 +294,42 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      },
+      {
+        "component": "select",
+        "name": "layout2",
+        "label": "2 Columns Layout",
+        "value": "equal",
+        "condition": {
+          "==": [
+            {
+              "var": "columns"
+            },
+            "2"
+          ]
+        },
+        "options": [
+          {
+            "name": "Equal",
+            "value": "equal"
+          },
+          {
+            "name": "60 / 40",
+            "value": "layout-60-40"
+          },
+          {
+            "name": "40 / 60",
+            "value": "layout-40-60"
+          },
+          {
+            "name": "70 / 30",
+            "value": "layout-70-30"
+          },
+          {
+            "name": "30 / 70",
+            "value": "layout-30-70"
+          }
+        ]
       },
       {
         "component": "multiselect",
