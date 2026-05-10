@@ -309,27 +309,27 @@
             "value": ""
           },
           {
-            "name": "60 / 40 (2 Cols)",
+            "name": "6 / 4 (2 Cols)",
             "value": "layout-60-40"
           },
           {
-            "name": "40 / 60 (2 Cols)",
+            "name": "4 / 6 (2 Cols)",
             "value": "layout-40-60"
           },
           {
-            "name": "70 / 30 (2 Cols)",
+            "name": "7 / 3 (2 Cols)",
             "value": "layout-70-30"
           },
           {
-            "name": "30 / 70 (2 Cols)",
+            "name": "3 / 7 (2 Cols)",
             "value": "layout-30-70"
           },
           {
-            "name": "1/3 – 2/3 (2 Cols)",
+            "name": "4 / 8 (2 Cols)",
             "value": "layout-4-8"
           },
           {
-            "name": "2/5 – 3/5 (2 Cols)",
+            "name": "4 / 6 (Legacy) (2 Cols)",
             "value": "layout-4-6"
           }
         ]
