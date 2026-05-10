@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 export default function decorate(block) {
   // Get column count from section's cols class or data attribute
   const section = block.closest('.section');
@@ -22,6 +24,7 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     li.className = 'column';
+    moveInstrumentation(row, li);
     while (row.firstElementChild) li.append(row.firstElementChild);
 
     // setup image columns

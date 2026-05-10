@@ -122,7 +122,9 @@
                 "template": {
                   "name": "Columns",
                   "filter": "columns"
-                }
+                },
+                "row": "column",
+                "column": "column"
               }
             }
           }
