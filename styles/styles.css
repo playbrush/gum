@@ -990,21 +990,22 @@ main .section.highlight {
 }
 
 /* section width variants */
-main > .section.full-screen > div {
+main > .section.full-screen > div,
+main > .section[data-width='full-screen'] > div {
   max-width: 100%;
 }
 
-main > .section.inset > div {
+main > .section.inset > div,
+main > .section[data-width='inset'] > div {
   max-width: 100%;
   margin-left: var(--spacing-6);
   margin-right: var(--spacing-6);
 }
 
 @media (width >= 900px) {
-  main > .section.inset > div {
+  main > .section.inset > div,
+  main > .section[data-width='inset'] > div {
     margin-left: var(--spacing-12);
     margin-right: var(--spacing-12);
   }
 }
-
-
