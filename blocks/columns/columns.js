@@ -3,8 +3,12 @@ export default function decorate(block) {
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  // Apply layout ratio class from the layout select field (stored as data-layout).
-  const { layout } = block.dataset;
+  // Support both current and legacy authoring fields.
+  const layoutFromClasses = (block.dataset.classes || '')
+    .split(/\s+/)
+    .find((value) => /^layout-(60-40|40-60|70-30|30-70|4-8|4-6)$/.test(value));
+
+  const layout = block.dataset.layout || block.dataset.layout2 || layoutFromClasses;
   if (layout && !block.classList.contains(layout)) {
     block.classList.add(layout);
   }
