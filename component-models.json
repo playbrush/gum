@@ -219,62 +219,13 @@
     ]
   },
   {
-    "id": "columns",
-    "fields": [
-      {
-        "component": "select",
-        "name": "gap",
-        "label": "Gap",
-        "options": [
-          {
-            "name": "Default (medium)",
-            "value": ""
-          },
-          {
-            "name": "Small",
-            "value": "spacer-s"
-          },
-          {
-            "name": "Medium",
-            "value": "spacer-m"
-          },
-          {
-            "name": "Wide",
-            "value": "wide-gap"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "background",
-        "label": "Background",
-        "options": [
-          {
-            "name": "Light (default)",
-            "value": ""
-          },
-          {
-            "name": "Dark",
-            "value": "dark"
-          }
-        ]
-      },
-      {
-        "component": "checkbox",
-        "name": "reverseMobile",
-        "label": "Reverse Order on Mobile",
-        "value": "reverse-mobile"
-      }
-    ]
-  },
-  {
     "id": "column",
     "fields": [
       {
         "component": "text",
         "name": "name",
         "label": "Column Name",
-        "description": "Optional label for this column in the Content Tree"
+        "description": "Optional label for this column"
       }
     ]
   },
