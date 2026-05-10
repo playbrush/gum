@@ -19,6 +19,14 @@
   display: block;
 }
 
+.columns.columns-wide-gap > div {
+  gap: var(--spacing-10, 40px);
+}
+
+.columns.columns-reverse-mobile > div {
+  flex-direction: column-reverse;
+}
+
 @media (width >= 900px) {
   .columns > div {
     align-items: center;

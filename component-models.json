@@ -81,6 +81,18 @@
     ]
   },
   {
+    "id": "text",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "Text",
+        "valueType": "string",
+        "value": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p><p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p><p>Donec ullamcorper nulla non metus auctor fringilla. Maecenas faucibus mollis interdum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>"
+      }
+    ]
+  },
+  {
     "id": "button",
     "fields": [
       {
@@ -214,11 +226,32 @@
     "id": "columns",
     "fields": [
       {
-        "component": "text",
-        "valueType": "number",
+        "component": "select",
         "name": "columns",
-        "value": "",
-        "label": "Columns"
+        "value": "2",
+        "label": "Columns",
+        "options": [
+          {
+            "name": "1",
+            "value": "1"
+          },
+          {
+            "name": "2",
+            "value": "2"
+          },
+          {
+            "name": "3",
+            "value": "3"
+          },
+          {
+            "name": "4",
+            "value": "4"
+          },
+          {
+            "name": "5",
+            "value": "5"
+          }
+        ]
       },
       {
         "component": "text",
@@ -226,6 +259,21 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Styles",
+        "options": [
+          {
+            "name": "Reverse Mobile",
+            "value": "columns-reverse-mobile"
+          },
+          {
+            "name": "Wide Gap",
+            "value": "columns-wide-gap"
+          }
+        ]
       }
     ]
   },

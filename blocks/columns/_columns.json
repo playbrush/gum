@@ -21,11 +21,17 @@
       "id": "columns",
       "fields": [
         {
-          "component": "text",
-          "valueType": "number",
+          "component": "select",
           "name": "columns",
-          "value": "",
-          "label": "Columns"
+          "value": "2",
+          "label": "Columns",
+          "options": [
+            { "name": "1", "value": "1" },
+            { "name": "2", "value": "2" },
+            { "name": "3", "value": "3" },
+            { "name": "4", "value": "4" },
+            { "name": "5", "value": "5" }
+          ]
         },
         {
           "component": "text",
@@ -33,6 +39,15 @@
           "name": "rows",
           "value": "",
           "label": "Rows"
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Styles",
+          "options": [
+            { "name": "Reverse Mobile", "value": "columns-reverse-mobile" },
+            { "name": "Wide Gap", "value": "columns-wide-gap" }
+          ]
         }
       ]
     }
