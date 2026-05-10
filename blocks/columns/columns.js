@@ -2,14 +2,13 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
   // Get column configuration from block's data attributes (from model)
-  const colsValue = block.dataset.cols || '2';
+  const rawColsValue = block.dataset.cols || '2';
+  const colsValue = /^[1-4]$/.test(rawColsValue) ? rawColsValue : '2';
   const layoutValue = block.dataset.layout || 'equal';
   const gapValue = block.dataset.gap || 'medium';
 
-  // Apply columns class based on cols value
-  if (/^[1-4]$/.test(colsValue)) {
-    block.classList.add(`cols-${colsValue}`);
-  }
+  // Always apply a supported class; unsupported values are coerced to 2.
+  block.classList.add(`cols-${colsValue}`);
 
   // Apply layout variant class
   if (layoutValue && layoutValue !== 'equal') {
