@@ -88,7 +88,7 @@
   /* theme/text */
   --text-primary: var(--color-green-600);
   --text-primary-highlight: var(--color-green-100);
-  --text-primary-inverse: var(--color-yellow-green-100);
+  --text-primary-inverse: var(--color-green-100);
   --text-secondary: var(--color-green-500);
   --text-secondary-highlight: var(--color-blue-300);
   --text-secondary-inverse: var(--color-white);

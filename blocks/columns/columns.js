@@ -6,7 +6,7 @@ export default function decorate(block) {
   // Apply layout class from xwalk model for 2-column layouts
   if (colCount === 2) {
     const layout = block.dataset.layout2;
-    if (layout && layout !== 'equal') {
+    if (layout) {
       block.classList.add(layout);
     }
   }

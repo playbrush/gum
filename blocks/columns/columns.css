@@ -40,6 +40,12 @@
   }
 
   /* 2-col layout ratios - apply to individual column children using nth-child */
+
+  /* Equal layout - uses default flex: 1 */
+  .columns.columns-2-cols.equal > div > div {
+    flex: 1;
+  }
+
   .columns.columns-2-cols.layout-60-40 > div > div:nth-child(1) {
     flex: 0 0 60%;
   }
