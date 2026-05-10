@@ -54,6 +54,42 @@
               "value": "h6"
             }
           ]
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Visual Size",
+          "maxSize": 1,
+          "options": [
+            {
+              "name": "Semantic Default",
+              "value": ""
+            },
+            {
+              "name": "Heading H1",
+              "value": "heading-h1"
+            },
+            {
+              "name": "Heading H2",
+              "value": "heading-h2"
+            },
+            {
+              "name": "Heading H3",
+              "value": "heading-h3"
+            },
+            {
+              "name": "Heading H4",
+              "value": "heading-h4"
+            },
+            {
+              "name": "Heading H5",
+              "value": "heading-h5"
+            },
+            {
+              "name": "Heading H6",
+              "value": "heading-h6"
+            }
+          ]
         }
       ]
     }

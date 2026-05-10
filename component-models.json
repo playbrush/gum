@@ -77,6 +77,42 @@
             "value": "h6"
           }
         ]
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Visual Size",
+        "maxSize": 1,
+        "options": [
+          {
+            "name": "Semantic Default",
+            "value": ""
+          },
+          {
+            "name": "Heading H1",
+            "value": "heading-h1"
+          },
+          {
+            "name": "Heading H2",
+            "value": "heading-h2"
+          },
+          {
+            "name": "Heading H3",
+            "value": "heading-h3"
+          },
+          {
+            "name": "Heading H4",
+            "value": "heading-h4"
+          },
+          {
+            "name": "Heading H5",
+            "value": "heading-h5"
+          },
+          {
+            "name": "Heading H6",
+            "value": "heading-h6"
+          }
+        ]
       }
     ]
   },
@@ -141,29 +177,42 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
-        "component": "select",
+        "component": "multiselect",
         "name": "style",
         "label": "Spacing",
+        "maxSize": 2,
         "options": [
           {
-            "name": "None",
-            "value": ""
-          },
-          {
-            "name": "Spacer S",
+            "name": "Padding S",
             "value": "spacing-s"
           },
           {
-            "name": "Spacer M",
+            "name": "Padding M",
             "value": "spacing-m"
           },
           {
-            "name": "Spacer L",
+            "name": "Padding L",
             "value": "spacing-l"
           },
           {
-            "name": "Spacer XL",
+            "name": "Padding XL",
             "value": "spacing-xl"
+          },
+          {
+            "name": "Margin S",
+            "value": "margin-s"
+          },
+          {
+            "name": "Margin M",
+            "value": "margin-m"
+          },
+          {
+            "name": "Margin L",
+            "value": "margin-l"
+          },
+          {
+            "name": "Margin XL",
+            "value": "margin-xl"
           }
         ]
       },

@@ -20,7 +20,7 @@
 }
 
 .columns.columns-wide-gap > div {
-  gap: var(--spacing-10, 40px);
+  gap: var(--layout-grid-gutter-wide, var(--spacing-layout-gap-wide));
 }
 
 .columns.columns-reverse-mobile > div {
@@ -31,7 +31,7 @@
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: var(--layout-grid-gutter, var(--spacing-6));
   }
 
   .columns > div > div {

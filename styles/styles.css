@@ -208,6 +208,14 @@
   --spacing-layout-margin-inset: 182px;
   --spacing-layout-gap-wide: 134px;
 
+  /* Grid layout tokens (aligned with design system layout grid) */
+  --layout-grid-max-width: 1440px;
+  --layout-grid-margin-mobile: var(--spacing-6);
+  --layout-grid-margin-desktop: var(--spacing-layout-margin);
+  --layout-grid-margin-inset-desktop: var(--spacing-layout-margin-inset);
+  --layout-grid-gutter: var(--spacing-6);
+  --layout-grid-gutter-wide: var(--spacing-layout-gap-wide);
+
   /* Columns spacer variants (mobile first, from design spec) */
   --columns-spacer-s: var(--spacing-6);
   --columns-spacer-m: var(--spacing-9);
@@ -319,6 +327,75 @@ h5 {
 }
 
 h6 {
+  font-size: var(--font-size-h6);
+  letter-spacing: 0;
+}
+
+/* heading size utility classes for Title component */
+.heading-h1,
+.heading-h1 h1,
+.heading-h1 h2,
+.heading-h1 h3,
+.heading-h1 h4,
+.heading-h1 h5,
+.heading-h1 h6 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-headline-lg);
+  letter-spacing: -1.5px;
+}
+
+.heading-h2,
+.heading-h2 h1,
+.heading-h2 h2,
+.heading-h2 h3,
+.heading-h2 h4,
+.heading-h2 h5,
+.heading-h2 h6 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-headline-lg);
+  letter-spacing: var(--letter-spacing-h2);
+}
+
+.heading-h3,
+.heading-h3 h1,
+.heading-h3 h2,
+.heading-h3 h3,
+.heading-h3 h4,
+.heading-h3 h5,
+.heading-h3 h6 {
+  font-size: var(--font-size-h3);
+  letter-spacing: 0;
+}
+
+.heading-h4,
+.heading-h4 h1,
+.heading-h4 h2,
+.heading-h4 h3,
+.heading-h4 h4,
+.heading-h4 h5,
+.heading-h4 h6 {
+  font-size: var(--font-size-h4);
+  letter-spacing: 0;
+}
+
+.heading-h5,
+.heading-h5 h1,
+.heading-h5 h2,
+.heading-h5 h3,
+.heading-h5 h4,
+.heading-h5 h5,
+.heading-h5 h6 {
+  font-size: var(--font-size-h5);
+  letter-spacing: 0;
+}
+
+.heading-h6,
+.heading-h6 h1,
+.heading-h6 h2,
+.heading-h6 h3,
+.heading-h6 h4,
+.heading-h6 h5,
+.heading-h6 h6 {
   font-size: var(--font-size-h6);
   letter-spacing: 0;
 }
@@ -920,13 +997,13 @@ main img {
 
 /* sections */
 main > .section {
-  margin: 40px 0;
+  margin: 0;
 }
 
 main > .section > div {
-  max-width: 1200px;
+  width: min(100%, calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-mobile))));
   margin: auto;
-  padding: 0 24px;
+  padding: 0;
 }
 
 main > .section:first-of-type {
@@ -935,7 +1012,7 @@ main > .section:first-of-type {
 
 @media (width >= 900px) {
   main > .section > div {
-    padding: 0 32px;
+    width: min(100%, calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-desktop))));
   }
 
   .section.spacing-m {
@@ -983,6 +1060,27 @@ main .section.highlight {
   padding-bottom: var(--spacing-20);
 }
 
+/* section optional margin variants */
+.section.margin-s {
+  margin-top: var(--spacing-6);
+  margin-bottom: var(--spacing-6);
+}
+
+.section.margin-m {
+  margin-top: var(--spacing-9);
+  margin-bottom: var(--spacing-9);
+}
+
+.section.margin-l {
+  margin-top: var(--spacing-12);
+  margin-bottom: var(--spacing-12);
+}
+
+.section.margin-xl {
+  margin-top: var(--spacing-20);
+  margin-bottom: var(--spacing-20);
+}
+
 /* section background variants */
 .section[data-background='dark'] {
   background-color: var(--background-primary);
@@ -992,20 +1090,37 @@ main .section.highlight {
 /* section width variants */
 main > .section.full-screen > div,
 main > .section[data-width='full-screen'] > div {
+  width: 100%;
   max-width: 100%;
 }
 
 main > .section.inset > div,
 main > .section[data-width='inset'] > div {
-  max-width: 100%;
-  margin-left: var(--spacing-6);
-  margin-right: var(--spacing-6);
+  width: min(100%, calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-mobile))));
+  max-width: none;
 }
 
 @media (width >= 900px) {
   main > .section.inset > div,
   main > .section[data-width='inset'] > div {
-    margin-left: var(--spacing-12);
-    margin-right: var(--spacing-12);
+    width: min(
+      100%,
+      calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-inset-desktop)))
+    );
+  }
+
+  .section.margin-m {
+    margin-top: var(--spacing-10);
+    margin-bottom: var(--spacing-10);
+  }
+
+  .section.margin-l {
+    margin-top: var(--spacing-15);
+    margin-bottom: var(--spacing-15);
+  }
+
+  .section.margin-xl {
+    margin-top: var(--spacing-24);
+    margin-bottom: var(--spacing-24);
   }
 }
