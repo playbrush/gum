@@ -1006,6 +1006,22 @@ main > .section > div {
   padding: 0;
 }
 
+/* Add inline padding for contained and inset width variants */
+main > .section.contained > div,
+main > .section:not([data-width]) > div {
+  padding-left: var(--layout-grid-margin-mobile);
+  padding-right: var(--layout-grid-margin-mobile);
+}
+
+main > .section[data-width='inset'] > div {
+  padding-left: var(--layout-grid-margin-mobile);
+  padding-right: var(--layout-grid-margin-mobile);
+}
+
+main > .section[data-width='full-screen'] > div {
+  padding: 0;
+}
+
 main > .section:first-of-type {
   margin-top: 0;
 }
@@ -1013,6 +1029,18 @@ main > .section:first-of-type {
 @media (width >= 900px) {
   main > .section > div {
     width: min(100%, calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-desktop))));
+  }
+
+  /* Desktop padding for section variants */
+  main > .section.contained > div,
+  main > .section:not([data-width]) > div {
+    padding-left: var(--layout-grid-margin-desktop);
+    padding-right: var(--layout-grid-margin-desktop);
+  }
+
+  main > .section[data-width='inset'] > div {
+    padding-left: var(--layout-grid-margin-inset-desktop);
+    padding-right: var(--layout-grid-margin-inset-desktop);
   }
 
   .section.spacing-m {

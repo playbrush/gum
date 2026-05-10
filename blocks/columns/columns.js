@@ -6,6 +6,10 @@ export default function decorate(block) {
   const layout2 = block.dataset.layout2 || 'equal';
   if (colCount === 2 && layout2 !== 'equal') {
     block.classList.add(layout2);
+    // Apply individual column identifier classes for nth-child targeting
+    cols.forEach((col, index) => {
+      col.classList.add(`col-${index + 1}-of-${colCount}`);
+    });
   }
 
   // setup image columns

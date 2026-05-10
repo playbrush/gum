@@ -1,0 +1,14 @@
+/* Title block styles */
+.title {
+  /* Spacing handled by section */
+}
+
+.title h1,
+.title h2,
+.title h3,
+.title h4,
+.title h5,
+.title h6 {
+  /* Semantic and visual styling applied via heading-h* classes */
+  margin: 0 0 0.25em;
+}

@@ -328,6 +328,14 @@
           {
             "name": "30 / 70",
             "value": "layout-30-70"
+          },
+          {
+            "name": "4 / 8",
+            "value": "layout-4-8"
+          },
+          {
+            "name": "4 / 6",
+            "value": "layout-4-6"
           }
         ]
       },
