@@ -65,6 +65,10 @@
               "value": ""
             },
             {
+              "name": "Display",
+              "value": "heading-display"
+            },
+            {
               "name": "Heading H1",
               "value": "heading-h1"
             },

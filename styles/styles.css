@@ -332,6 +332,18 @@ h6 {
 }
 
 /* heading size utility classes for Title component */
+.heading-display,
+.heading-display h1,
+.heading-display h2,
+.heading-display h3,
+.heading-display h4,
+.heading-display h5,
+.heading-display h6 {
+  font-size: var(--font-size-display-mobile);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
 .heading-h1,
 .heading-h1 h1,
 .heading-h1 h2,
@@ -398,6 +410,18 @@ h6 {
 .heading-h6 h6 {
   font-size: var(--font-size-h6);
   letter-spacing: 0;
+}
+
+@media (width >= 900px) {
+  .heading-display,
+  .heading-display h1,
+  .heading-display h2,
+  .heading-display h3,
+  .heading-display h4,
+  .heading-display h5,
+  .heading-display h6 {
+    font-size: var(--font-size-display);
+  }
 }
 
 p,

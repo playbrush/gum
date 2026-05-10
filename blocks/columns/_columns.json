@@ -41,33 +41,17 @@
           "label": "Rows"
         },
         {
-          "component": "select",
-          "name": "layout2",
-          "label": "2 Columns Layout",
-          "value": "equal",
-          "condition": {
-            "==": [
-              {
-                "var": "columns"
-              },
-              "2"
-            ]
-          },
-          "options": [
-            { "name": "Equal", "value": "equal" },
-            { "name": "60 / 40", "value": "layout-60-40" },
-            { "name": "40 / 60", "value": "layout-40-60" },
-            { "name": "70 / 30", "value": "layout-70-30" },
-            { "name": "30 / 70", "value": "layout-30-70" },
-            { "name": "4 / 8", "value": "layout-4-8" },
-            { "name": "4 / 6", "value": "layout-4-6" }
-          ]
-        },
-        {
           "component": "multiselect",
           "name": "classes",
-          "label": "Styles",
+          "label": "Styles & Layout",
           "options": [
+            { "name": "Equal (2 Cols)", "value": "equal" },
+            { "name": "60 / 40 (2 Cols)", "value": "layout-60-40" },
+            { "name": "40 / 60 (2 Cols)", "value": "layout-40-60" },
+            { "name": "70 / 30 (2 Cols)", "value": "layout-70-30" },
+            { "name": "30 / 70 (2 Cols)", "value": "layout-30-70" },
+            { "name": "4 / 8 (2 Cols)", "value": "layout-4-8" },
+            { "name": "4 / 6 (2 Cols)", "value": "layout-4-6" },
             { "name": "Reverse Mobile", "value": "columns-reverse-mobile" },
             { "name": "Wide Gap", "value": "columns-wide-gap" }
           ]
