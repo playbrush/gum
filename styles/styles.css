@@ -989,36 +989,22 @@ main .section.highlight {
   color: var(--text-primary-inverse);
 }
 
-/* section direct column layout */
-.section.cols-1 > div {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
+/* section width variants */
+main > .section.full-screen > div {
+  max-width: 100%;
 }
 
-.section.cols-2 > div {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+main > .section.inset > div {
+  max-width: 100%;
+  margin-left: var(--spacing-6);
+  margin-right: var(--spacing-6);
 }
 
-.section.cols-3 > div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.section.cols-4 > div {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-/* responsive column layout */
-@media (width < 768px) {
-  .section.cols-2 > div,
-  .section.cols-3 > div,
-  .section.cols-4 > div {
-    grid-template-columns: 1fr;
+@media (width >= 900px) {
+  main > .section.inset > div {
+    margin-left: var(--spacing-12);
+    margin-right: var(--spacing-12);
   }
 }
+
+

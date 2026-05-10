@@ -172,28 +172,20 @@
       },
       {
         "component": "select",
-        "name": "cols",
-        "label": "Columns",
+        "name": "width",
+        "label": "Section Width",
         "options": [
           {
-            "name": "None (default)",
+            "name": "Contained (default)",
             "value": ""
           },
           {
-            "name": "1 Column",
-            "value": "cols-1"
+            "name": "Full Screen",
+            "value": "full-screen"
           },
           {
-            "name": "2 Columns",
-            "value": "cols-2"
-          },
-          {
-            "name": "3 Columns",
-            "value": "cols-3"
-          },
-          {
-            "name": "4 Columns",
-            "value": "cols-4"
+            "name": "Inset",
+            "value": "inset"
           }
         ]
       }
@@ -224,23 +216,23 @@
       {
         "component": "select",
         "name": "cols",
-        "label": "Number of Columns",
+        "label": "Columns",
         "value": "2",
         "options": [
           {
-            "name": "1 Column",
+            "name": "1",
             "value": "1"
           },
           {
-            "name": "2 Columns",
+            "name": "2",
             "value": "2"
           },
           {
-            "name": "3 Columns",
+            "name": "3",
             "value": "3"
           },
           {
-            "name": "4 Columns",
+            "name": "4",
             "value": "4"
           }
         ]
@@ -248,119 +240,51 @@
       {
         "component": "select",
         "name": "layout",
-        "label": "Column Layout (1 Column)",
+        "label": "Layout",
         "value": "equal",
-        "visibility": [
-          {
-            "fieldName": "cols",
-            "value": "1"
-          }
-        ],
         "options": [
           {
-            "name": "Full Width",
-            "value": "full-width"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "layout",
-        "label": "Column Layout (2 Columns)",
-        "value": "col-6-col-6",
-        "visibility": [
-          {
-            "fieldName": "cols",
-            "value": "2"
-          }
-        ],
-        "options": [
-          {
-            "name": "Equal Width (6-6)",
-            "value": "col-6-col-6"
-          },
-          {
-            "name": "Narrow-Wide (5-5 Inset)",
-            "value": "col-5-col-5-inset"
-          },
-          {
-            "name": "60-40 (4-6 Inset)",
-            "value": "col-4-col-6-inset"
-          },
-          {
-            "name": "40-60 (6-4 Inset)",
-            "value": "col-6-col-4-inset"
-          },
-          {
-            "name": "70-30 (7-3 Inset)",
-            "value": "col-7-col-3-inset"
-          },
-          {
-            "name": "Sidebar (4-8)",
-            "value": "col-4-col-8"
-          }
-        ]
-      },
-      {
-        "component": "select",
-        "name": "layout",
-        "label": "Column Layout (3 Columns)",
-        "value": "equal",
-        "visibility": [
-          {
-            "fieldName": "cols",
-            "value": "3"
-          }
-        ],
-        "options": [
-          {
-            "name": "Equal Width",
+            "name": "Equal",
             "value": "equal"
           },
           {
-            "name": "Left-Center-Right",
+            "name": "60-40",
+            "value": "col-4-col-6-inset"
+          },
+          {
+            "name": "40-60",
+            "value": "col-6-col-4-inset"
+          },
+          {
+            "name": "70-30",
+            "value": "col-7-col-3-inset"
+          },
+          {
+            "name": "Sidebar",
+            "value": "col-4-col-8"
+          },
+          {
+            "name": "L-C-R",
             "value": "col-3-col-4-col-1"
           }
         ]
       },
       {
         "component": "select",
-        "name": "layout",
-        "label": "Column Layout (4 Columns)",
-        "value": "equal",
-        "visibility": [
-          {
-            "fieldName": "cols",
-            "value": "4"
-          }
-        ],
-        "options": [
-          {
-            "name": "Equal Width",
-            "value": "equal"
-          },
-          {
-            "name": "5 Equal Cols",
-            "value": "col-2-col-2-col-2-col-2-col-2-inset"
-          }
-        ]
-      },
-      {
-        "component": "select",
         "name": "gap",
-        "label": "Column Gap",
+        "label": "Gap",
         "value": "medium",
         "options": [
           {
-            "name": "Small",
+            "name": "S",
             "value": "small"
           },
           {
-            "name": "Medium",
+            "name": "M",
             "value": "medium"
           },
           {
-            "name": "Large",
+            "name": "L",
             "value": "large"
           }
         ]
@@ -373,8 +297,7 @@
       {
         "component": "text",
         "name": "name",
-        "label": "Column Name",
-        "description": "Optional label for this column"
+        "label": "Name"
       }
     ]
   },
