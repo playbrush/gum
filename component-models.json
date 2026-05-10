@@ -169,6 +169,33 @@
             "value": "dark"
           }
         ]
+      },
+      {
+        "component": "select",
+        "name": "cols",
+        "label": "Columns",
+        "options": [
+          {
+            "name": "None (default)",
+            "value": ""
+          },
+          {
+            "name": "1 Column",
+            "value": "cols-1"
+          },
+          {
+            "name": "2 Columns",
+            "value": "cols-2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "cols-3"
+          },
+          {
+            "name": "4 Columns",
+            "value": "cols-4"
+          }
+        ]
       }
     ]
   },
@@ -188,6 +215,55 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "columns",
+    "fields": [
+      {
+        "component": "select",
+        "name": "gap",
+        "label": "Gap",
+        "options": [
+          {
+            "name": "Default (medium)",
+            "value": ""
+          },
+          {
+            "name": "Small",
+            "value": "spacer-s"
+          },
+          {
+            "name": "Medium",
+            "value": "spacer-m"
+          },
+          {
+            "name": "Wide",
+            "value": "wide-gap"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "background",
+        "label": "Background",
+        "options": [
+          {
+            "name": "Light (default)",
+            "value": ""
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          }
+        ]
+      },
+      {
+        "component": "checkbox",
+        "name": "reverseMobile",
+        "label": "Reverse Order on Mobile",
+        "value": "reverse-mobile"
       }
     ]
   },

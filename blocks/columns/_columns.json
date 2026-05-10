@@ -1,6 +1,20 @@
 {
   "definitions": [
     {
+      "title": "Columns",
+      "id": "columns",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/columns/v1/columns",
+            "template": {
+              "model": "columns"
+            }
+          }
+        }
+      }
+    },
+    {
       "title": "Column",
       "id": "column",
       "plugins": {
@@ -16,6 +30,55 @@
     }
   ],
   "models": [
+    {
+      "id": "columns",
+      "fields": [
+        {
+          "component": "select",
+          "name": "gap",
+          "label": "Gap",
+          "options": [
+            {
+              "name": "Default (medium)",
+              "value": ""
+            },
+            {
+              "name": "Small",
+              "value": "spacer-s"
+            },
+            {
+              "name": "Medium",
+              "value": "spacer-m"
+            },
+            {
+              "name": "Wide",
+              "value": "wide-gap"
+            }
+          ]
+        },
+        {
+          "component": "select",
+          "name": "background",
+          "label": "Background",
+          "options": [
+            {
+              "name": "Light (default)",
+              "value": ""
+            },
+            {
+              "name": "Dark",
+              "value": "dark"
+            }
+          ]
+        },
+        {
+          "component": "checkbox",
+          "name": "reverseMobile",
+          "label": "Reverse Order on Mobile",
+          "value": "reverse-mobile"
+        }
+      ]
+    },
     {
       "id": "column",
       "fields": [

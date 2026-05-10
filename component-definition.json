@@ -113,6 +113,20 @@
           }
         },
         {
+          "title": "Columns",
+          "id": "columns",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/columns/v1/columns",
+                "template": {
+                  "model": "columns"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Column",
           "id": "column",
           "plugins": {

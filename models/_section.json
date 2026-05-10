@@ -66,6 +66,33 @@
               "value": "dark"
             }
           ]
+        },
+        {
+          "component": "select",
+          "name": "cols",
+          "label": "Columns",
+          "options": [
+            {
+              "name": "None (default)",
+              "value": ""
+            },
+            {
+              "name": "1 Column",
+              "value": "cols-1"
+            },
+            {
+              "name": "2 Columns",
+              "value": "cols-2"
+            },
+            {
+              "name": "3 Columns",
+              "value": "cols-3"
+            },
+            {
+              "name": "4 Columns",
+              "value": "cols-4"
+            }
+          ]
         }
       ]
     }
