@@ -83,13 +83,24 @@
     },
     {
       "id": "column",
-      "fields": []
+      "fields": [
+        {
+          "component": "text",
+          "name": "name",
+          "label": "Column Name",
+          "description": "Optional label for this column in the Content Tree"
+        }
+      ]
     }
   ],
   "filters": [
     {
       "id": "columns",
       "components": ["column"]
+    },
+    {
+      "id": "column",
+      "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment"]
     }
   ]
 }

@@ -269,7 +269,14 @@
   },
   {
     "id": "column",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Column Name",
+        "description": "Optional label for this column in the Content Tree"
+      }
+    ]
   },
   {
     "id": "fragment",
