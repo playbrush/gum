@@ -211,12 +211,21 @@
     ]
   },
   {
-    "id": "column",
+    "id": "columns",
     "fields": [
       {
         "component": "text",
-        "name": "name",
-        "label": "Name"
+        "valueType": "number",
+        "name": "columns",
+        "value": "",
+        "label": "Columns"
+      },
+      {
+        "component": "text",
+        "valueType": "number",
+        "name": "rows",
+        "value": "",
+        "label": "Rows"
       }
     ]
   },

@@ -6,28 +6,10 @@
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/columns/v1/columns",
             "template": {
-              "name": "Columns",
-              "filter": "columns"
-            },
-            "row": "column",
-            "column": "column"
-          }
-        }
-      }
-    },
-    {
-      "title": "Column",
-      "id": "column",
-      "plugins": {
-        "xwalk": {
-          "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
-            "template": {
-              "name": "Column",
-              "model": "column",
-              "filter": "column"
+              "columns": "2",
+              "rows": "1"
             }
           }
         }
@@ -36,12 +18,21 @@
   ],
   "models": [
     {
-      "id": "column",
+      "id": "columns",
       "fields": [
         {
           "component": "text",
-          "name": "name",
-          "label": "Name"
+          "valueType": "number",
+          "name": "columns",
+          "value": "",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "",
+          "label": "Rows"
         }
       ]
     }
@@ -53,7 +44,7 @@
     },
     {
       "id": "column",
-      "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment"]
+      "components": ["text", "image", "button", "title"]
     }
   ]
 }
