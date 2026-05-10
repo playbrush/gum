@@ -219,6 +219,107 @@
     ]
   },
   {
+    "id": "columns",
+    "fields": [
+      {
+        "component": "select",
+        "name": "cols",
+        "label": "Number of Columns",
+        "value": "2",
+        "options": [
+          {
+            "name": "1 Column",
+            "value": "1"
+          },
+          {
+            "name": "2 Columns",
+            "value": "2"
+          },
+          {
+            "name": "3 Columns",
+            "value": "3"
+          },
+          {
+            "name": "4 Columns",
+            "value": "4"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "layout",
+        "label": "Column Layout",
+        "value": "equal",
+        "options": [
+          {
+            "name": "Equal Width",
+            "value": "equal"
+          },
+          {
+            "name": "6-6",
+            "value": "col-6-col-6"
+          },
+          {
+            "name": "5-5 (Inset)",
+            "value": "col-5-col-5-inset"
+          },
+          {
+            "name": "4-6 (Inset)",
+            "value": "col-4-col-6-inset"
+          },
+          {
+            "name": "6-4 (Inset)",
+            "value": "col-6-col-4-inset"
+          },
+          {
+            "name": "7-3 (Inset)",
+            "value": "col-7-col-3-inset"
+          },
+          {
+            "name": "3-4-1",
+            "value": "col-3-col-4-col-1"
+          },
+          {
+            "name": "4-8",
+            "value": "col-4-col-8"
+          },
+          {
+            "name": "3-3-3-3",
+            "value": "col-3-col-3-col-3-col-3"
+          },
+          {
+            "name": "2-2-2-2-2 (Inset)",
+            "value": "col-2-col-2-col-2-col-2-col-2-inset"
+          },
+          {
+            "name": "Full Width",
+            "value": "full-width"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "gap",
+        "label": "Column Gap",
+        "value": "medium",
+        "options": [
+          {
+            "name": "Small",
+            "value": "small"
+          },
+          {
+            "name": "Medium",
+            "value": "medium"
+          },
+          {
+            "name": "Large",
+            "value": "large"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "column",
     "fields": [
       {

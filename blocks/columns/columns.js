@@ -1,23 +1,24 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  // Get column count from section's cols class or data attribute
-  const section = block.closest('.section');
-  let colsClass = '';
-  if (section) {
-    // Check for class first (cols-1, cols-2, etc.)
-    const sectionColsClass = [...section.classList].find((cls) => /^cols-[1-4]$/.test(cls));
-    if (sectionColsClass) {
-      colsClass = sectionColsClass;
-      block.classList.add(colsClass);
-    } else {
-      // Check for data attribute (e.g., data-cols="cols-2")
-      const dataColsValue = section.dataset.cols;
-      if (dataColsValue && /^cols-[1-4]$/.test(dataColsValue)) {
-        colsClass = dataColsValue;
-        block.classList.add(colsClass);
-      }
-    }
+  // Get column configuration from block's data attributes (from model)
+  const colsValue = block.dataset.cols || '2';
+  const layoutValue = block.dataset.layout || 'equal';
+  const gapValue = block.dataset.gap || 'medium';
+
+  // Apply columns class based on cols value
+  if (/^[1-4]$/.test(colsValue)) {
+    block.classList.add(`cols-${colsValue}`);
+  }
+
+  // Apply layout variant class
+  if (layoutValue && layoutValue !== 'equal') {
+    block.classList.add(layoutValue);
+  }
+
+  // Apply gap variant class
+  if (gapValue && gapValue !== 'medium') {
+    block.classList.add(`gap-${gapValue}`);
   }
 
   const ul = document.createElement('ul');

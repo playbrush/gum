@@ -35,29 +35,102 @@
   display: block;
 }
 
-/* Two column layout */
-.columns.columns-2-cols > ul {
+/* Default equal width layouts */
+.columns.cols-1 > ul {
+  grid-template-columns: 1fr;
+}
+
+.columns.cols-2 > ul {
   grid-template-columns: repeat(2, 1fr);
 }
 
-/* Three column layout */
-.columns.columns-3-cols > ul {
+.columns.cols-3 > ul {
   grid-template-columns: repeat(3, 1fr);
 }
 
-/* Four column layout */
-.columns.columns-4-cols > ul {
+.columns.cols-4 > ul {
   grid-template-columns: repeat(4, 1fr);
+}
+
+/* Two column layout variants */
+.columns.col-6-col-6 > ul {
+  grid-template-columns: 1fr 1fr;
+}
+
+.columns.col-5-col-5-inset > ul {
+  grid-template-columns: 1fr 1fr;
+  padding: 0 var(--spacing-6);
+}
+
+.columns.col-4-col-6-inset > ul {
+  grid-template-columns: 0.67fr 1fr;
+  padding: 0 var(--spacing-6);
+}
+
+.columns.col-6-col-4-inset > ul {
+  grid-template-columns: 1fr 0.67fr;
+  padding: 0 var(--spacing-6);
+}
+
+.columns.col-7-col-3-inset > ul {
+  grid-template-columns: 1.33fr 0.67fr;
+  padding: 0 var(--spacing-6);
+}
+
+.columns.col-4-col-8 > ul {
+  grid-template-columns: 0.5fr 1fr;
+}
+
+/* Three column layout variants */
+.columns.col-3-col-4-col-1 > ul {
+  grid-template-columns: 0.75fr 1fr 0.25fr;
+}
+
+.columns.col-3-col-3-col-3-col-3 > ul {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Five column layout variants */
+.columns.col-2-col-2-col-2-col-2-col-2-inset > ul {
+  grid-template-columns: repeat(5, 1fr);
+  padding: 0 var(--spacing-6);
+}
+
+/* Full width layout */
+.columns.full-width > ul {
+  grid-template-columns: 1fr;
 }
 
 /* Mobile responsive */
 @media (width <= 768px) {
   .columns > ul {
     grid-template-columns: 1fr;
+    padding: 0 !important;
   }
 }
 
-/* Column gap variants */
+/* Gap variants */
+.columns.gap-small > ul {
+  gap: var(--spacing-small);
+}
+
+.columns.gap-large > ul {
+  gap: var(--spacing-large);
+}
+
+/* Deprecated naming support */
+.columns.columns-2-cols > ul {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.columns.columns-3-cols > ul {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.columns.columns-4-cols > ul {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .columns.columns-reverse-mobile > ul > li.column,
 .columns[data-reversemobile='reverse-mobile'] > ul > li.column {
   flex-direction: column-reverse;
