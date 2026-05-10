@@ -3,19 +3,12 @@ export default function decorate(block) {
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  // Always get layout value from dataset, default to 'equal' for 2 columns
-  const layout2 = colCount === 2 ? block.dataset.layout2 || 'equal' : null;
-
-  // Apply layout class for 2-column layouts
+  // Apply layout class from xwalk model for 2-column layouts
   if (colCount === 2) {
-    if (layout2 !== 'equal') {
-      block.classList.add(layout2);
+    const layout = block.dataset.layout2;
+    if (layout && layout !== 'equal') {
+      block.classList.add(layout);
     }
-    // Add identifier classes for all 2-col layouts (for CSS targeting)
-    block.classList.add('layout-set');
-    cols.forEach((col, index) => {
-      col.classList.add(`col-${index + 1}`);
-    });
   }
 
   // setup image columns
