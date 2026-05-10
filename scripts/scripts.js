@@ -72,6 +72,35 @@ function buildAutoBlocks() {
   }
 }
 
+function decorateTitleHeadings(main) {
+  const titleStylePattern = /^(heading-display|heading-h[1-6])$/;
+  const titleNodes = main.querySelectorAll('[data-aue-component="title"], h1, h2, h3, h4, h5, h6');
+
+  titleNodes.forEach((node) => {
+    const target = node.matches('h1, h2, h3, h4, h5, h6')
+      ? node
+      : node.querySelector('h1, h2, h3, h4, h5, h6');
+
+    if (!target) return;
+
+    const classSources = [
+      node.getAttribute('class') || '',
+      node.getAttribute('data-classes') || '',
+      target.getAttribute('class') || '',
+      target.getAttribute('data-classes') || '',
+    ].join(' ');
+
+    const styleClass = classSources
+      .split(/\s+/)
+      .map((c) => c.trim())
+      .find((c) => titleStylePattern.test(c));
+
+    if (styleClass && !target.classList.contains(styleClass)) {
+      target.classList.add(styleClass);
+    }
+  });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -84,6 +113,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateTitleHeadings(main);
 }
 
 /**
@@ -119,6 +149,7 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  decorateTitleHeadings(main);
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

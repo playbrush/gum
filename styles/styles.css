@@ -351,7 +351,7 @@ h6 {
 .heading-h1 h4,
 .heading-h1 h5,
 .heading-h1 h6 {
-  font-size: var(--font-size-h1);
+  font-size: var(--font-size-h1-mobile);
   line-height: var(--line-height-headline-lg);
   letter-spacing: -1.5px;
 }
@@ -363,7 +363,7 @@ h6 {
 .heading-h2 h4,
 .heading-h2 h5,
 .heading-h2 h6 {
-  font-size: var(--font-size-h2);
+  font-size: var(--font-size-h2-mobile);
   line-height: var(--line-height-headline-lg);
   letter-spacing: var(--letter-spacing-h2);
 }
@@ -375,7 +375,7 @@ h6 {
 .heading-h3 h4,
 .heading-h3 h5,
 .heading-h3 h6 {
-  font-size: var(--font-size-h3);
+  font-size: var(--font-size-h3-mobile);
   letter-spacing: 0;
 }
 
@@ -386,7 +386,7 @@ h6 {
 .heading-h4 h4,
 .heading-h4 h5,
 .heading-h4 h6 {
-  font-size: var(--font-size-h4);
+  font-size: var(--font-size-h4-mobile);
   letter-spacing: 0;
 }
 
@@ -397,7 +397,7 @@ h6 {
 .heading-h5 h4,
 .heading-h5 h5,
 .heading-h5 h6 {
-  font-size: var(--font-size-h5);
+  font-size: var(--font-size-h5-mobile);
   letter-spacing: 0;
 }
 
@@ -408,7 +408,7 @@ h6 {
 .heading-h6 h4,
 .heading-h6 h5,
 .heading-h6 h6 {
-  font-size: var(--font-size-h6);
+  font-size: var(--font-size-h6-mobile);
   letter-spacing: 0;
 }
 
@@ -421,6 +421,66 @@ h6 {
   .heading-display h5,
   .heading-display h6 {
     font-size: var(--font-size-display);
+  }
+
+  .heading-h1,
+  .heading-h1 h1,
+  .heading-h1 h2,
+  .heading-h1 h3,
+  .heading-h1 h4,
+  .heading-h1 h5,
+  .heading-h1 h6 {
+    font-size: var(--font-size-h1);
+  }
+
+  .heading-h2,
+  .heading-h2 h1,
+  .heading-h2 h2,
+  .heading-h2 h3,
+  .heading-h2 h4,
+  .heading-h2 h5,
+  .heading-h2 h6 {
+    font-size: var(--font-size-h2);
+  }
+
+  .heading-h3,
+  .heading-h3 h1,
+  .heading-h3 h2,
+  .heading-h3 h3,
+  .heading-h3 h4,
+  .heading-h3 h5,
+  .heading-h3 h6 {
+    font-size: var(--font-size-h3);
+  }
+
+  .heading-h4,
+  .heading-h4 h1,
+  .heading-h4 h2,
+  .heading-h4 h3,
+  .heading-h4 h4,
+  .heading-h4 h5,
+  .heading-h4 h6 {
+    font-size: var(--font-size-h4);
+  }
+
+  .heading-h5,
+  .heading-h5 h1,
+  .heading-h5 h2,
+  .heading-h5 h3,
+  .heading-h5 h4,
+  .heading-h5 h5,
+  .heading-h5 h6 {
+    font-size: var(--font-size-h5);
+  }
+
+  .heading-h6,
+  .heading-h6 h1,
+  .heading-h6 h2,
+  .heading-h6 h3,
+  .heading-h6 h4,
+  .heading-h6 h5,
+  .heading-h6 h6 {
+    font-size: var(--font-size-h6);
   }
 }
 
