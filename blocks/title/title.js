@@ -3,9 +3,16 @@ export default function decorate(block) {
   const heading = block.querySelector('h1, h2, h3, h4, h5, h6');
 
   if (heading) {
-    // The heading itself is the title component (data-aue-component="title")
-    // Get the classes field value from the heading element's dataset
-    const styleClass = heading.dataset.classes;
+    // Look for the classes attribute on the heading, the block, or any parent with data-aue-component="title"
+    let styleClass = heading.dataset.classes || block.dataset.classes;
+
+    // If not found, search up the parent chain for data-aue-component="title"
+    if (!styleClass) {
+      const parent = heading.closest('[data-aue-component="title"]');
+      if (parent) {
+        styleClass = parent.dataset.classes;
+      }
+    }
 
     // Apply the heading style class if it exists and is not empty
     if (styleClass && styleClass.trim()) {

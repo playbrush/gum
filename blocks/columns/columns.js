@@ -3,12 +3,18 @@ export default function decorate(block) {
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  const layout2 = block.dataset.layout2 || 'equal';
-  if (colCount === 2 && layout2 !== 'equal') {
-    block.classList.add(layout2);
-    // Apply individual column identifier classes for nth-child targeting
+  // Always get layout value from dataset, default to 'equal' for 2 columns
+  const layout2 = colCount === 2 ? block.dataset.layout2 || 'equal' : null;
+
+  // Apply layout class for 2-column layouts
+  if (colCount === 2) {
+    if (layout2 !== 'equal') {
+      block.classList.add(layout2);
+    }
+    // Add identifier classes for all 2-col layouts (for CSS targeting)
+    block.classList.add('layout-set');
     cols.forEach((col, index) => {
-      col.classList.add(`col-${index + 1}-of-${colCount}`);
+      col.classList.add(`col-${index + 1}`);
     });
   }
 

@@ -1006,19 +1006,19 @@ main > .section > div {
   padding: 0;
 }
 
-/* Add inline padding for contained and inset width variants */
-main > .section.contained > div,
-main > .section:not([data-width]) > div {
+/* Add inline padding for contained and inset width variants on the section element */
+main > .section.contained,
+main > .section:not([data-width]) {
   padding-left: var(--layout-grid-margin-mobile);
   padding-right: var(--layout-grid-margin-mobile);
 }
 
-main > .section[data-width='inset'] > div {
+main > .section[data-width='inset'] {
   padding-left: var(--layout-grid-margin-mobile);
   padding-right: var(--layout-grid-margin-mobile);
 }
 
-main > .section[data-width='full-screen'] > div {
+main > .section[data-width='full-screen'] {
   padding: 0;
 }
 
@@ -1031,14 +1031,14 @@ main > .section:first-of-type {
     width: min(100%, calc(var(--layout-grid-max-width) - (2 * var(--layout-grid-margin-desktop))));
   }
 
-  /* Desktop padding for section variants */
-  main > .section.contained > div,
-  main > .section:not([data-width]) > div {
+  /* Desktop padding for section variants on the section element */
+  main > .section.contained,
+  main > .section:not([data-width]) {
     padding-left: var(--layout-grid-margin-desktop);
     padding-right: var(--layout-grid-margin-desktop);
   }
 
-  main > .section[data-width='inset'] > div {
+  main > .section[data-width='inset'] {
     padding-left: var(--layout-grid-margin-inset-desktop);
     padding-right: var(--layout-grid-margin-inset-desktop);
   }
