@@ -248,52 +248,100 @@
       {
         "component": "select",
         "name": "layout",
-        "label": "Column Layout",
+        "label": "Column Layout (1 Column)",
         "value": "equal",
+        "visibility": [
+          {
+            "fieldName": "cols",
+            "value": "1"
+          }
+        ],
+        "options": [
+          {
+            "name": "Full Width",
+            "value": "full-width"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "layout",
+        "label": "Column Layout (2 Columns)",
+        "value": "col-6-col-6",
+        "visibility": [
+          {
+            "fieldName": "cols",
+            "value": "2"
+          }
+        ],
+        "options": [
+          {
+            "name": "Equal Width (6-6)",
+            "value": "col-6-col-6"
+          },
+          {
+            "name": "Narrow-Wide (5-5 Inset)",
+            "value": "col-5-col-5-inset"
+          },
+          {
+            "name": "60-40 (4-6 Inset)",
+            "value": "col-4-col-6-inset"
+          },
+          {
+            "name": "40-60 (6-4 Inset)",
+            "value": "col-6-col-4-inset"
+          },
+          {
+            "name": "70-30 (7-3 Inset)",
+            "value": "col-7-col-3-inset"
+          },
+          {
+            "name": "Sidebar (4-8)",
+            "value": "col-4-col-8"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "layout",
+        "label": "Column Layout (3 Columns)",
+        "value": "equal",
+        "visibility": [
+          {
+            "fieldName": "cols",
+            "value": "3"
+          }
+        ],
         "options": [
           {
             "name": "Equal Width",
             "value": "equal"
           },
           {
-            "name": "6-6",
-            "value": "col-6-col-6"
-          },
-          {
-            "name": "5-5 (Inset)",
-            "value": "col-5-col-5-inset"
-          },
-          {
-            "name": "4-6 (Inset)",
-            "value": "col-4-col-6-inset"
-          },
-          {
-            "name": "6-4 (Inset)",
-            "value": "col-6-col-4-inset"
-          },
-          {
-            "name": "7-3 (Inset)",
-            "value": "col-7-col-3-inset"
-          },
-          {
-            "name": "3-4-1",
+            "name": "Left-Center-Right",
             "value": "col-3-col-4-col-1"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "layout",
+        "label": "Column Layout (4 Columns)",
+        "value": "equal",
+        "visibility": [
+          {
+            "fieldName": "cols",
+            "value": "4"
+          }
+        ],
+        "options": [
+          {
+            "name": "Equal Width",
+            "value": "equal"
           },
           {
-            "name": "4-8",
-            "value": "col-4-col-8"
-          },
-          {
-            "name": "3-3-3-3",
-            "value": "col-3-col-3-col-3-col-3"
-          },
-          {
-            "name": "2-2-2-2-2 (Inset)",
+            "name": "5 Equal Cols",
             "value": "col-2-col-2-col-2-col-2-col-2-inset"
-          },
-          {
-            "name": "Full Width",
-            "value": "full-width"
           }
         ]
       },
