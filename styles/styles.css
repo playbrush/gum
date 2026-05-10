@@ -1178,6 +1178,15 @@ main .section.highlight {
   color: var(--text-primary-inverse);
 }
 
+/* Body/L/Medium reference style for paragraph text on dark sections */
+.section[data-background='dark'] .columns p:not(.button-container) {
+  color: var(--text-secondary-inverse);
+  font-size: var(--font-size-large);
+  font-weight: 500;
+  line-height: var(--line-height-body-lg);
+  letter-spacing: var(--letter-spacing-body-sm);
+}
+
 /* section width variants */
 main > .section.full-screen > div,
 main > .section[data-width='full-screen'] > div {

@@ -85,8 +85,10 @@ function decorateTitleHeadings(main) {
 
     const classSources = [
       node.getAttribute('class') || '',
+      node.getAttribute('data-style') || '',
       node.getAttribute('data-classes') || '',
       target.getAttribute('class') || '',
+      target.getAttribute('data-style') || '',
       target.getAttribute('data-classes') || '',
     ].join(' ');
 
