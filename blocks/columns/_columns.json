@@ -80,6 +80,10 @@
           "value": "reverse-mobile"
         }
       ]
+    },
+    {
+      "id": "column",
+      "fields": []
     }
   ],
   "filters": [
