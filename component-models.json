@@ -268,35 +268,6 @@
     ]
   },
   {
-    "id": "column",
-    "fields": [
-      {
-        "component": "text",
-        "name": "content",
-        "label": "Content"
-      },
-      {
-        "component": "text",
-        "name": "alignment",
-        "label": "Alignment",
-        "options": [
-          {
-            "name": "Left",
-            "value": "left"
-          },
-          {
-            "name": "Center",
-            "value": "center"
-          },
-          {
-            "name": "Right",
-            "value": "right"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "id": "fragment",
     "fields": [
       {

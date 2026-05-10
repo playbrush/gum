@@ -1,27 +1,12 @@
-.columns {
+.columns > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
   gap: var(--spacing-medium);
 }
 
-.columns.columns-2-cols {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.columns.columns-3-cols {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.columns.columns-4-cols {
-  grid-template-columns: repeat(4, 1fr);
-}
-
-@media (width <= 768px) {
-  .columns {
-    grid-template-columns: 1fr;
-  }
-}
-
-.columns > :is(.column, div) {
+.columns > ul > li.column {
   display: flex;
   flex-direction: column;
   gap: var(--columns-spacer-s);
@@ -31,47 +16,70 @@
   box-sizing: border-box;
 }
 
-.columns > :is(.column, div) img {
+.columns > ul > li.column img {
   width: 100%;
 }
 
-.columns > :is(.column, div) > div {
+.columns > ul > li.column > div {
   order: 1;
   min-width: 0;
 }
 
-.columns > :is(.column, div).columns-img-col,
-.columns > :is(.column, div) > .columns-img-col {
+.columns > ul > li.column.columns-img-col,
+.columns > ul > li.column > .columns-img-col {
   order: 0;
 }
 
-.columns > :is(.column, div).columns-img-col img,
-.columns > :is(.column, div) > .columns-img-col img {
+.columns > ul > li.column.columns-img-col img,
+.columns > ul > li.column > .columns-img-col img {
   display: block;
 }
 
-.columns.columns-reverse-mobile > :is(.column, div),
-.columns[data-reversemobile='reverse-mobile'] > :is(.column, div) {
+/* Two column layout */
+.columns.columns-2-cols > ul {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Three column layout */
+.columns.columns-3-cols > ul {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Four column layout */
+.columns.columns-4-cols > ul {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Mobile responsive */
+@media (width <= 768px) {
+  .columns > ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Column gap variants */
+.columns.columns-reverse-mobile > ul > li.column,
+.columns[data-reversemobile='reverse-mobile'] > ul > li.column {
   flex-direction: column-reverse;
 }
 
-.columns.columns-dark,
-.columns[data-background='dark'] {
+.columns.columns-dark > ul,
+.columns[data-background='dark'] > ul {
   background-color: var(--background-primary);
   color: var(--text-primary-inverse);
 }
 
-.columns.columns-wide-gap > :is(.column, div),
-.columns[data-gap='wide-gap'] > :is(.column, div) {
+.columns.columns-wide-gap > ul > li.column,
+.columns[data-gap='wide-gap'] > ul > li.column {
   gap: var(--spacing-layout-gap-wide);
 }
 
-.columns.columns-spacer-s > :is(.column, div),
-.columns[data-gap='spacer-s'] > :is(.column, div) {
+.columns.columns-spacer-s > ul > li.column,
+.columns[data-gap='spacer-s'] > ul > li.column {
   gap: var(--columns-spacer-s);
 }
 
-.columns.columns-spacer-m > :is(.column, div),
-.columns[data-gap='spacer-m'] > :is(.column, div) {
+.columns.columns-spacer-m > ul > li.column,
+.columns[data-gap='spacer-m'] > ul > li.column {
   gap: var(--columns-spacer-m);
 }
