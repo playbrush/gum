@@ -72,6 +72,42 @@ function buildAutoBlocks() {
   }
 }
 
+const titleStyleCache = new Map();
+
+function extractAemPathFromUrn(urn) {
+  if (!urn || !urn.startsWith('urn:aemconnection:')) return null;
+  return urn.replace('urn:aemconnection:', '');
+}
+
+async function resolveTitleStyleFromResource(resourceUrn) {
+  if (!resourceUrn) return null;
+  const path = extractAemPathFromUrn(resourceUrn);
+  if (!path) return null;
+
+  if (titleStyleCache.has(path)) {
+    return titleStyleCache.get(path);
+  }
+
+  const fetchPromise = fetch(`${path}.json`, { credentials: 'include' })
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => {
+      if (!data) return null;
+      const rawValue = data.classes || data.style || '';
+      if (!rawValue) return null;
+
+      const styleClass = String(rawValue)
+        .split(/\s+/)
+        .map((c) => c.trim())
+        .find((c) => c === 'heading-display' || /^heading-h[1-6]$/.test(c));
+
+      return styleClass || null;
+    })
+    .catch(() => null);
+
+  titleStyleCache.set(path, fetchPromise);
+  return fetchPromise;
+}
+
 function decorateTitleHeadings(main) {
   const titleStylePattern = /^(heading-display|heading-h[1-6])$/;
   const titleNodes = main.querySelectorAll('[data-aue-component="title"], h1, h2, h3, h4, h5, h6');
@@ -123,6 +159,18 @@ function decorateTitleHeadings(main) {
 
     if (styleClass && !target.classList.contains(styleClass)) {
       target.classList.add(styleClass);
+      return;
+    }
+
+    const resourceUrn =
+      node.getAttribute('data-aue-resource') || target.getAttribute('data-aue-resource');
+
+    if (resourceUrn) {
+      resolveTitleStyleFromResource(resourceUrn).then((resolvedStyleClass) => {
+        if (resolvedStyleClass) {
+          target.classList.add(resolvedStyleClass);
+        }
+      });
     }
   });
 }
