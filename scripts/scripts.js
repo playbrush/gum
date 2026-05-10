@@ -83,6 +83,20 @@ function decorateTitleHeadings(main) {
 
     if (!target) return;
 
+    const collectStyleClass = (el) => {
+      if (!el) return null;
+      const src = [
+        el.getAttribute('class') || '',
+        el.getAttribute('data-style') || '',
+        el.getAttribute('data-classes') || '',
+      ].join(' ');
+
+      return src
+        .split(/\s+/)
+        .map((c) => c.trim())
+        .find((c) => titleStylePattern.test(c));
+    };
+
     const classSources = [
       node.getAttribute('class') || '',
       node.getAttribute('data-style') || '',
@@ -92,14 +106,37 @@ function decorateTitleHeadings(main) {
       target.getAttribute('data-classes') || '',
     ].join(' ');
 
-    const styleClass = classSources
+    let styleClass = classSources
       .split(/\s+/)
       .map((c) => c.trim())
       .find((c) => titleStylePattern.test(c));
 
+    // Fallback: some UE updates apply class/style on parent container instead of heading node.
+    if (!styleClass) {
+      const boundary = target.closest('.section, [data-aue-type="container"]');
+      let parent = target.parentElement;
+      while (parent && parent !== boundary && !styleClass) {
+        styleClass = collectStyleClass(parent);
+        parent = parent.parentElement;
+      }
+    }
+
     if (styleClass && !target.classList.contains(styleClass)) {
       target.classList.add(styleClass);
     }
+  });
+}
+
+function observeTitleHeadingUpdates(main) {
+  const observer = new MutationObserver(() => {
+    decorateTitleHeadings(main);
+  });
+
+  observer.observe(main, {
+    subtree: true,
+    childList: true,
+    attributes: true,
+    attributeFilter: ['class', 'data-style', 'data-classes', 'data-aue-component'],
   });
 }
 
@@ -116,6 +153,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateTitleHeadings(main);
+  observeTitleHeadingUpdates(main);
 }
 
 /**

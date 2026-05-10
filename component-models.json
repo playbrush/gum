@@ -80,7 +80,7 @@
       },
       {
         "component": "select",
-        "name": "style",
+        "name": "classes",
         "label": "Heading Style",
         "options": [
           {
