@@ -10,7 +10,7 @@
             "template": {
               "columns": "2",
               "rows": "1",
-              "layout": ""
+              "style": ""
             }
           }
         }
@@ -43,7 +43,7 @@
         },
         {
           "component": "select",
-          "name": "layout",
+          "name": "style",
           "label": "Layout",
           "options": [
             { "name": "Equal (default)", "value": "" },

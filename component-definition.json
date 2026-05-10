@@ -124,7 +124,7 @@
                 "template": {
                   "columns": "2",
                   "rows": "1",
-                  "layout": ""
+                  "style": ""
                 }
               }
             }
