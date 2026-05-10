@@ -109,5 +109,10 @@
       ]
     }
   ],
-  "filters": []
+  "filters": [
+    {
+      "id": "columns",
+      "components": ["column"]
+    }
+  ]
 }
