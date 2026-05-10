@@ -42,5 +42,14 @@
       "columns",
       "fragment"
     ]
+  },
+  {
+    "id": "section",
+    "components": [
+      "columns",
+      "hero",
+      "cards",
+      "fragment"
+    ]
   }
 ]

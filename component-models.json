@@ -336,5 +336,76 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "section",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Section Name"
+      },
+      {
+        "component": "select",
+        "name": "style",
+        "label": "Spacing",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Spacer S",
+            "value": "spacing-s"
+          },
+          {
+            "name": "Spacer M",
+            "value": "spacing-m"
+          },
+          {
+            "name": "Spacer L",
+            "value": "spacing-l"
+          },
+          {
+            "name": "Spacer XL",
+            "value": "spacing-xl"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "background",
+        "label": "Background",
+        "options": [
+          {
+            "name": "Light (default)",
+            "value": ""
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "width",
+        "label": "Section Width",
+        "options": [
+          {
+            "name": "Contained (default)",
+            "value": ""
+          },
+          {
+            "name": "Full Screen",
+            "value": "full-screen"
+          },
+          {
+            "name": "Inset",
+            "value": "inset"
+          }
+        ]
+      }
+    ]
   }
 ]
