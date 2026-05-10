@@ -79,7 +79,7 @@
         ]
       },
       {
-        "component": "select",
+        "component": "multiselect",
         "name": "classes",
         "label": "Heading Style",
         "options": [
@@ -300,13 +300,13 @@
         "label": "Rows"
       },
       {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Styles & Layout",
+        "component": "select",
+        "name": "layout",
+        "label": "Layout",
         "options": [
           {
-            "name": "Equal (2 Cols)",
-            "value": "equal"
+            "name": "Equal (default)",
+            "value": ""
           },
           {
             "name": "60 / 40 (2 Cols)",
@@ -325,13 +325,20 @@
             "value": "layout-30-70"
           },
           {
-            "name": "4 / 8 (2 Cols)",
+            "name": "1/3 – 2/3 (2 Cols)",
             "value": "layout-4-8"
           },
           {
-            "name": "4 / 6 (2 Cols)",
+            "name": "2/5 – 3/5 (2 Cols)",
             "value": "layout-4-6"
-          },
+          }
+        ]
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Styles",
+        "options": [
           {
             "name": "Reverse Mobile",
             "value": "columns-reverse-mobile"

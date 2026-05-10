@@ -3,12 +3,10 @@ export default function decorate(block) {
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  // Backward compatibility: support older authored content using layout2 field.
-  if (colCount === 2) {
-    const layout = block.dataset.layout2 || block.getAttribute('data-layout2');
-    if (layout && !block.classList.contains(layout)) {
-      block.classList.add(layout);
-    }
+  // Apply layout ratio class from the layout select field (stored as data-layout).
+  const { layout } = block.dataset;
+  if (layout && !block.classList.contains(layout)) {
+    block.classList.add(layout);
   }
 
   // setup image columns

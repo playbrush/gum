@@ -30,68 +30,37 @@
 @media (width >= 900px) {
   .columns > div {
     align-items: center;
-    flex-direction: unset;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: var(--layout-grid-gutter, var(--spacing-6));
   }
 
   .columns > div > div {
-    flex: 1;
     order: unset;
   }
 
-  /* 2-col layout ratios - apply to individual column children using nth-child */
-
-  /* Equal layout - uses default flex: 1 */
-  .columns.columns-2-cols.equal > div > div {
-    flex: 1;
+  /* 2-col layout ratios using fr units — no overflow possible */
+  .columns.columns-2-cols.layout-60-40 > div {
+    grid-template-columns: 3fr 2fr;
   }
 
-  .columns.columns-2-cols.layout-60-40 > div > div:nth-child(1) {
-    flex: 0 0 60%;
+  .columns.columns-2-cols.layout-40-60 > div {
+    grid-template-columns: 2fr 3fr;
   }
 
-  .columns.columns-2-cols.layout-60-40 > div > div:nth-child(2) {
-    flex: 0 0 40%;
+  .columns.columns-2-cols.layout-70-30 > div {
+    grid-template-columns: 7fr 3fr;
   }
 
-  .columns.columns-2-cols.layout-40-60 > div > div:nth-child(1) {
-    flex: 0 0 40%;
+  .columns.columns-2-cols.layout-30-70 > div {
+    grid-template-columns: 3fr 7fr;
   }
 
-  .columns.columns-2-cols.layout-40-60 > div > div:nth-child(2) {
-    flex: 0 0 60%;
+  .columns.columns-2-cols.layout-4-8 > div {
+    grid-template-columns: 1fr 2fr;
   }
 
-  .columns.columns-2-cols.layout-70-30 > div > div:nth-child(1) {
-    flex: 0 0 70%;
-  }
-
-  .columns.columns-2-cols.layout-70-30 > div > div:nth-child(2) {
-    flex: 0 0 30%;
-  }
-
-  .columns.columns-2-cols.layout-30-70 > div > div:nth-child(1) {
-    flex: 0 0 30%;
-  }
-
-  .columns.columns-2-cols.layout-30-70 > div > div:nth-child(2) {
-    flex: 0 0 70%;
-  }
-
-  /* New 4-8 and 4-6 ratio layouts */
-  .columns.columns-2-cols.layout-4-8 > div > div:nth-child(1) {
-    flex: 0 0 33.33%;
-  }
-
-  .columns.columns-2-cols.layout-4-8 > div > div:nth-child(2) {
-    flex: 0 0 66.66%;
-  }
-
-  .columns.columns-2-cols.layout-4-6 > div > div:nth-child(1) {
-    flex: 0 0 40%;
-  }
-
-  .columns.columns-2-cols.layout-4-6 > div > div:nth-child(2) {
-    flex: 0 0 60%;
+  .columns.columns-2-cols.layout-4-6 > div {
+    grid-template-columns: 2fr 3fr;
   }
 }

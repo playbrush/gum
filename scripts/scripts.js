@@ -72,105 +72,20 @@ function buildAutoBlocks() {
   }
 }
 
-const titleStyleCache = new Map();
+const HEADING_STYLE_PATTERN = /^(heading-display|heading-h[1-6])$/;
 
-function extractAemPathFromUrn(urn) {
-  if (!urn || !urn.startsWith('urn:aemconnection:')) return null;
-  return urn.replace('urn:aemconnection:', '');
-}
-
-async function resolveTitleStyleFromResource(resourceUrn) {
-  if (!resourceUrn) return null;
-  const path = extractAemPathFromUrn(resourceUrn);
-  if (!path) return null;
-
-  if (titleStyleCache.has(path)) {
-    return titleStyleCache.get(path);
-  }
-
-  const fetchPromise = fetch(`${path}.json`, { credentials: 'include' })
-    .then((res) => (res.ok ? res.json() : null))
-    .then((data) => {
-      if (!data) return null;
-      const rawValue = data.classes || data.style || '';
-      if (!rawValue) return null;
-
-      const styleClass = String(rawValue)
-        .split(/\s+/)
-        .map((c) => c.trim())
-        .find((c) => c === 'heading-display' || /^heading-h[1-6]$/.test(c));
-
-      return styleClass || null;
-    })
-    .catch(() => null);
-
-  titleStyleCache.set(path, fetchPromise);
-  return fetchPromise;
-}
-
+/**
+ * Copies a heading style class (heading-display, heading-h*) from the .title block
+ * wrapper onto the actual heading element so both CSS and UE live-editing work.
+ * @param {Element} main
+ */
 function decorateTitleHeadings(main) {
-  const titleStylePattern = /^(heading-display|heading-h[1-6])$/;
-  const titleNodes = main.querySelectorAll('[data-aue-component="title"], h1, h2, h3, h4, h5, h6');
-
-  titleNodes.forEach((node) => {
-    const target = node.matches('h1, h2, h3, h4, h5, h6')
-      ? node
-      : node.querySelector('h1, h2, h3, h4, h5, h6');
-
-    if (!target) return;
-
-    const collectStyleClass = (el) => {
-      if (!el) return null;
-      const src = [
-        el.getAttribute('class') || '',
-        el.getAttribute('data-style') || '',
-        el.getAttribute('data-classes') || '',
-      ].join(' ');
-
-      return src
-        .split(/\s+/)
-        .map((c) => c.trim())
-        .find((c) => titleStylePattern.test(c));
-    };
-
-    const classSources = [
-      node.getAttribute('class') || '',
-      node.getAttribute('data-style') || '',
-      node.getAttribute('data-classes') || '',
-      target.getAttribute('class') || '',
-      target.getAttribute('data-style') || '',
-      target.getAttribute('data-classes') || '',
-    ].join(' ');
-
-    let styleClass = classSources
-      .split(/\s+/)
-      .map((c) => c.trim())
-      .find((c) => titleStylePattern.test(c));
-
-    // Fallback: some UE updates apply class/style on parent container instead of heading node.
-    if (!styleClass) {
-      const boundary = target.closest('.section, [data-aue-type="container"]');
-      let parent = target.parentElement;
-      while (parent && parent !== boundary && !styleClass) {
-        styleClass = collectStyleClass(parent);
-        parent = parent.parentElement;
-      }
-    }
-
-    if (styleClass && !target.classList.contains(styleClass)) {
-      target.classList.add(styleClass);
-      return;
-    }
-
-    const resourceUrn =
-      node.getAttribute('data-aue-resource') || target.getAttribute('data-aue-resource');
-
-    if (resourceUrn) {
-      resolveTitleStyleFromResource(resourceUrn).then((resolvedStyleClass) => {
-        if (resolvedStyleClass) {
-          target.classList.add(resolvedStyleClass);
-        }
-      });
+  main.querySelectorAll('.title.block').forEach((block) => {
+    const heading = block.querySelector('h1, h2, h3, h4, h5, h6');
+    if (!heading) return;
+    const styleClass = [...block.classList].find((c) => HEADING_STYLE_PATTERN.test(c));
+    if (styleClass && !heading.classList.contains(styleClass)) {
+      heading.classList.add(styleClass);
     }
   });
 }
@@ -184,7 +99,7 @@ function observeTitleHeadingUpdates(main) {
     subtree: true,
     childList: true,
     attributes: true,
-    attributeFilter: ['class', 'data-style', 'data-classes', 'data-aue-component'],
+    attributeFilter: ['class'],
   });
 }
 
