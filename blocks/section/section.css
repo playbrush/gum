@@ -1,78 +1,41 @@
-/* Define the grid layout for the section */
-.section {
-  display: grid;
-  gap: var(--spacing-medium);
+.section.spacing-s {
+  padding-top: var(--spacing-6);
+  padding-bottom: var(--spacing-6);
 }
 
-/* Define column configurations */
-.section.col-2 {
-  grid-template-columns: repeat(2, 1fr);
+.section.spacing-m {
+  padding-top: var(--spacing-9);
+  padding-bottom: var(--spacing-9);
 }
 
-.section.col-3 {
-  grid-template-columns: repeat(3, 1fr);
+.section.spacing-l {
+  padding-top: var(--spacing-12);
+  padding-bottom: var(--spacing-12);
 }
 
-.section.col-4 {
-  grid-template-columns: repeat(4, 1fr);
+.section.spacing-xl {
+  padding-top: var(--spacing-20);
+  padding-bottom: var(--spacing-20);
 }
 
-/* Add responsive behavior */
-@media (width <= 768px) {
-  .section {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Moved column styles to section component */
-
-.section > .column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--columns-spacer-s);
-  padding: var(--spacing-15) var(--spacing-6);
-  width: 100%;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.section .column img {
-  width: 100%;
-}
-
-.section > .column > div {
-  order: 1;
-  min-width: 0;
-}
-
-.section > .column.columns-img-col {
-  order: 0;
-}
-
-.section > .column.columns-img-col img {
-  display: block;
-}
-
-/* Mobile feature: invert stack order */
-.section.section-reverse-mobile > .column {
-  flex-direction: column-reverse;
-}
-
-/* Background variants */
-.section.section-dark {
+.section[data-background='dark'] {
   background-color: var(--background-primary);
   color: var(--text-primary-inverse);
 }
 
-/* Spacing/layout variants */
-.section.section-wide-gap > .column {
-  gap: var(--spacing-layout-gap-wide);
-}
+@media (width >= 900px) {
+  .section.spacing-m {
+    padding-top: var(--spacing-10);
+    padding-bottom: var(--spacing-10);
+  }
 
-.section.section-spacer-s > .column {
-  gap: var(--columns-spacer-s);
-}
+  .section.spacing-l {
+    padding-top: var(--spacing-15);
+    padding-bottom: var(--spacing-15);
+  }
 
-.section.section-spacer-m > .column {
-  gap: var(--columns-spacer-m);
+  .section.spacing-xl {
+    padding-top: var(--spacing-24);
+    padding-bottom: var(--spacing-24);
+  }
 }

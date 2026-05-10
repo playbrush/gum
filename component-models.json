@@ -129,13 +129,44 @@
         "description": "The label shown for this section in the Content Tree"
       },
       {
-        "component": "multiselect",
+        "component": "select",
         "name": "style",
-        "label": "Style",
+        "label": "Spacing",
         "options": [
           {
-            "name": "Highlight",
-            "value": "highlight"
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "Spacer S",
+            "value": "spacing-s"
+          },
+          {
+            "name": "Spacer M",
+            "value": "spacing-m"
+          },
+          {
+            "name": "Spacer L",
+            "value": "spacing-l"
+          },
+          {
+            "name": "Spacer XL",
+            "value": "spacing-xl"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "background",
+        "label": "Background",
+        "options": [
+          {
+            "name": "Light (default)",
+            "value": ""
+          },
+          {
+            "name": "Dark",
+            "value": "dark"
           }
         ]
       }

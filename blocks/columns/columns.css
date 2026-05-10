@@ -1,1 +1,70 @@
-/* Removed column styles as they are now part of the section component */
+.columns {
+  display: grid;
+  gap: var(--spacing-medium);
+}
+
+.columns.columns-2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.columns.columns-3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.columns.columns-4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (width <= 768px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.columns > .column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--columns-spacer-s);
+  padding: var(--spacing-15) var(--spacing-6);
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.columns .column img {
+  width: 100%;
+}
+
+.columns > .column > div {
+  order: 1;
+  min-width: 0;
+}
+
+.columns > .column.columns-img-col {
+  order: 0;
+}
+
+.columns > .column.columns-img-col img {
+  display: block;
+}
+
+.columns.columns-reverse-mobile > .column {
+  flex-direction: column-reverse;
+}
+
+.columns.columns-dark {
+  background-color: var(--background-primary);
+  color: var(--text-primary-inverse);
+}
+
+.columns.columns-wide-gap > .column {
+  gap: var(--spacing-layout-gap-wide);
+}
+
+.columns.columns-spacer-s > .column {
+  gap: var(--columns-spacer-s);
+}
+
+.columns.columns-spacer-m > .column {
+  gap: var(--columns-spacer-m);
+}
