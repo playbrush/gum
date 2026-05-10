@@ -1,24 +1,19 @@
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 export default function decorate(block) {
-  // Get column configuration from block's data attributes (from model)
-  const rawColsValue = block.dataset.cols || '2';
-  const colsValue = /^[1-4]$/.test(rawColsValue) ? rawColsValue : '2';
-  const layoutValue = block.dataset.layout || 'equal';
-  const gapValue = block.dataset.gap || 'medium';
-
-  // Always apply a supported class; unsupported values are coerced to 2.
-  block.classList.add(`cols-${colsValue}`);
-
-  // Apply layout variant class
-  if (layoutValue && layoutValue !== 'equal') {
-    block.classList.add(layoutValue);
-  }
-
-  // Apply gap variant class
-  if (gapValue && gapValue !== 'medium') {
-    block.classList.add(`gap-${gapValue}`);
-  }
+  const supportedLayouts = new Set([
+    'col-6-col-6',
+    'col-5-col-5-inset',
+    'col-4-col-6-inset',
+    'col-6-col-4-inset',
+    'col-7-col-3-inset',
+    'col-4-col-8',
+    'col-3-col-4-col-1',
+    'col-3-col-3-col-3-col-3',
+    'col-2-col-2-col-2-col-2-col-2-inset',
+    'full-width',
+  ]);
+  const supportedGaps = new Set(['small', 'medium', 'large']);
 
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -40,5 +35,22 @@ export default function decorate(block) {
 
     ul.append(li);
   });
+
+  // Columns count is derived from child items and clamped to supported values.
+  const itemCount = ul.children.length;
+  const derivedCols = Math.min(4, Math.max(1, itemCount || 1));
+  block.classList.add(`cols-${derivedCols}`);
+
+  // Backward compatibility: keep support for existing authored data attrs, but only allow supported values.
+  const layoutValue = block.dataset.layout || '';
+  if (supportedLayouts.has(layoutValue)) {
+    block.classList.add(layoutValue);
+  }
+
+  const gapValue = block.dataset.gap || 'medium';
+  if (supportedGaps.has(gapValue) && gapValue !== 'medium') {
+    block.classList.add(`gap-${gapValue}`);
+  }
+
   block.replaceChildren(ul);
 }
