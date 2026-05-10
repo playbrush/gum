@@ -293,13 +293,6 @@
         ]
       },
       {
-        "component": "text",
-        "valueType": "number",
-        "name": "rows",
-        "value": "",
-        "label": "Rows"
-      },
-      {
         "component": "select",
         "name": "style",
         "label": "Layout",
