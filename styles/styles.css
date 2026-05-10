@@ -484,6 +484,159 @@ h6 {
   }
 }
 
+/* Title heading fallback styles when UE stores selection in data attributes instead of class */
+:is([data-style~='heading-display'], [data-classes~='heading-display']),
+:is([data-style~='heading-display'], [data-classes~='heading-display']) h1,
+:is([data-style~='heading-display'], [data-classes~='heading-display']) h2,
+:is([data-style~='heading-display'], [data-classes~='heading-display']) h3,
+:is([data-style~='heading-display'], [data-classes~='heading-display']) h4,
+:is([data-style~='heading-display'], [data-classes~='heading-display']) h5,
+:is([data-style~='heading-display'], [data-classes~='heading-display']) h6 {
+  font-size: var(--font-size-display-mobile);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']),
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']) h1,
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']) h2,
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']) h3,
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']) h4,
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']) h5,
+:is([data-style~='heading-h1'], [data-classes~='heading-h1']) h6 {
+  font-size: var(--font-size-h1-mobile);
+  line-height: var(--line-height-headline-lg);
+  letter-spacing: -1.5px;
+}
+
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']),
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']) h1,
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']) h2,
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']) h3,
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']) h4,
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']) h5,
+:is([data-style~='heading-h2'], [data-classes~='heading-h2']) h6 {
+  font-size: var(--font-size-h2-mobile);
+  line-height: var(--line-height-headline-lg);
+  letter-spacing: var(--letter-spacing-h2);
+}
+
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']),
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']) h1,
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']) h2,
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']) h3,
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']) h4,
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']) h5,
+:is([data-style~='heading-h3'], [data-classes~='heading-h3']) h6 {
+  font-size: var(--font-size-h3-mobile);
+  letter-spacing: 0;
+}
+
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']),
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']) h1,
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']) h2,
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']) h3,
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']) h4,
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']) h5,
+:is([data-style~='heading-h4'], [data-classes~='heading-h4']) h6 {
+  font-size: var(--font-size-h4-mobile);
+  letter-spacing: 0;
+}
+
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']),
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']) h1,
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']) h2,
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']) h3,
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']) h4,
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']) h5,
+:is([data-style~='heading-h5'], [data-classes~='heading-h5']) h6 {
+  font-size: var(--font-size-h5-mobile);
+  letter-spacing: 0;
+}
+
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']),
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']) h1,
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']) h2,
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']) h3,
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']) h4,
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']) h5,
+:is([data-style~='heading-h6'], [data-classes~='heading-h6']) h6 {
+  font-size: var(--font-size-h6-mobile);
+  letter-spacing: 0;
+}
+
+@media (width >= 900px) {
+  :is([data-style~='heading-display'], [data-classes~='heading-display']),
+  :is([data-style~='heading-display'], [data-classes~='heading-display']) h1,
+  :is([data-style~='heading-display'], [data-classes~='heading-display']) h2,
+  :is([data-style~='heading-display'], [data-classes~='heading-display']) h3,
+  :is([data-style~='heading-display'], [data-classes~='heading-display']) h4,
+  :is([data-style~='heading-display'], [data-classes~='heading-display']) h5,
+  :is([data-style~='heading-display'], [data-classes~='heading-display']) h6 {
+    font-size: var(--font-size-display);
+  }
+
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']),
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']) h1,
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']) h2,
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']) h3,
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']) h4,
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']) h5,
+  :is([data-style~='heading-h1'], [data-classes~='heading-h1']) h6 {
+    font-size: var(--font-size-h1);
+  }
+
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']),
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']) h1,
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']) h2,
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']) h3,
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']) h4,
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']) h5,
+  :is([data-style~='heading-h2'], [data-classes~='heading-h2']) h6 {
+    font-size: var(--font-size-h2);
+  }
+
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']),
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']) h1,
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']) h2,
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']) h3,
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']) h4,
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']) h5,
+  :is([data-style~='heading-h3'], [data-classes~='heading-h3']) h6 {
+    font-size: var(--font-size-h3);
+  }
+
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']),
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']) h1,
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']) h2,
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']) h3,
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']) h4,
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']) h5,
+  :is([data-style~='heading-h4'], [data-classes~='heading-h4']) h6 {
+    font-size: var(--font-size-h4);
+  }
+
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']),
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']) h1,
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']) h2,
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']) h3,
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']) h4,
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']) h5,
+  :is([data-style~='heading-h5'], [data-classes~='heading-h5']) h6 {
+    font-size: var(--font-size-h5);
+  }
+
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']),
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']) h1,
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']) h2,
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']) h3,
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']) h4,
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']) h5,
+  :is([data-style~='heading-h6'], [data-classes~='heading-h6']) h6 {
+    font-size: var(--font-size-h6);
+  }
+}
+
 p,
 dl,
 ol,
@@ -1181,7 +1334,7 @@ main .section.highlight {
 /* Body/L/Medium reference style for paragraph text in columns */
 .columns p:not(.button-container) {
   font-size: var(--font-size-large);
-  font-weight: 500;
+  font-weight: 400;
   line-height: var(--line-height-body-lg);
   letter-spacing: var(--letter-spacing-body-sm);
 }
