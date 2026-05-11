@@ -19,10 +19,6 @@
   display: block;
 }
 
-.columns.columns-wide-gap > div {
-  gap: var(--layout-grid-gutter-wide, var(--spacing-layout-gap-wide));
-}
-
 .columns.columns-reverse-mobile > div {
   flex-direction: column-reverse;
 }
@@ -31,7 +27,7 @@
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: var(--layout-grid-gutter, var(--spacing-6));
+    gap: var(--columns-current-gap, var(--layout-grid-gutter, var(--spacing-6)));
   }
 
   .columns > div > div {
@@ -39,64 +35,65 @@
     order: unset;
   }
 
-  /* 2-col layout ratios with gap-safe flex-basis to avoid overflow */
-  .columns.columns-2-cols.layout-6-4 > div > div:nth-child(1),
-  .columns.columns-2-cols[data-layout='layout-6-4'] > div > div:nth-child(1),
-  .columns.columns-2-cols[data-style='layout-6-4'] > div > div:nth-child(1) {
-    flex: 0 0 calc(60% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  .columns.columns-2-cols.layout-6-4,
+  .columns.columns-2-cols[data-layout='layout-6-4'],
+  .columns.columns-2-cols[data-style='layout-6-4'] {
+    --columns-ratio-left: 0.6;
+    --columns-ratio-right: 0.4;
   }
 
-  .columns.columns-2-cols.layout-6-4 > div > div:nth-child(2),
-  .columns.columns-2-cols[data-layout='layout-6-4'] > div > div:nth-child(2),
-  .columns.columns-2-cols[data-style='layout-6-4'] > div > div:nth-child(2) {
-    flex: 0 0 calc(40% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  .columns.columns-2-cols.layout-4-6,
+  .columns.columns-2-cols[data-layout='layout-4-6'],
+  .columns.columns-2-cols[data-style='layout-4-6'] {
+    --columns-ratio-left: 0.4;
+    --columns-ratio-right: 0.6;
   }
 
-  .columns.columns-2-cols.layout-4-6 > div > div:nth-child(1),
-  .columns.columns-2-cols[data-layout='layout-4-6'] > div > div:nth-child(1),
-  .columns.columns-2-cols[data-style='layout-4-6'] > div > div:nth-child(1) {
-    flex: 0 0 calc(40% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  .columns.columns-2-cols.layout-7-3,
+  .columns.columns-2-cols[data-layout='layout-7-3'],
+  .columns.columns-2-cols[data-style='layout-7-3'] {
+    --columns-ratio-left: 0.7;
+    --columns-ratio-right: 0.3;
   }
 
-  .columns.columns-2-cols.layout-4-6 > div > div:nth-child(2),
-  .columns.columns-2-cols[data-layout='layout-4-6'] > div > div:nth-child(2),
-  .columns.columns-2-cols[data-style='layout-4-6'] > div > div:nth-child(2) {
-    flex: 0 0 calc(60% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  .columns.columns-2-cols.layout-3-7,
+  .columns.columns-2-cols[data-layout='layout-3-7'],
+  .columns.columns-2-cols[data-style='layout-3-7'] {
+    --columns-ratio-left: 0.3;
+    --columns-ratio-right: 0.7;
   }
 
-  .columns.columns-2-cols.layout-7-3 > div > div:nth-child(1),
-  .columns.columns-2-cols[data-layout='layout-7-3'] > div > div:nth-child(1),
-  .columns.columns-2-cols[data-style='layout-7-3'] > div > div:nth-child(1) {
-    flex: 0 0 calc(70% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  /* Wide-gap variants are explicit layout choices and only apply to 2-column blocks. */
+  .columns.columns-2-cols.layout-7-3-wide,
+  .columns.columns-2-cols[data-layout='layout-7-3-wide'],
+  .columns.columns-2-cols[data-style='layout-7-3-wide'] {
+    --columns-ratio-left: 0.7;
+    --columns-ratio-right: 0.3;
+    --columns-current-gap: var(--layout-grid-gutter-wide, var(--spacing-layout-gap-wide));
   }
 
-  .columns.columns-2-cols.layout-7-3 > div > div:nth-child(2),
-  .columns.columns-2-cols[data-layout='layout-7-3'] > div > div:nth-child(2),
-  .columns.columns-2-cols[data-style='layout-7-3'] > div > div:nth-child(2) {
-    flex: 0 0 calc(30% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  .columns.columns-2-cols.layout-3-7-wide,
+  .columns.columns-2-cols[data-layout='layout-3-7-wide'],
+  .columns.columns-2-cols[data-style='layout-3-7-wide'] {
+    --columns-ratio-left: 0.3;
+    --columns-ratio-right: 0.7;
+    --columns-current-gap: var(--layout-grid-gutter-wide, var(--spacing-layout-gap-wide));
   }
 
-  .columns.columns-2-cols.layout-3-7 > div > div:nth-child(1),
-  .columns.columns-2-cols[data-layout='layout-3-7'] > div > div:nth-child(1),
-  .columns.columns-2-cols[data-style='layout-3-7'] > div > div:nth-child(1) {
-    flex: 0 0 calc(30% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  /* Preserve ratio under any gap size by distributing remaining width after gap. */
+  .columns.columns-2-cols > div > div:nth-child(1) {
+    flex: 0 0
+      calc(
+        (100% - var(--columns-current-gap, var(--layout-grid-gutter, var(--spacing-6)))) *
+          var(--columns-ratio-left, 0.5)
+      );
   }
 
-  .columns.columns-2-cols.layout-3-7 > div > div:nth-child(2),
-  .columns.columns-2-cols[data-layout='layout-3-7'] > div > div:nth-child(2),
-  .columns.columns-2-cols[data-style='layout-3-7'] > div > div:nth-child(2) {
-    flex: 0 0 calc(70% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
-  }
-
-  .columns.columns-2-cols.layout-4-8 > div > div:nth-child(1),
-  .columns.columns-2-cols[data-layout='layout-4-8'] > div > div:nth-child(1),
-  .columns.columns-2-cols[data-style='layout-4-8'] > div > div:nth-child(1) {
-    flex: 0 0 calc(33.333% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
-  }
-
-  .columns.columns-2-cols.layout-4-8 > div > div:nth-child(2),
-  .columns.columns-2-cols[data-layout='layout-4-8'] > div > div:nth-child(2),
-  .columns.columns-2-cols[data-style='layout-4-8'] > div > div:nth-child(2) {
-    flex: 0 0 calc(66.667% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
+  .columns.columns-2-cols > div > div:nth-child(2) {
+    flex: 0 0
+      calc(
+        (100% - var(--columns-current-gap, var(--layout-grid-gutter, var(--spacing-6)))) *
+          var(--columns-ratio-right, 0.5)
+      );
   }
 }

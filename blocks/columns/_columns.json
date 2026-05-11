@@ -45,17 +45,15 @@
             { "name": "4 / 6 (2 Cols)", "value": "layout-4-6" },
             { "name": "7 / 3 (2 Cols)", "value": "layout-7-3" },
             { "name": "3 / 7 (2 Cols)", "value": "layout-3-7" },
-            { "name": "4 / 8 (2 Cols)", "value": "layout-4-8" }
+            { "name": "7 / 3 Wide Gap (2 Cols)", "value": "layout-7-3-wide" },
+            { "name": "3 / 7 Wide Gap (2 Cols)", "value": "layout-3-7-wide" }
           ]
         },
         {
           "component": "multiselect",
           "name": "classes",
           "label": "Styles",
-          "options": [
-            { "name": "Reverse Mobile", "value": "columns-reverse-mobile" },
-            { "name": "Wide Gap", "value": "columns-wide-gap" }
-          ]
+          "options": [{ "name": "Reverse Mobile", "value": "columns-reverse-mobile" }]
         }
       ]
     }
