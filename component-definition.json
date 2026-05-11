@@ -28,8 +28,8 @@
                 "template": {
                   "name": "Heading",
                   "model": "heading",
-                  "heading": "Headline",
-                  "headingType": "h2"
+                  "title": "Headline",
+                  "titleType": "h2"
                 }
               }
             }

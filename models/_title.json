@@ -10,8 +10,8 @@
             "template": {
               "name": "Heading",
               "model": "heading",
-              "heading": "Headline",
-              "headingType": "h2"
+              "title": "Headline",
+              "titleType": "h2"
             }
           }
         }
@@ -24,13 +24,13 @@
       "fields": [
         {
           "component": "text",
-          "name": "heading",
+          "name": "title",
           "label": "Headline",
           "value": "Headline"
         },
         {
           "component": "select",
-          "name": "headingType",
+          "name": "titleType",
           "label": "Heading Level",
           "value": "h2",
           "options": [
