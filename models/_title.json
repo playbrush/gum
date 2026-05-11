@@ -1,15 +1,14 @@
 {
   "definitions": [
     {
-      "title": "Heading",
-      "id": "heading",
+      "title": "Title",
+      "id": "title",
       "plugins": {
         "xwalk": {
           "page": {
-            "resourceType": "core/franklin/components/block/v1/block",
+            "resourceType": "core/franklin/components/title/v1/title",
             "template": {
-              "name": "Heading",
-              "model": "heading",
+              "model": "title",
               "title": "Headline",
               "titleType": "h2"
             }
@@ -20,82 +19,31 @@
   ],
   "models": [
     {
-      "id": "heading",
+      "id": "title",
       "fields": [
         {
           "component": "text",
           "name": "title",
-          "label": "Headline",
+          "label": "Title",
           "value": "Headline"
         },
         {
           "component": "select",
           "name": "titleType",
-          "label": "Heading Level",
+          "label": "Title Type",
           "value": "h2",
           "options": [
             {
-              "name": "h1",
+              "name": "H1",
               "value": "h1"
             },
             {
-              "name": "h2",
+              "name": "H2",
               "value": "h2"
             },
             {
-              "name": "h3",
+              "name": "H3",
               "value": "h3"
-            },
-            {
-              "name": "h4",
-              "value": "h4"
-            },
-            {
-              "name": "h5",
-              "value": "h5"
-            },
-            {
-              "name": "h6",
-              "value": "h6"
-            }
-          ]
-        },
-        {
-          "component": "select",
-          "name": "classes",
-          "label": "Heading Style",
-          "options": [
-            {
-              "name": "Semantic Default",
-              "value": ""
-            },
-            {
-              "name": "Display",
-              "value": "heading-display"
-            },
-            {
-              "name": "Heading H1",
-              "value": "heading-h1"
-            },
-            {
-              "name": "Heading H2",
-              "value": "heading-h2"
-            },
-            {
-              "name": "Heading H3",
-              "value": "heading-h3"
-            },
-            {
-              "name": "Heading H4",
-              "value": "heading-h4"
-            },
-            {
-              "name": "Heading H5",
-              "value": "heading-h5"
-            },
-            {
-              "name": "Heading H6",
-              "value": "heading-h6"
             }
           ]
         }

@@ -11,7 +11,7 @@
       "text",
       "image",
       "button",
-      "heading",
+      "title",
       "hero",
       "cards",
       "columns",
@@ -36,7 +36,7 @@
       "text",
       "image",
       "button",
-      "heading"
+      "title"
     ]
   }
 ]

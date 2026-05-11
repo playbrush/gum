@@ -19,15 +19,14 @@
           }
         },
         {
-          "title": "Heading",
-          "id": "heading",
+          "title": "Title",
+          "id": "title",
           "plugins": {
             "xwalk": {
               "page": {
-                "resourceType": "core/franklin/components/block/v1/block",
+                "resourceType": "core/franklin/components/title/v1/title",
                 "template": {
-                  "name": "Heading",
-                  "model": "heading",
+                  "model": "title",
                   "title": "Headline",
                   "titleType": "h2"
                 }
