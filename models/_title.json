@@ -56,7 +56,7 @@
           ]
         },
         {
-          "component": "multiselect",
+          "component": "select",
           "name": "classes",
           "label": "Heading Style",
           "options": [

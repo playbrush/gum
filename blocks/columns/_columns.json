@@ -36,11 +36,11 @@
         },
         {
           "component": "select",
-          "name": "collayout",
+          "name": "style",
           "label": "Layout",
           "value": "",
           "options": [
-            { "name": "Equal (default)", "value": "" },
+            { "name": "5 / 5 (default)", "value": "" },
             { "name": "6 / 4 (2 Cols)", "value": "layout-6-4" },
             { "name": "4 / 6 (2 Cols)", "value": "layout-4-6" },
             { "name": "7 / 3 (2 Cols)", "value": "layout-7-3" },

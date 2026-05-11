@@ -79,7 +79,7 @@
         ]
       },
       {
-        "component": "multiselect",
+        "component": "select",
         "name": "classes",
         "label": "Heading Style",
         "options": [
@@ -294,12 +294,12 @@
       },
       {
         "component": "select",
-        "name": "collayout",
+        "name": "style",
         "label": "Layout",
         "value": "",
         "options": [
           {
-            "name": "Equal (default)",
+            "name": "5 / 5 (default)",
             "value": ""
           },
           {
