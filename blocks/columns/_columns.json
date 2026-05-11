@@ -10,7 +10,7 @@
             "template": {
               "columns": "2",
               "rows": "1",
-              "style": ""
+              "layout": ""
             }
           }
         }
@@ -36,16 +36,16 @@
         },
         {
           "component": "select",
-          "name": "style",
+          "name": "layout",
           "label": "Layout",
           "options": [
             { "name": "Equal (default)", "value": "" },
-            { "name": "6 / 4 (2 Cols)", "value": "layout-60-40" },
-            { "name": "4 / 6 (2 Cols)", "value": "layout-40-60" },
-            { "name": "7 / 3 (2 Cols)", "value": "layout-70-30" },
-            { "name": "3 / 7 (2 Cols)", "value": "layout-30-70" },
+            { "name": "6 / 4 (2 Cols)", "value": "layout-6-4" },
+            { "name": "4 / 6 (2 Cols)", "value": "layout-4-6" },
+            { "name": "7 / 3 (2 Cols)", "value": "layout-7-3" },
+            { "name": "3 / 7 (2 Cols)", "value": "layout-3-7" },
             { "name": "4 / 8 (2 Cols)", "value": "layout-4-8" },
-            { "name": "4 / 6 (Legacy) (2 Cols)", "value": "layout-4-6" }
+            { "name": "4 / 6 (2 Cols)", "value": "layout-4-6" }
           ]
         },
         {
