@@ -294,7 +294,7 @@
       },
       {
         "component": "select",
-        "name": "style",
+        "name": "layout",
         "label": "Layout",
         "value": "",
         "options": [
