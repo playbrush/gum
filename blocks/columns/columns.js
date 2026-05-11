@@ -3,8 +3,6 @@ export default function decorate(block) {
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  console.log(block.classList);
-
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {

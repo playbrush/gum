@@ -294,7 +294,7 @@
       },
       {
         "component": "select",
-        "name": "classes",
+        "name": "collayout",
         "label": "Layout",
         "value": "",
         "options": [
