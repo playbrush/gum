@@ -67,7 +67,7 @@
     },
     {
       "id": "column",
-      "components": ["text", "image", "button", "title"]
+      "components": ["text", "image", "button", "heading"]
     }
   ]
 }
