@@ -41,62 +41,62 @@
 
   /* 2-col layout ratios with gap-safe flex-basis to avoid overflow */
   .columns.columns-2-cols.layout-6-4 > div > div:nth-child(1),
+  .columns.columns-2-cols[data-layout='layout-6-4'] > div > div:nth-child(1),
   .columns.columns-2-cols[data-style='layout-6-4'] > div > div:nth-child(1) {
     flex: 0 0 calc(60% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-6-4 > div > div:nth-child(2),
+  .columns.columns-2-cols[data-layout='layout-6-4'] > div > div:nth-child(2),
   .columns.columns-2-cols[data-style='layout-6-4'] > div > div:nth-child(2) {
     flex: 0 0 calc(40% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-4-6 > div > div:nth-child(1),
+  .columns.columns-2-cols[data-layout='layout-4-6'] > div > div:nth-child(1),
   .columns.columns-2-cols[data-style='layout-4-6'] > div > div:nth-child(1) {
     flex: 0 0 calc(40% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-4-6 > div > div:nth-child(2),
+  .columns.columns-2-cols[data-layout='layout-4-6'] > div > div:nth-child(2),
   .columns.columns-2-cols[data-style='layout-4-6'] > div > div:nth-child(2) {
     flex: 0 0 calc(60% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-7-3 > div > div:nth-child(1),
+  .columns.columns-2-cols[data-layout='layout-7-3'] > div > div:nth-child(1),
   .columns.columns-2-cols[data-style='layout-7-3'] > div > div:nth-child(1) {
     flex: 0 0 calc(70% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-7-3 > div > div:nth-child(2),
+  .columns.columns-2-cols[data-layout='layout-7-3'] > div > div:nth-child(2),
   .columns.columns-2-cols[data-style='layout-7-3'] > div > div:nth-child(2) {
     flex: 0 0 calc(30% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-3-7 > div > div:nth-child(1),
+  .columns.columns-2-cols[data-layout='layout-3-7'] > div > div:nth-child(1),
   .columns.columns-2-cols[data-style='layout-3-7'] > div > div:nth-child(1) {
     flex: 0 0 calc(30% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-3-7 > div > div:nth-child(2),
+  .columns.columns-2-cols[data-layout='layout-3-7'] > div > div:nth-child(2),
   .columns.columns-2-cols[data-style='layout-3-7'] > div > div:nth-child(2) {
     flex: 0 0 calc(70% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-4-8 > div > div:nth-child(1),
+  .columns.columns-2-cols[data-layout='layout-4-8'] > div > div:nth-child(1),
   .columns.columns-2-cols[data-style='layout-4-8'] > div > div:nth-child(1) {
     flex: 0 0 calc(33.333% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 
   .columns.columns-2-cols.layout-4-8 > div > div:nth-child(2),
+  .columns.columns-2-cols[data-layout='layout-4-8'] > div > div:nth-child(2),
   .columns.columns-2-cols[data-style='layout-4-8'] > div > div:nth-child(2) {
     flex: 0 0 calc(66.667% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
-  }
-
-  .columns.columns-2-cols.layout-4-6 > div > div:nth-child(1),
-  .columns.columns-2-cols[data-style='layout-4-6'] > div > div:nth-child(1) {
-    flex: 0 0 calc(40% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
-  }
-
-  .columns.columns-2-cols.layout-4-6 > div > div:nth-child(2),
-  .columns.columns-2-cols[data-style='layout-4-6'] > div > div:nth-child(2) {
-    flex: 0 0 calc(60% - (var(--layout-grid-gutter, var(--spacing-6)) / 2));
   }
 }

@@ -1,19 +1,22 @@
+const LAYOUT_VALUE_PATTERN = /^layout-[a-z0-9-]+$/;
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  // Keep layout variants working across model versions.
-  // Preferred source is data-layout; older content may still provide data-style
-  // or a raw style attribute value like "layout-60-40".
-  const layoutValue =
+  // Keep layout variants working across model versions and wrapper metadata placement.
+  const wrapper = block.closest('.columns-wrapper');
+  const inlineStyle = block.getAttribute('style');
+  const rawLayoutValue =
     block.dataset.layout ||
     block.dataset.style ||
-    (block.getAttribute('style') && /^layout-[a-z0-9-]+$/.test(block.getAttribute('style'))
-      ? block.getAttribute('style')
-      : '');
-  if (layoutValue) {
-    block.classList.add(layoutValue);
+    wrapper?.dataset.layout ||
+    wrapper?.dataset.style ||
+    (inlineStyle && LAYOUT_VALUE_PATTERN.test(inlineStyle) ? inlineStyle : '');
+
+  if (rawLayoutValue) {
+    block.classList.add(rawLayoutValue);
   }
 
   // setup image columns
