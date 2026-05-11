@@ -296,6 +296,7 @@
         "component": "select",
         "name": "layout",
         "label": "Layout",
+        "value": "",
         "options": [
           {
             "name": "Equal (default)",

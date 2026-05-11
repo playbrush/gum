@@ -1,22 +1,14 @@
-const LAYOUT_VALUE_PATTERN = /^layout-[a-z0-9-]+$/;
-
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  // Keep layout variants working across model versions and wrapper metadata placement.
-  const wrapper = block.closest('.columns-wrapper');
-  const inlineStyle = block.getAttribute('style');
-  const rawLayoutValue =
-    block.dataset.layout ||
-    block.dataset.style ||
-    wrapper?.dataset.layout ||
-    wrapper?.dataset.style ||
-    (inlineStyle && LAYOUT_VALUE_PATTERN.test(inlineStyle) ? inlineStyle : '');
+  const layoutRow = [...block.children].find((row) => row.textContent.trim().startsWith('layout-'));
 
-  if (rawLayoutValue) {
-    block.classList.add(rawLayoutValue);
+  if (layoutRow) {
+    const layout = layoutRow.textContent.trim();
+    block.classList.add(layout);
+    layoutRow.remove();
   }
 
   // setup image columns
