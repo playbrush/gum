@@ -10,5 +10,15 @@
 .title h5,
 .title h6 {
   /* Semantic and visual styling applied via heading-h* classes */
+  color: var(--text-primary);
   margin: 0 0 0.25em;
+}
+
+.section[data-background='dark'] .title h1,
+.section[data-background='dark'] .title h2,
+.section[data-background='dark'] .title h3,
+.section[data-background='dark'] .title h4,
+.section[data-background='dark'] .title h5,
+.section[data-background='dark'] .title h6 {
+  color: var(--text-primary-inverse);
 }

@@ -1172,9 +1172,17 @@ main .section.highlight {
   padding-bottom: var(--spacing-20);
 }
 
-/* section background variants */
+/* section background variants  Target also all headings */
 .section[data-background='dark'] {
   background-color: var(--background-primary);
+}
+
+.section[data-background='dark'] h1,
+.section[data-background='dark'] h2,
+.section[data-background='dark'] h3,
+.section[data-background='dark'] h4,
+.section[data-background='dark'] h5,
+.section[data-background='dark'] h6 {
   color: var(--text-primary-inverse);
 }
 
