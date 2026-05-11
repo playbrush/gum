@@ -3,13 +3,7 @@ export default function decorate(block) {
   const colCount = cols.length;
   block.classList.add(`columns-${colCount}-cols`);
 
-  const layoutRow = [...block.children].find((row) => row.textContent.trim().startsWith('layout-'));
-
-  if (layoutRow) {
-    const layout = layoutRow.textContent.trim();
-    block.classList.add(layout);
-    layoutRow.remove();
-  }
+  console.log(block.classList);
 
   // setup image columns
   [...block.children].forEach((row) => {
