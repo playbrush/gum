@@ -45,12 +45,14 @@
       {
         "component": "text",
         "name": "title",
-        "label": "Title"
+        "label": "Title",
+        "value": "Headline"
       },
       {
         "component": "select",
         "name": "titleType",
         "label": "Title Type",
+        "value": "h2",
         "options": [
           {
             "name": "h1",
