@@ -44,14 +44,14 @@
     "fields": [
       {
         "component": "text",
-        "name": "title",
-        "label": "Title",
+        "name": "heading",
+        "label": "Headline",
         "value": "Headline"
       },
       {
         "component": "select",
-        "name": "titleType",
-        "label": "Title Type",
+        "name": "headingType",
+        "label": "Heading Level",
         "value": "h2",
         "options": [
           {
