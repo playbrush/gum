@@ -78,6 +78,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
+  button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -135,6 +136,16 @@ export default async function decorate(block) {
     brandLink.closest('.button-container').className = '';
   }
 
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.querySelectorAll('a, button').forEach((action) => {
+      if (!action.getAttribute('aria-label')) {
+        const label = action.textContent.trim();
+        if (label) action.setAttribute('aria-label', label);
+      }
+    });
+  }
+
   const navSections = nav.querySelector('.nav-sections');
   if (navSections) {
     navSections
@@ -155,10 +166,18 @@ export default async function decorate(block) {
   const hamburger = document.createElement('div');
   hamburger.classList.add('nav-hamburger');
   hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+      <span class="nav-hamburger-label">Menu</span>
       <span class="nav-hamburger-icon"></span>
     </button>`;
   hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
   nav.prepend(hamburger);
+
+  const navWave = document.createElement('div');
+  navWave.className = 'nav-wave';
+  navWave.setAttribute('aria-hidden', 'true');
+  if (navBrand?.nextSibling) nav.insertBefore(navWave, navBrand.nextSibling);
+  else nav.append(navWave);
+
   nav.setAttribute('aria-expanded', 'false');
   // prevent mobile nav behavior on window resize
   toggleMenu(nav, navSections, isDesktop.matches);
