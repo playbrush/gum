@@ -294,7 +294,7 @@
       },
       {
         "component": "select",
-        "name": "layout",
+        "name": "classes_layout",
         "label": "Layout",
         "value": "",
         "options": [
