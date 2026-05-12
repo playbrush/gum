@@ -401,7 +401,12 @@ header nav .nav-tools .default-content-wrapper > ul {
   list-style: none;
 }
 
-header nav .nav-tools a:any-link,
+/* stylelint-disable-next-line no-descending-specificity */
+header nav .nav-tools a:any-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
 header nav .nav-tools button {
   color: var(--text-secondary);
   text-decoration: none;
