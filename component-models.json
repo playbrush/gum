@@ -327,5 +327,44 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "navigation",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Navigation Name",
+        "description": "Internal label used in the content tree",
+        "value": "Header Navigation"
+      }
+    ]
+  },
+  {
+    "id": "navigation-link",
+    "fields": [
+      {
+        "component": "text",
+        "name": "label",
+        "label": "Label"
+      },
+      {
+        "component": "aem-content",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "name": "parent",
+        "label": "Parent Label",
+        "description": "Set for child links, leave empty for top-level links"
+      },
+      {
+        "component": "text",
+        "name": "icon",
+        "label": "Icon (Child Links)",
+        "description": "Optional icon name for child links, e.g. external-link"
+      }
+    ]
   }
 ]

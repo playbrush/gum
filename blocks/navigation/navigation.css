@@ -1,0 +1,11 @@
+/* Navigation block can be reused for standalone nav content and header integrations. */
+.navigation.block.navigation-ready .nav-navigation-links > ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.navigation.block.navigation-ready .nav-navigation-child-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
