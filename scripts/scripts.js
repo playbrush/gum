@@ -156,12 +156,19 @@ async function loadLazy(doc) {
   loadHeader(headerEl);
 
   const main = doc.querySelector('main');
+  const pageName = window.location.pathname.split('/').pop().replace('.html', '');
   // On the nav fragment page, restrict UE authoring to navigation components only
-  if (main && window.location.pathname.split('/').pop() === 'nav') {
+  if (main && pageName === 'nav') {
     main.setAttribute('data-aue-filter', 'nav');
   }
   await loadSections(main);
   decorateTitleHeadings(main);
+  // After sections are decorated, override their filters too so UE restricts nested additions
+  if (main && pageName === 'nav') {
+    main.querySelectorAll('[data-aue-type="container"]').forEach((container) => {
+      container.setAttribute('data-aue-filter', 'nav');
+    });
+  }
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
