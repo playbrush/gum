@@ -20,60 +20,51 @@ function getCellLink(cell) {
 function buildNavigationMarkupFromRows(block) {
   if (block.querySelector(':scope > ul')) return;
 
+  // Top-level rows = navigation-item. Within each row, additional child divs = navigation-sub-item.
   const rows = [...block.children].filter((row) => row.tagName === 'DIV');
   if (!rows.length) return;
 
-  const items = rows
-    .map((row, index) => {
-      const cols = [...row.children];
-      const label = getCellText(cols[0]);
-      const link = getCellLink(cols[1]);
-      const parent = getCellText(cols[2]);
-      const icon = getCellText(cols[3]);
-      if (!label || !link) return null;
+  const ul = document.createElement('ul');
 
-      return {
-        id: `${normalizeKey(label)}-${index}`,
-        label,
-        link,
-        parent: normalizeKey(parent),
-        icon,
-        children: [],
-      };
-    })
-    .filter(Boolean);
+  rows.forEach((row) => {
+    const cols = [...row.children];
+    const label = getCellText(cols[0]);
+    const link = getCellLink(cols[1]);
+    if (!label) return;
 
-  if (!items.length) return;
+    const li = document.createElement('li');
+    const anchor = document.createElement('a');
+    anchor.href = link || '#';
+    anchor.textContent = label;
+    li.append(anchor);
 
-  const byLabel = new Map();
-  items.forEach((item) => {
-    if (!byLabel.has(normalizeKey(item.label))) byLabel.set(normalizeKey(item.label), item);
+    // cols[2+] are navigation-sub-item divs, each containing its own label/link/icon children
+    const subItemDivs = cols.slice(2).filter((col) => col.tagName === 'DIV');
+    if (subItemDivs.length) {
+      const subUl = document.createElement('ul');
+      subItemDivs.forEach((subDiv) => {
+        const subCols = [...subDiv.children];
+        const subLabel = getCellText(subCols[0]);
+        const subLink = getCellLink(subCols[1]);
+        const icon = getCellText(subCols[2]);
+        if (!subLabel) return;
+
+        const subLi = document.createElement('li');
+        const subAnchor = document.createElement('a');
+        subAnchor.href = subLink || '#';
+        subAnchor.textContent = subLabel;
+        if (icon) subAnchor.dataset.icon = icon;
+        subLi.append(subAnchor);
+        subUl.append(subLi);
+      });
+      if (subUl.children.length) li.append(subUl);
+    }
+
+    ul.append(li);
   });
 
-  const roots = [];
-  items.forEach((item) => {
-    const parentItem = item.parent ? byLabel.get(item.parent) : null;
-    if (parentItem) parentItem.children.push(item);
-    else roots.push(item);
-  });
-
-  const renderItems = (collection, isChild = false) => {
-    const ul = document.createElement('ul');
-    collection.forEach((item) => {
-      const li = document.createElement('li');
-      const anchor = document.createElement('a');
-      anchor.href = item.link;
-      anchor.textContent = item.label;
-      if (isChild && item.icon) anchor.dataset.icon = item.icon;
-      li.append(anchor);
-
-      if (item.children.length) li.append(renderItems(item.children, true));
-      ul.append(li);
-    });
-    return ul;
-  };
-
-  block.replaceChildren(renderItems(roots));
+  if (!ul.children.length) return;
+  block.replaceChildren(ul);
 }
 
 function normalizeSectionState(navSection) {

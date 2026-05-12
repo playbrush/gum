@@ -17,15 +17,31 @@
       }
     },
     {
-      "title": "Navigation Link",
-      "id": "navigation-link",
+      "title": "Navigation Item",
+      "id": "navigation-item",
       "plugins": {
         "xwalk": {
           "page": {
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
-              "name": "Navigation Link",
-              "model": "navigation-link"
+              "name": "Navigation Item",
+              "model": "navigation-item",
+              "filter": "navigation-item"
+            }
+          }
+        }
+      }
+    },
+    {
+      "title": "Navigation Sub Item",
+      "id": "navigation-sub-item",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block/item",
+            "template": {
+              "name": "Navigation Sub Item",
+              "model": "navigation-sub-item"
             }
           }
         }
@@ -46,7 +62,22 @@
       ]
     },
     {
-      "id": "navigation-link",
+      "id": "navigation-item",
+      "fields": [
+        {
+          "component": "text",
+          "name": "label",
+          "label": "Label"
+        },
+        {
+          "component": "aem-content",
+          "name": "link",
+          "label": "Link"
+        }
+      ]
+    },
+    {
+      "id": "navigation-sub-item",
       "fields": [
         {
           "component": "text",
@@ -60,15 +91,9 @@
         },
         {
           "component": "text",
-          "name": "parent",
-          "label": "Parent Label",
-          "description": "Set for child links, leave empty for top-level links"
-        },
-        {
-          "component": "text",
           "name": "icon",
-          "label": "Icon (Child Links)",
-          "description": "Optional icon name for child links, e.g. external-link"
+          "label": "Icon",
+          "description": "Optional icon name, e.g. external-link"
         }
       ]
     }
@@ -76,7 +101,11 @@
   "filters": [
     {
       "id": "navigation",
-      "components": ["navigation-link"]
+      "components": ["navigation-item"]
+    },
+    {
+      "id": "navigation-item",
+      "components": ["navigation-sub-item"]
     }
   ]
 }

@@ -163,10 +163,10 @@ async function loadLazy(doc) {
   }
   await loadSections(main);
   decorateTitleHeadings(main);
-  // After sections are decorated, override their filters too so UE restricts nested additions
+  // After sections are decorated (.section class added by aem.js), override their UE filter
   if (main && pageName === 'nav') {
-    main.querySelectorAll('[data-aue-type="container"]').forEach((container) => {
-      container.setAttribute('data-aue-filter', 'nav');
+    main.querySelectorAll('.section').forEach((section) => {
+      section.setAttribute('data-aue-filter', 'nav');
     });
   }
 
