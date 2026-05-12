@@ -40,6 +40,18 @@
     ]
   },
   {
+    "id": "header",
+    "components": [
+      "navigation"
+    ]
+  },
+  {
+    "id": "nav",
+    "components": [
+      "navigation"
+    ]
+  },
+  {
     "id": "navigation",
     "components": [
       "navigation-link"

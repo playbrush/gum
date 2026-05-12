@@ -148,9 +148,18 @@ async function loadEager(doc) {
  * @param {Element} doc The container element
  */
 async function loadLazy(doc) {
-  loadHeader(doc.querySelector('header'));
+  const headerEl = doc.querySelector('header');
+  if (headerEl) {
+    headerEl.setAttribute('data-aue-type', 'container');
+    headerEl.setAttribute('data-aue-filter', 'header');
+  }
+  loadHeader(headerEl);
 
   const main = doc.querySelector('main');
+  // On the nav fragment page, restrict UE authoring to navigation components only
+  if (main && window.location.pathname.split('/').pop() === 'nav') {
+    main.setAttribute('data-aue-filter', 'nav');
+  }
   await loadSections(main);
   decorateTitleHeadings(main);
 

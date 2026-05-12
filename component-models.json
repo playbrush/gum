@@ -303,6 +303,18 @@
     ]
   },
   {
+    "id": "header",
+    "fields": [
+      {
+        "component": "text",
+        "name": "name",
+        "label": "Header Name",
+        "description": "Internal label used in the content tree",
+        "value": "Site Header"
+      }
+    ]
+  },
+  {
     "id": "hero",
     "fields": [
       {
