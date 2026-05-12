@@ -54,12 +54,7 @@
   {
     "id": "navigation",
     "components": [
-      "navigation-item"
-    ]
-  },
-  {
-    "id": "navigation-item",
-    "components": [
+      "navigation-item",
       "navigation-sub-item"
     ]
   }

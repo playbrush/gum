@@ -20,11 +20,13 @@ function getCellLink(cell) {
 function buildNavigationMarkupFromRows(block) {
   if (block.querySelector(':scope > ul')) return;
 
-  // Top-level rows = navigation-item. Within each row, additional child divs = navigation-sub-item.
   const rows = [...block.children].filter((row) => row.tagName === 'DIV');
   if (!rows.length) return;
 
-  const ul = document.createElement('ul');
+  // Classify rows: navigation-sub-item rows have 4 cells (label, link, icon, parent).
+  // navigation-item rows have 2 cells (label, link).
+  const navItems = [];
+  const subItems = [];
 
   rows.forEach((row) => {
     const cols = [...row.children];
@@ -32,35 +34,51 @@ function buildNavigationMarkupFromRows(block) {
     const link = getCellLink(cols[1]);
     if (!label) return;
 
+    if (cols.length >= 4) {
+      // navigation-sub-item: label | link | icon | parent
+      subItems.push({
+        label,
+        link,
+        icon: getCellText(cols[2]),
+        parent: getCellText(cols[3]),
+      });
+    } else {
+      navItems.push({ label, link });
+    }
+  });
+
+  // Build top-level list and a map from label → <li>
+  const ul = document.createElement('ul');
+  const itemMap = new Map();
+
+  navItems.forEach(({ label, link }) => {
     const li = document.createElement('li');
     const anchor = document.createElement('a');
     anchor.href = link || '#';
     anchor.textContent = label;
     li.append(anchor);
+    itemMap.set(label, li);
+    ul.append(li);
+  });
 
-    // cols[2+] are navigation-sub-item divs, each containing its own label/link/icon children
-    const subItemDivs = cols.slice(2).filter((col) => col.tagName === 'DIV');
-    if (subItemDivs.length) {
-      const subUl = document.createElement('ul');
-      subItemDivs.forEach((subDiv) => {
-        const subCols = [...subDiv.children];
-        const subLabel = getCellText(subCols[0]);
-        const subLink = getCellLink(subCols[1]);
-        const icon = getCellText(subCols[2]);
-        if (!subLabel) return;
+  // Attach sub-items under their parent <li>
+  subItems.forEach(({ label, link, icon, parent }) => {
+    const parentLi = itemMap.get(parent);
+    if (!parentLi) return; // orphan — skip
 
-        const subLi = document.createElement('li');
-        const subAnchor = document.createElement('a');
-        subAnchor.href = subLink || '#';
-        subAnchor.textContent = subLabel;
-        if (icon) subAnchor.dataset.icon = icon;
-        subLi.append(subAnchor);
-        subUl.append(subLi);
-      });
-      if (subUl.children.length) li.append(subUl);
+    let subUl = parentLi.querySelector(':scope > ul');
+    if (!subUl) {
+      subUl = document.createElement('ul');
+      parentLi.append(subUl);
     }
 
-    ul.append(li);
+    const subLi = document.createElement('li');
+    const subAnchor = document.createElement('a');
+    subAnchor.href = link || '#';
+    subAnchor.textContent = label;
+    if (icon) subAnchor.dataset.icon = icon;
+    subLi.append(subAnchor);
+    subUl.append(subLi);
   });
 
   if (!ul.children.length) return;

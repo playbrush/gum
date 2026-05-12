@@ -385,6 +385,12 @@
         "name": "icon",
         "label": "Icon",
         "description": "Optional icon name, e.g. external-link"
+      },
+      {
+        "component": "text",
+        "name": "parent",
+        "label": "Parent Item Label",
+        "description": "Label of the Navigation Item this belongs under"
       }
     ]
   }
