@@ -17,6 +17,21 @@ function getCellLink(cell) {
   return link?.href || '';
 }
 
+// Move UE instrumentation attributes (data-aue-*, data-richtext-*) from one element to another
+// so UE can still track the new elements after the block rebuilds its DOM.
+function moveUeInstrumentation(from, to) {
+  [...from.attributes]
+    .map(({ nodeName }) => nodeName)
+    .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-'))
+    .forEach((attr) => {
+      const value = from.getAttribute(attr);
+      if (value) {
+        to.setAttribute(attr, value);
+        from.removeAttribute(attr);
+      }
+    });
+}
+
 function buildNavigationMarkupFromRows(block) {
   if (block.querySelector(':scope > ul')) return;
 
@@ -34,6 +49,9 @@ function buildNavigationMarkupFromRows(block) {
     if (!label) return;
 
     const li = document.createElement('li');
+    // Preserve UE instrumentation so UE still sees this <li> as a navigation-item container
+    moveUeInstrumentation(row, li);
+
     const anchor = document.createElement('a');
     anchor.href = link || '#';
     anchor.textContent = label;
@@ -51,6 +69,9 @@ function buildNavigationMarkupFromRows(block) {
         if (!subLabel) return;
 
         const subLi = document.createElement('li');
+        // Preserve UE instrumentation so UE still sees this <li> as a navigation-sub-item
+        moveUeInstrumentation(subDiv, subLi);
+
         const subAnchor = document.createElement('a');
         subAnchor.href = subLink || '#';
         subAnchor.textContent = subLabel;
