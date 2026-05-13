@@ -17,21 +17,6 @@ function getCellLink(cell) {
   return link?.href || '';
 }
 
-// Move UE instrumentation attributes (data-aue-*, data-richtext-*) from one element to another
-// so UE can still track the new elements after the block rebuilds its DOM.
-function moveUeInstrumentation(from, to) {
-  [...from.attributes]
-    .map(({ nodeName }) => nodeName)
-    .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-'))
-    .forEach((attr) => {
-      const value = from.getAttribute(attr);
-      if (value) {
-        to.setAttribute(attr, value);
-        from.removeAttribute(attr);
-      }
-    });
-}
-
 function buildNavigationMarkupFromRows(block) {
   if (block.querySelector(':scope > ul')) return;
 
@@ -49,9 +34,6 @@ function buildNavigationMarkupFromRows(block) {
     if (!label) return;
 
     const li = document.createElement('li');
-    // Preserve UE instrumentation so UE still sees this <li> as a navigation-item container
-    moveUeInstrumentation(row, li);
-
     const anchor = document.createElement('a');
     anchor.href = link || '#';
     anchor.textContent = label;
@@ -69,9 +51,6 @@ function buildNavigationMarkupFromRows(block) {
         if (!subLabel) return;
 
         const subLi = document.createElement('li');
-        // Preserve UE instrumentation so UE still sees this <li> as a navigation-sub-item
-        moveUeInstrumentation(subDiv, subLi);
-
         const subAnchor = document.createElement('a');
         subAnchor.href = subLink || '#';
         subAnchor.textContent = subLabel;
@@ -196,6 +175,12 @@ export function decorateNavigationComponents(nav, navSections, navTools, hamburg
 }
 
 export default function decorate(block) {
+  // In UE author mode AEM sets data-aue-resource on the block server-side.
+  // Transforming the DOM in author mode destroys UE's component registry, breaking the "+" button.
+  // When nav.html is fetched as a fragment by header.js there is no data-aue-resource,
+  // so transformation runs normally for preview and publish.
+  if (block.dataset.aueResource) return;
+
   buildNavigationMarkupFromRows(block);
   block.classList.add('nav-navigation', 'navigation-ready');
   const linksContainer = block.querySelector(':scope .default-content-wrapper') || block;
