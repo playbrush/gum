@@ -353,7 +353,7 @@
     ]
   },
   {
-    "id": "navigation-item",
+    "id": "nav-link",
     "fields": [
       {
         "component": "text",
@@ -368,7 +368,7 @@
     ]
   },
   {
-    "id": "navigation-sub-item",
+    "id": "nav-sub-link",
     "fields": [
       {
         "component": "text",
