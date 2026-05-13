@@ -25,7 +25,8 @@
             "resourceType": "core/franklin/components/block/v1/block/item",
             "template": {
               "name": "Navigation Item",
-              "model": "navigation-item"
+              "model": "navigation-item",
+              "filter": "navigation-item"
             }
           }
         }
@@ -93,12 +94,6 @@
           "name": "icon",
           "label": "Icon",
           "description": "Optional icon name, e.g. external-link"
-        },
-        {
-          "component": "text",
-          "name": "parent",
-          "label": "Parent Item Label",
-          "description": "Label of the Navigation Item this belongs under"
         }
       ]
     }
@@ -106,7 +101,11 @@
   "filters": [
     {
       "id": "navigation",
-      "components": ["navigation-item", "navigation-sub-item"]
+      "components": ["navigation-item"]
+    },
+    {
+      "id": "navigation-item",
+      "components": ["navigation-sub-item"]
     }
   ]
 }
