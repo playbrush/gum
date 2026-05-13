@@ -179,7 +179,18 @@ export default function decorate(block) {
   // Transforming the DOM in author mode destroys UE's component registry, breaking the "+" button.
   // When nav.html is fetched as a fragment by header.js there is no data-aue-resource,
   // so transformation runs normally for preview and publish.
-  if (block.dataset.aueResource) return;
+  if (block.dataset.aueResource) {
+    // Author mode: AEM sets data-aue-type="component" on all child rows server-side,
+    // even for block/v1/block items. We override this to "container" with the correct
+    // filter so UE shows a "+" button for adding nav-sub-link children.
+    [...block.children].forEach((row) => {
+      if (row.tagName === 'DIV' && row.dataset.aueResource) {
+        row.setAttribute('data-aue-type', 'container');
+        row.setAttribute('data-aue-filter', 'nav-link');
+      }
+    });
+    return;
+  }
 
   buildNavigationMarkupFromRows(block);
   block.classList.add('nav-navigation', 'navigation-ready');
