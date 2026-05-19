@@ -341,18 +341,6 @@
     ]
   },
   {
-    "id": "navigation",
-    "fields": [
-      {
-        "component": "text",
-        "name": "name",
-        "label": "Navigation Name",
-        "description": "Internal label used in the content tree",
-        "value": "Header Navigation"
-      }
-    ]
-  },
-  {
     "id": "navigation-link",
     "fields": [
       {

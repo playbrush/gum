@@ -8,118 +8,6 @@ function normalizeKey(value) {
     .replace(/[^a-z0-9]+/g, '-');
 }
 
-function getCellText(cell) {
-  return cell?.textContent?.trim() || '';
-}
-
-function getCellLink(cell) {
-  const link = cell?.querySelector('a');
-  return link?.href || '';
-}
-
-function buildNavigationMarkupFromRows(block) {
-  if (block.querySelector(':scope > ul')) return;
-
-  // Navigation Link is now a block/v1/block rendered as <div class="navigation-link block">.
-  // Each navigation-link block's own fields (label, link) are single-column rows;
-  // navigation-sub-link items follow as multi-column rows.
-  const navLinkBlocks = [...block.querySelectorAll(':scope .navigation-link')];
-
-  if (navLinkBlocks.length) {
-    const ul = document.createElement('ul');
-
-    navLinkBlocks.forEach((navLinkBlock) => {
-      const rows = [...navLinkBlock.children].filter((r) => r.tagName === 'DIV');
-      // row[0] → label (single-col); row[1] → link (single-col)
-      const label = getCellText(rows[0]?.children[0]);
-      const link = getCellLink(rows[1]?.children[0]);
-      if (!label) return;
-
-      const li = document.createElement('li');
-      const anchor = document.createElement('a');
-      anchor.href = link || '#';
-      anchor.textContent = label;
-      li.append(anchor);
-
-      // navigation-sub-link is now block/v1/block: rendered as .navigation-sub-link divs
-      const subLinkBlocks = [...navLinkBlock.querySelectorAll(':scope .navigation-sub-link')];
-      if (subLinkBlocks.length) {
-        const subUl = document.createElement('ul');
-        subLinkBlocks.forEach((subBlock) => {
-          const subRows = [...subBlock.children].filter((r) => r.tagName === 'DIV');
-          // row[0] → label, row[1] → link, row[2] → icon (each single-col)
-          const subLabel = getCellText(subRows[0]?.children[0]);
-          const subLink = getCellLink(subRows[1]?.children[0]);
-          const icon = getCellText(subRows[2]?.children[0]);
-          if (!subLabel) return;
-
-          const subLi = document.createElement('li');
-          const subAnchor = document.createElement('a');
-          subAnchor.href = subLink || '#';
-          subAnchor.textContent = subLabel;
-          if (icon) subAnchor.dataset.icon = icon;
-          subLi.append(subAnchor);
-          subUl.append(subLi);
-        });
-        if (subUl.children.length) li.append(subUl);
-      }
-
-      ul.append(li);
-    });
-
-    if (ul.children.length) block.replaceChildren(ul);
-    return;
-  }
-
-  // Fallback: flat structure where navigation-link = 2-col row, sub-link = 3-col row.
-  const rows = [...block.children].filter((row) => row.tagName === 'DIV');
-  if (!rows.length) return;
-
-  const ul = document.createElement('ul');
-  let currentLi = null;
-  let currentSubUl = null;
-
-  rows.forEach((row) => {
-    const cols = [...row.children].filter((c) => c.tagName === 'DIV');
-    if (cols.length < 2) return;
-
-    if (cols.length >= 3) {
-      if (!currentLi) return;
-      if (!currentSubUl) {
-        currentSubUl = document.createElement('ul');
-        currentLi.append(currentSubUl);
-      }
-      const subLabel = getCellText(cols[0]);
-      const subLink = getCellLink(cols[1]);
-      const icon = getCellText(cols[2]);
-      if (!subLabel) return;
-
-      const subLi = document.createElement('li');
-      const subAnchor = document.createElement('a');
-      subAnchor.href = subLink || '#';
-      subAnchor.textContent = subLabel;
-      if (icon) subAnchor.dataset.icon = icon;
-      subLi.append(subAnchor);
-      currentSubUl.append(subLi);
-    } else {
-      const label = getCellText(cols[0]);
-      const link = getCellLink(cols[1]);
-      if (!label) return;
-
-      currentLi = document.createElement('li');
-      currentSubUl = null;
-      const anchor = document.createElement('a');
-      anchor.href = link || '#';
-      anchor.textContent = label;
-      currentLi.append(anchor);
-      ul.append(currentLi);
-    }
-  });
-
-  if (!ul.children.length) return;
-  block.replaceChildren(ul);
-}
-
 function normalizeSectionState(navSection) {
   const label =
     navSection.querySelector(':scope > a, :scope > span, :scope > p')?.textContent || '';
@@ -226,22 +114,7 @@ export function decorateNavigationComponents(nav, navSections, navTools, hamburg
   nav.classList.add('header-menu-shell');
 }
 
-export default function decorate(block) {
-  if (block.dataset.aueResource) {
-    // AEM instruments blocks nested inside other blocks as type="component" (no filter).
-    // Re-promote navigation-link elements to type="block" so UE shows "Add" with the
-    // correct filter, allowing navigation-sub-link to be added inside them.
-    // Select by data-aue-model because the CSS class is not present in author mode.
-    block.querySelectorAll('[data-aue-model="navigation-link"]').forEach((navLink) => {
-      navLink.setAttribute('data-aue-type', 'block');
-      navLink.setAttribute('data-aue-filter', 'navigation-link');
-    });
-    return;
-  }
-
-  buildNavigationMarkupFromRows(block);
-  block.classList.add('nav-navigation', 'navigation-ready');
-  const linksContainer = block.querySelector(':scope .default-content-wrapper') || block;
-  linksContainer.classList.add('nav-navigation-links');
-  decorateChildNavIcons(block);
+export default function decorate() {
+  // Navigation is now a section/v1/section.
+  // Delivery-mode transformation is handled by navigation-link.js for each child block.
 }
