@@ -30,7 +30,7 @@ function buildNavigationMarkupFromRows(block) {
 
     navLinkBlocks.forEach((navLinkBlock) => {
       const rows = [...navLinkBlock.children].filter((r) => r.tagName === 'DIV');
-      // row[0] → label (single-col); row[1] → link (single-col); row[2+] → sub-link items
+      // row[0] → label (single-col); row[1] → link (single-col)
       const label = getCellText(rows[0]?.children[0]);
       const link = getCellLink(rows[1]?.children[0]);
       if (!label) return;
@@ -41,14 +41,16 @@ function buildNavigationMarkupFromRows(block) {
       anchor.textContent = label;
       li.append(anchor);
 
-      const subLinkRows = rows.slice(2);
-      if (subLinkRows.length) {
+      // navigation-sub-link is now block/v1/block: rendered as .navigation-sub-link divs
+      const subLinkBlocks = [...navLinkBlock.querySelectorAll(':scope .navigation-sub-link')];
+      if (subLinkBlocks.length) {
         const subUl = document.createElement('ul');
-        subLinkRows.forEach((subRow) => {
-          const cols = [...subRow.children].filter((c) => c.tagName === 'DIV');
-          const subLabel = getCellText(cols[0]);
-          const subLink = getCellLink(cols[1]);
-          const icon = getCellText(cols[2]);
+        subLinkBlocks.forEach((subBlock) => {
+          const subRows = [...subBlock.children].filter((r) => r.tagName === 'DIV');
+          // row[0] → label, row[1] → link, row[2] → icon (each single-col)
+          const subLabel = getCellText(subRows[0]?.children[0]);
+          const subLink = getCellLink(subRows[1]?.children[0]);
+          const icon = getCellText(subRows[2]?.children[0]);
           if (!subLabel) return;
 
           const subLi = document.createElement('li');
