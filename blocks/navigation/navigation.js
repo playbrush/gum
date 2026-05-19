@@ -24,44 +24,45 @@ function buildNavigationMarkupFromRows(block) {
   if (!rows.length) return;
 
   const ul = document.createElement('ul');
+  let currentLi = null;
+  let currentSubUl = null;
 
   rows.forEach((row) => {
-    // First two direct div children: label | link (navigation-item fields)
-    // Any further div children: navigation-sub-item rows (each with label|link|icon divs)
-    const cols = [...row.children];
-    const label = getCellText(cols[0]);
-    const link = getCellLink(cols[1]);
-    if (!label) return;
+    const cols = [...row.children].filter((c) => c.tagName === 'DIV');
 
-    const li = document.createElement('li');
-    const anchor = document.createElement('a');
-    anchor.href = link || '#';
-    anchor.textContent = label;
-    li.append(anchor);
+    if (cols.length >= 3) {
+      // navigation-sub-link row (3 columns: label, link, icon)
+      if (!currentLi) return;
+      if (!currentSubUl) {
+        currentSubUl = document.createElement('ul');
+        currentLi.append(currentSubUl);
+      }
+      const subLabel = getCellText(cols[0]);
+      const subLink = getCellLink(cols[1]);
+      const icon = getCellText(cols[2]);
+      if (!subLabel) return;
 
-    // cols[2+] are navigation-sub-item divs stored as child items by UE
-    const subItemDivs = cols.slice(2).filter((col) => col.tagName === 'DIV');
-    if (subItemDivs.length) {
-      const subUl = document.createElement('ul');
-      subItemDivs.forEach((subDiv) => {
-        const subCols = [...subDiv.children];
-        const subLabel = getCellText(subCols[0]);
-        const subLink = getCellLink(subCols[1]);
-        const icon = getCellText(subCols[2]);
-        if (!subLabel) return;
+      const subLi = document.createElement('li');
+      const subAnchor = document.createElement('a');
+      subAnchor.href = subLink || '#';
+      subAnchor.textContent = subLabel;
+      if (icon) subAnchor.dataset.icon = icon;
+      subLi.append(subAnchor);
+      currentSubUl.append(subLi);
+    } else {
+      // navigation-link row (2 columns: label, link)
+      const label = getCellText(cols[0]);
+      const link = getCellLink(cols[1]);
+      if (!label) return;
 
-        const subLi = document.createElement('li');
-        const subAnchor = document.createElement('a');
-        subAnchor.href = subLink || '#';
-        subAnchor.textContent = subLabel;
-        if (icon) subAnchor.dataset.icon = icon;
-        subLi.append(subAnchor);
-        subUl.append(subLi);
-      });
-      if (subUl.children.length) li.append(subUl);
+      currentLi = document.createElement('li');
+      currentSubUl = null;
+      const anchor = document.createElement('a');
+      anchor.href = link || '#';
+      anchor.textContent = label;
+      currentLi.append(anchor);
+      ul.append(currentLi);
     }
-
-    ul.append(li);
   });
 
   if (!ul.children.length) return;
@@ -175,17 +176,10 @@ export function decorateNavigationComponents(nav, navSections, navTools, hamburg
 }
 
 export default function decorate(block) {
-  // In UE author mode AEM does not emit data-aue-filter on nested block rows, so
-  // navigation-link items lack a filter and UE hides the "+" button.
-  // Mirror what scripts.js does for sections: set the filter via setAttribute so UE
-  // knows navigation-link is a container that accepts navigation-sub-link children.
+  // In author mode (UE), leave the block DOM untouched so UE can manage items.
+  // The navigation block filter (navigation-link + navigation-sub-link) is set
+  // server-side by AEM, so the "+" button and picker work natively.
   if (block.dataset.aueResource) {
-    [...block.children].forEach((row) => {
-      if (row.tagName === 'DIV' && row.dataset.aueResource) {
-        row.setAttribute('data-aue-type', 'container');
-        row.setAttribute('data-aue-filter', 'navigation-link');
-      }
-    });
     return;
   }
 
