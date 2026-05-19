@@ -24,44 +24,49 @@ function buildNavigationMarkupFromRows(block) {
   if (!rows.length) return;
 
   const ul = document.createElement('ul');
+  let currentLi = null;
+  let currentSubUl = null;
 
   rows.forEach((row) => {
-    // First two direct div children are the navigation-link model fields: label | link.
-    // Any further div children are navigation-sub-link items added via UE (each child
-    // contains its own field divs: label | link | icon).
-    const cols = [...row.children];
-    const label = getCellText(cols[0]);
-    const link = getCellLink(cols[1]);
-    if (!label) return;
+    const cols = [...row.children].filter((c) => c.tagName === 'DIV');
 
-    const li = document.createElement('li');
-    const anchor = document.createElement('a');
-    anchor.href = link || '#';
-    anchor.textContent = label;
-    li.append(anchor);
+    // Skip single-col rows (navigation block's own "name" property row).
+    if (cols.length < 2) return;
 
-    const subItemDivs = cols.slice(2).filter((col) => col.tagName === 'DIV');
-    if (subItemDivs.length) {
-      const subUl = document.createElement('ul');
-      subItemDivs.forEach((subDiv) => {
-        const subCols = [...subDiv.children];
-        const subLabel = getCellText(subCols[0]);
-        const subLink = getCellLink(subCols[1]);
-        const icon = getCellText(subCols[2]);
-        if (!subLabel) return;
+    if (cols.length >= 3) {
+      // navigation-sub-link: 3 columns (label | link | icon).
+      // Belongs to the most recent navigation-link above it.
+      if (!currentLi) return;
+      if (!currentSubUl) {
+        currentSubUl = document.createElement('ul');
+        currentLi.append(currentSubUl);
+      }
+      const subLabel = getCellText(cols[0]);
+      const subLink = getCellLink(cols[1]);
+      const icon = getCellText(cols[2]);
+      if (!subLabel) return;
 
-        const subLi = document.createElement('li');
-        const subAnchor = document.createElement('a');
-        subAnchor.href = subLink || '#';
-        subAnchor.textContent = subLabel;
-        if (icon) subAnchor.dataset.icon = icon;
-        subLi.append(subAnchor);
-        subUl.append(subLi);
-      });
-      if (subUl.children.length) li.append(subUl);
+      const subLi = document.createElement('li');
+      const subAnchor = document.createElement('a');
+      subAnchor.href = subLink || '#';
+      subAnchor.textContent = subLabel;
+      if (icon) subAnchor.dataset.icon = icon;
+      subLi.append(subAnchor);
+      currentSubUl.append(subLi);
+    } else {
+      // navigation-link: 2 columns (label | link).
+      const label = getCellText(cols[0]);
+      const link = getCellLink(cols[1]);
+      if (!label) return;
+
+      currentLi = document.createElement('li');
+      currentSubUl = null;
+      const anchor = document.createElement('a');
+      anchor.href = link || '#';
+      anchor.textContent = label;
+      currentLi.append(anchor);
+      ul.append(currentLi);
     }
-
-    ul.append(li);
   });
 
   if (!ul.children.length) return;
