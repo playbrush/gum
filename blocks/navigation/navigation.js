@@ -20,6 +20,56 @@ function getCellLink(cell) {
 function buildNavigationMarkupFromRows(block) {
   if (block.querySelector(':scope > ul')) return;
 
+  // Navigation Link is now a block/v1/block rendered as <div class="navigation-link block">.
+  // Each navigation-link block's own fields (label, link) are single-column rows;
+  // navigation-sub-link items follow as multi-column rows.
+  const navLinkBlocks = [...block.querySelectorAll(':scope .navigation-link')];
+
+  if (navLinkBlocks.length) {
+    const ul = document.createElement('ul');
+
+    navLinkBlocks.forEach((navLinkBlock) => {
+      const rows = [...navLinkBlock.children].filter((r) => r.tagName === 'DIV');
+      // row[0] → label (single-col); row[1] → link (single-col); row[2+] → sub-link items
+      const label = getCellText(rows[0]?.children[0]);
+      const link = getCellLink(rows[1]?.children[0]);
+      if (!label) return;
+
+      const li = document.createElement('li');
+      const anchor = document.createElement('a');
+      anchor.href = link || '#';
+      anchor.textContent = label;
+      li.append(anchor);
+
+      const subLinkRows = rows.slice(2);
+      if (subLinkRows.length) {
+        const subUl = document.createElement('ul');
+        subLinkRows.forEach((subRow) => {
+          const cols = [...subRow.children].filter((c) => c.tagName === 'DIV');
+          const subLabel = getCellText(cols[0]);
+          const subLink = getCellLink(cols[1]);
+          const icon = getCellText(cols[2]);
+          if (!subLabel) return;
+
+          const subLi = document.createElement('li');
+          const subAnchor = document.createElement('a');
+          subAnchor.href = subLink || '#';
+          subAnchor.textContent = subLabel;
+          if (icon) subAnchor.dataset.icon = icon;
+          subLi.append(subAnchor);
+          subUl.append(subLi);
+        });
+        if (subUl.children.length) li.append(subUl);
+      }
+
+      ul.append(li);
+    });
+
+    if (ul.children.length) block.replaceChildren(ul);
+    return;
+  }
+
+  // Fallback: flat structure where navigation-link = 2-col row, sub-link = 3-col row.
   const rows = [...block.children].filter((row) => row.tagName === 'DIV');
   if (!rows.length) return;
 
@@ -29,13 +79,9 @@ function buildNavigationMarkupFromRows(block) {
 
   rows.forEach((row) => {
     const cols = [...row.children].filter((c) => c.tagName === 'DIV');
-
-    // Skip single-col rows (navigation block's own "name" property row).
     if (cols.length < 2) return;
 
     if (cols.length >= 3) {
-      // navigation-sub-link: 3 columns (label | link | icon).
-      // Belongs to the most recent navigation-link above it.
       if (!currentLi) return;
       if (!currentSubUl) {
         currentSubUl = document.createElement('ul');
@@ -54,7 +100,6 @@ function buildNavigationMarkupFromRows(block) {
       subLi.append(subAnchor);
       currentSubUl.append(subLi);
     } else {
-      // navigation-link: 2 columns (label | link).
       const label = getCellText(cols[0]);
       const link = getCellLink(cols[1]);
       if (!label) return;
