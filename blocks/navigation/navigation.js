@@ -231,7 +231,8 @@ export default function decorate(block) {
     // AEM instruments blocks nested inside other blocks as type="component" (no filter).
     // Re-promote navigation-link elements to type="block" so UE shows "Add" with the
     // correct filter, allowing navigation-sub-link to be added inside them.
-    block.querySelectorAll(':scope .navigation-link').forEach((navLink) => {
+    // Select by data-aue-model because the CSS class is not present in author mode.
+    block.querySelectorAll('[data-aue-model="navigation-link"]').forEach((navLink) => {
       navLink.setAttribute('data-aue-type', 'block');
       navLink.setAttribute('data-aue-filter', 'navigation-link');
     });
