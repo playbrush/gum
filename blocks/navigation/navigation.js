@@ -227,10 +227,14 @@ export function decorateNavigationComponents(nav, navSections, navTools, hamburg
 }
 
 export default function decorate(block) {
-  // In author mode (UE), leave the block DOM untouched so UE can manage items.
-  // The navigation block filter (navigation-link + navigation-sub-link) is set
-  // server-side by AEM, so the "+" button and picker work natively.
   if (block.dataset.aueResource) {
+    // AEM instruments blocks nested inside other blocks as type="component" (no filter).
+    // Re-promote navigation-link elements to type="block" so UE shows "Add" with the
+    // correct filter, allowing navigation-sub-link to be added inside them.
+    block.querySelectorAll(':scope .navigation-link').forEach((navLink) => {
+      navLink.setAttribute('data-aue-type', 'block');
+      navLink.setAttribute('data-aue-filter', 'navigation-link');
+    });
     return;
   }
 
