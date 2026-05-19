@@ -180,13 +180,19 @@ export default function decorate(block) {
   // When nav.html is fetched as a fragment by header.js there is no data-aue-resource,
   // so transformation runs normally for preview and publish.
   if (block.dataset.aueResource) {
-    // Author mode: AEM sets data-aue-type="component" on all child rows server-side,
-    // even for block/v1/block items. We override this to "container" with the correct
-    // filter so UE shows a "+" button for adding nav-sub-link children.
+    // Author mode: AEM instruments nav-link rows as data-aue-type="component" even when the
+    // resourceType is block/v1/block.  Simply mutating the attribute on an already-registered
+    // element is ignored by UE — UE only picks up the type on *insertion*.
+    // Fix: remove each nav-link row, update its attributes, then reinsert it so UE's
+    // childList MutationObserver fires and re-registers the element as a "container".
     [...block.children].forEach((row) => {
       if (row.tagName === 'DIV' && row.dataset.aueResource) {
+        const { parentNode } = row;
+        const ref = row.nextSibling;
+        parentNode.removeChild(row);
         row.setAttribute('data-aue-type', 'container');
         row.setAttribute('data-aue-filter', 'nav-link');
+        parentNode.insertBefore(row, ref);
       }
     });
     return;
