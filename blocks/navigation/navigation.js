@@ -182,7 +182,7 @@ export default function decorate(block) {
   if (block.dataset.aueResource) {
     [...block.children].forEach((row) => {
       if (row.tagName === 'DIV' && row.dataset.aueResource) {
-        row.setAttribute('data-aue-type', 'block');
+        row.setAttribute('data-aue-type', 'container');
         row.setAttribute('data-aue-filter', 'navigation-link');
       }
     });
