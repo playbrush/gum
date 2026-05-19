@@ -175,11 +175,19 @@ export function decorateNavigationComponents(nav, navSections, navTools, hamburg
 }
 
 export default function decorate(block) {
-  // In UE author mode AEM instruments the DOM server-side. Transforming the DOM here
-  // would destroy component registrations and break the "+" button.
-  // nav.html fetched as a fragment by header.js has no data-aue-resource, so the
-  // transformation runs normally for preview and publish.
-  if (block.dataset.aueResource) return;
+  // In UE author mode AEM does not emit data-aue-filter on nested block rows, so
+  // navigation-link items lack a filter and UE hides the "+" button.
+  // Mirror what scripts.js does for sections: set the filter via setAttribute so UE
+  // knows navigation-link is a container that accepts navigation-sub-link children.
+  if (block.dataset.aueResource) {
+    [...block.children].forEach((row) => {
+      if (row.tagName === 'DIV' && row.dataset.aueResource) {
+        row.setAttribute('data-aue-type', 'container');
+        row.setAttribute('data-aue-filter', 'navigation-link');
+      }
+    });
+    return;
+  }
 
   buildNavigationMarkupFromRows(block);
   block.classList.add('nav-navigation', 'navigation-ready');
