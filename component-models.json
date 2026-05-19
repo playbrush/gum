@@ -353,7 +353,7 @@
     ]
   },
   {
-    "id": "nav-link",
+    "id": "navigation-link",
     "fields": [
       {
         "component": "text",
@@ -368,7 +368,7 @@
     ]
   },
   {
-    "id": "nav-sub-link",
+    "id": "navigation-sub-link",
     "fields": [
       {
         "component": "text",

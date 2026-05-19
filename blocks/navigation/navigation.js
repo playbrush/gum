@@ -175,28 +175,11 @@ export function decorateNavigationComponents(nav, navSections, navTools, hamburg
 }
 
 export default function decorate(block) {
-  // In UE author mode AEM sets data-aue-resource on the block server-side.
-  // Transforming the DOM in author mode destroys UE's component registry, breaking the "+" button.
-  // When nav.html is fetched as a fragment by header.js there is no data-aue-resource,
-  // so transformation runs normally for preview and publish.
-  if (block.dataset.aueResource) {
-    // Author mode: AEM instruments nav-link rows as data-aue-type="component" even when the
-    // resourceType is block/v1/block.  Simply mutating the attribute on an already-registered
-    // element is ignored by UE — UE only picks up the type on *insertion*.
-    // Fix: remove each nav-link row, update its attributes, then reinsert it so UE's
-    // childList MutationObserver fires and re-registers the element as a "container".
-    [...block.children].forEach((row) => {
-      if (row.tagName === 'DIV' && row.dataset.aueResource) {
-        const { parentNode } = row;
-        const ref = row.nextSibling;
-        parentNode.removeChild(row);
-        row.setAttribute('data-aue-type', 'container');
-        row.setAttribute('data-aue-filter', 'nav-link');
-        parentNode.insertBefore(row, ref);
-      }
-    });
-    return;
-  }
+  // In UE author mode AEM instruments the DOM server-side. Transforming the DOM here
+  // would destroy component registrations and break the "+" button.
+  // nav.html fetched as a fragment by header.js has no data-aue-resource, so the
+  // transformation runs normally for preview and publish.
+  if (block.dataset.aueResource) return;
 
   buildNavigationMarkupFromRows(block);
   block.classList.add('nav-navigation', 'navigation-ready');
