@@ -8,6 +8,7 @@ import {
   decorateBlocks,
   decorateTemplateAndTheme,
   waitForFirstImage,
+  loadBlock,
   loadSection,
   loadSections,
   loadCSS,
@@ -116,15 +117,22 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
-  // Decorate blocks nested inside layout blocks (e.g. product-card inside columns)
-  // so that loadSections can discover and load them via div.block selector
-  main.querySelectorAll('.block > div > div > div').forEach((el) => {
-    if (el.classList.length > 0 && !el.dataset.blockStatus) {
-      decorateBlock(el);
-    }
-  });
+  // Decorate nested blocks (e.g. product-card inside columns) so loadSection can pick them up
+  main.querySelectorAll('.columns .product-card:not(.block)').forEach(decorateBlock);
   decorateTitleHeadings(main);
   observeTitleHeadingUpdates(main);
+}
+
+/**
+ * Decorates and loads blocks nested inside layout blocks (e.g. product-card inside columns).
+ * Safe to call multiple times — the :not(.block) guard prevents double-processing.
+ * @param {Element} root The container to search within (defaults to main)
+ */
+export async function loadNestedBlocks(root = document.querySelector('main')) {
+  if (!root) return;
+  const blocks = [...root.querySelectorAll('.columns .product-card:not(.block)')];
+  blocks.forEach(decorateBlock);
+  await Promise.all(blocks.filter((b) => b.dataset.blockName).map(loadBlock));
 }
 
 /**

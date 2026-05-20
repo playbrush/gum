@@ -9,7 +9,7 @@ import {
   loadSections,
 } from './aem.js';
 import { decorateRichtext } from './editor-support-rte.js';
-import { decorateMain } from './scripts.js';
+import { decorateMain, loadNestedBlocks } from './scripts.js';
 
 let promiseChanges$ = Promise.resolve();
 
@@ -66,6 +66,7 @@ async function applyChanges(event) {
         decorateBlock(newBlock);
         decorateRichtext(newBlock);
         await loadBlock(newBlock);
+        await loadNestedBlocks(newBlock);
         block.remove();
         newBlock.style.display = null;
         return true;
@@ -130,3 +131,13 @@ decorateRichtext();
 // for new richtext-instrumented elements. this happens for example when using experimentation.
 const observer = new MutationObserver(() => decorateRichtext());
 observer.observe(document, { attributeFilter: ['data-richtext-prop'], subtree: true });
+
+// Watch for nested blocks added dynamically by UE (e.g. product-card dropped into columns).
+// The :not(.block) guard in loadNestedBlocks prevents double-processing.
+const nestedBlockObserver = new MutationObserver(() => {
+  const main = document.querySelector('main');
+  if (!main || !main.querySelector('.columns .product-card:not(.block)')) return;
+  loadNestedBlocks(main);
+});
+const ueMain = document.querySelector('main');
+if (ueMain) nestedBlockObserver.observe(ueMain, { childList: true, subtree: true });
