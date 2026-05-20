@@ -21,14 +21,22 @@
       "id": "product-card",
       "fields": [
         {
-          "component": "boolean",
-          "name": "content_isNew",
-          "label": "New"
-        },
-        {
-          "component": "boolean",
-          "name": "content_isBestSeller",
-          "label": "Best Seller"
+          "component": "container",
+          "name": "badges",
+          "label": "Badges",
+          "collapsible": false,
+          "fields": [
+            {
+              "component": "boolean",
+              "name": "content_isNew",
+              "label": "New"
+            },
+            {
+              "component": "boolean",
+              "name": "content_isBestSeller",
+              "label": "Best Seller"
+            }
+          ]
         },
         {
           "component": "text",
