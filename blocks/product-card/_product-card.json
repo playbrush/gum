@@ -71,6 +71,24 @@
           "description": "Numeric score, e.g. 4.9"
         },
         {
+          "component": "container",
+          "name": "ctas",
+          "label": "Call to Actions",
+          "collapsible": false,
+          "fields": [
+            {
+              "component": "boolean",
+              "name": "content_addToCart",
+              "label": "Add to Cart"
+            },
+            {
+              "component": "boolean",
+              "name": "content_buyInStore",
+              "label": "Buy in Store"
+            }
+          ]
+        },
+        {
           "component": "reference",
           "valueType": "string",
           "name": "image",
@@ -82,28 +100,6 @@
           "valueType": "string",
           "name": "imageAlt",
           "label": "Image Alt Text"
-        },
-        {
-          "component": "aem-content",
-          "name": "primaryCta",
-          "label": "Primary CTA"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "primaryCtaText",
-          "label": "Primary Button Text"
-        },
-        {
-          "component": "aem-content",
-          "name": "secondaryCta",
-          "label": "Secondary CTA"
-        },
-        {
-          "component": "text",
-          "valueType": "string",
-          "name": "secondaryCtaText",
-          "label": "Secondary Link Text"
         }
       ]
     }

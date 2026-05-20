@@ -19,12 +19,10 @@ export default function decorate(block) {
   const rows = [...block.children];
   const getCell = (row, idx = 0) => row?.children?.[idx];
 
-  // 4 cells via element grouping + field collapse:
-  // Row 0: content group (badges <p>, name <h2-h4> via nameType, price <p>, rating <p>)
+  // 2 rows via element grouping:
+  // Row 0: content group (badges <p>, name <h2-h4> via nameType, price <p>, rating <p>, addToCart <p>, buyInStore <p>)
   // Row 1: image (picture, with imageAlt collapsed)
-  // Row 2: primaryCta (anchor, with primaryCtaText collapsed)
-  // Row 3: secondaryCta (anchor, with secondaryCtaText collapsed)
-  const [contentRow, imageRow, primaryRow, secondaryRow] = rows;
+  const [contentRow, imageRow] = rows;
 
   const contentCell = getCell(contentRow);
   const headingEl = contentCell?.querySelector('h2,h3,h4');
@@ -49,6 +47,12 @@ export default function decorate(block) {
   const name = headingEl?.textContent.trim() || '';
   const price = afterHeading[0]?.textContent.trim() || '';
   const rating = afterHeading[1]?.textContent.trim() || '';
+  const isTrue = (el) => {
+    const v = el?.textContent.trim().toLowerCase();
+    return v === 'true' || v === 'on';
+  };
+  const addToCart = isTrue(afterHeading[2]);
+  const buyInStore = isTrue(afterHeading[3]);
 
   // Image: on live delivery the reference field renders as <picture>; move it directly.
   // In UE the reference renders as <a href="url"> — create a plain <img> from the full URL.
@@ -73,9 +77,6 @@ export default function decorate(block) {
       }
     }
   }
-
-  const primaryLink = getCell(primaryRow)?.querySelector('a');
-  const secondaryLink = getCell(secondaryRow)?.querySelector('a');
 
   // ── Article card ────────────────────────────────────────────────────────
   const card = document.createElement('article');
@@ -151,33 +152,33 @@ export default function decorate(block) {
     bottom.append(media);
   }
 
-  if (primaryLink || secondaryLink) {
+  if (addToCart || buyInStore) {
     const buttons = document.createElement('div');
     buttons.className = 'product-card-buttons';
 
-    if (primaryLink) {
-      const btn = document.createElement('a');
-      btn.href = primaryLink.href;
+    if (addToCart) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
       btn.className = 'product-card-btn-primary';
-      btn.textContent = primaryLink.textContent.trim() || 'Button';
+      btn.textContent = 'Add to Cart';
       buttons.append(btn);
     }
 
-    if (secondaryLink) {
-      const link = document.createElement('a');
-      link.href = secondaryLink.href;
-      link.className = 'product-card-btn-secondary';
+    if (buyInStore) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'product-card-btn-secondary';
 
       const span = document.createElement('span');
-      span.textContent = secondaryLink.textContent.trim() || 'Button';
+      span.textContent = 'Buy in Store';
 
       const chevron = document.createElement('span');
       chevron.className = 'product-card-chevron';
       chevron.setAttribute('aria-hidden', 'true');
       chevron.innerHTML = createChevronSvg();
 
-      link.append(span, chevron);
-      buttons.append(link);
+      btn.append(span, chevron);
+      buttons.append(btn);
     }
 
     bottom.append(buttons);
