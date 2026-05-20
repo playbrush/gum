@@ -55,6 +55,19 @@
   background: var(--label-best-seller, #f2c6ff);
 }
 
+.product-card-badge-online-only {
+  background: var(--label-online-only, #ffa1a3);
+}
+
+.product-card-badge-featured,
+.product-card-badge-featured-product {
+  background: var(--label-featured, #ffd26f);
+}
+
+.product-card-badge-recommended {
+  background: var(--label-recommended, #ffb867);
+}
+
 /* Product Name — normalize h2/h3/h4 to same visual size */
 .product-card-inner h2,
 .product-card-inner h3,
@@ -195,10 +208,7 @@
   font-weight: 500;
   line-height: var(--line-height-body-sm, 1.1);
   color: var(--text-primary, #154734);
-  text-decoration: underline;
-  text-decoration-color: var(--color-yellow-green-200, #7fbb00);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
+  text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   letter-spacing: var(--letter-spacing-body-sm, 0);
@@ -206,7 +216,10 @@
 
 .product-card-btn-secondary:hover {
   color: var(--text-primary, #154734);
+  text-decoration: underline;
   text-decoration-color: var(--text-primary, #154734);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
 }
 
 .product-card-btn-secondary:focus-visible {
