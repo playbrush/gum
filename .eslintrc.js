@@ -16,5 +16,6 @@ module.exports = {
     'linebreak-style': ['error', 'unix'], // enforce unix linebreaks
     'no-param-reassign': [2, { props: false }], // allow modifying properties of param
     'prettier/prettier': 'error',
+    // 'xwalk/max-cells': ['error', 8], // product-card requires 7 fields
   },
 };

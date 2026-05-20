@@ -22,17 +22,32 @@ export default function decorate(block) {
 
   const rows = [...block.children];
   const getCell = (row, idx = 0) => row?.children?.[idx];
-  const getText = (el) => el?.textContent?.trim() || '';
 
-  const [tagsRow, nameRow, priceRow, ratingRow, imageRow, primaryRow, secondaryRow] = rows;
+  // 4 cells via element grouping + field collapse:
+  // Row 0: content group (badges <p>, name <h2-h4> via nameType, price <p>, rating <p>)
+  // Row 1: image (picture, with imageAlt collapsed)
+  // Row 2: primaryCta (anchor, with primaryCtaText collapsed)
+  // Row 3: secondaryCta (anchor, with secondaryCtaText collapsed)
+  const [contentRow, imageRow, primaryRow, secondaryRow] = rows;
 
-  const tags = getText(getCell(tagsRow))
+  const contentCell = getCell(contentRow);
+  const headingEl = contentCell?.querySelector('h2,h3,h4');
+  const contentChildren = [...(contentCell?.children ?? [])];
+  const headingIdx = headingEl ? contentChildren.indexOf(headingEl) : -1;
+  const beforeHeading = (headingIdx >= 0 ? contentChildren.slice(0, headingIdx) : []).filter(
+    (c) => c.tagName === 'P'
+  );
+  const afterHeading = (
+    headingIdx >= 0 ? contentChildren.slice(headingIdx + 1) : contentChildren
+  ).filter((c) => c.tagName === 'P');
+
+  const tags = (beforeHeading[0]?.textContent.trim() || '')
     .split(',')
     .map((t) => t.trim())
     .filter(Boolean);
-  const name = getText(getCell(nameRow));
-  const price = getText(getCell(priceRow));
-  const rating = getText(getCell(ratingRow));
+  const name = headingEl?.textContent.trim() || '';
+  const price = afterHeading[0]?.textContent.trim() || '';
+  const rating = afterHeading[1]?.textContent.trim() || '';
   const imgEl = getCell(imageRow)?.querySelector('picture, img');
   const primaryLink = getCell(primaryRow)?.querySelector('a');
   const secondaryLink = getCell(secondaryRow)?.querySelector('a');
@@ -50,7 +65,7 @@ export default function decorate(block) {
     labelsEl.className = 'product-card-labels';
     tags.forEach((tag) => {
       const badge = document.createElement('span');
-      badge.className = `product-card-badge product-card-badge--${normalizeBadgeClass(tag)}`;
+      badge.className = `product-card-badge product-card-badge-${normalizeBadgeClass(tag)}`;
       badge.textContent = tag;
       labelsEl.append(badge);
     });

@@ -23,27 +23,39 @@
         {
           "component": "text",
           "valueType": "string",
-          "name": "tags",
-          "label": "Badge Tags",
-          "description": "Comma-separated badge labels. Supported: new, best-seller"
+          "name": "content_badges",
+          "label": "Badge Labels",
+          "description": "Comma-separated: new, best-seller"
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "name",
+          "name": "content_name",
           "label": "Product Name"
         },
         {
-          "component": "text",
+          "component": "select",
           "valueType": "string",
-          "name": "price",
-          "label": "Price",
-          "description": "Format: £##.##"
+          "name": "content_nameType",
+          "label": "Name Heading Level",
+          "value": "h3",
+          "options": [
+            { "name": "H2", "value": "h2" },
+            { "name": "H3", "value": "h3" },
+            { "name": "H4", "value": "h4" }
+          ]
         },
         {
           "component": "text",
           "valueType": "string",
-          "name": "rating",
+          "name": "content_price",
+          "label": "Price",
+          "description": "e.g. £12.99"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "content_rating",
           "label": "Rating",
           "description": "Numeric score, e.g. 4.9"
         },
@@ -55,20 +67,32 @@
           "multi": false
         },
         {
-          "component": "richtext",
+          "component": "text",
           "valueType": "string",
-          "name": "cta-primary",
-          "value": "",
-          "label": "Primary CTA",
-          "description": "Create a hyperlink — the link text becomes the button label"
+          "name": "imageAlt",
+          "label": "Image Alt Text"
         },
         {
-          "component": "richtext",
+          "component": "aem-content",
+          "name": "primaryCta",
+          "label": "Primary CTA"
+        },
+        {
+          "component": "text",
           "valueType": "string",
-          "name": "cta-secondary",
-          "value": "",
-          "label": "Secondary CTA",
-          "description": "Create a hyperlink — the link text becomes the secondary link label"
+          "name": "primaryCtaText",
+          "label": "Primary Button Text"
+        },
+        {
+          "component": "aem-content",
+          "name": "secondaryCta",
+          "label": "Secondary CTA"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "secondaryCtaText",
+          "label": "Secondary Link Text"
         }
       ]
     }
