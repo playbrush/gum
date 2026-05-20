@@ -540,16 +540,18 @@ button {
   gap: 8px;
   margin: 12px 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border-radius: var(--radius-m);
+  padding: 0.7em 1.75em;
   font-family: var(--font-family-poppins);
+  font-size: var(--font-size-default);
   font-style: normal;
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.1;
+  letter-spacing: 0;
   text-align: center;
   text-decoration: none;
   background-color: var(--color-yellow-green-100);
-  color: var(--text-color);
+  color: var(--text-primary);
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -588,28 +590,29 @@ button.secondary:hover {
 
 a.button.secondary-inverse,
 button.secondary-inverse {
-  background-color: var(--color-neutral-100);
-  border: 2px solid transparent;
-  color: var(--text-primary);
+  background-color: transparent;
+  border: 2px solid var(--color-yellow-green-100);
+  color: var(--color-white);
 }
 
 a.button.secondary-inverse:hover,
 button.secondary-inverse:hover {
   background-color: var(--color-yellow-green-100);
-  color: var(--text-color);
+  border-color: var(--color-yellow-green-100);
+  color: var(--text-primary);
 }
 
 a.button.tertiary,
 button.tertiary {
   background-color: var(--color-blue-300);
   border: 2px solid transparent;
-  color: var(--text-color);
+  color: var(--text-primary);
 }
 
 a.button.tertiary:hover,
 button.tertiary:hover {
-  background-color: var(--color-blue-400);
-  color: var(--text-color);
+  background-color: var(--color-blue-300);
+  color: var(--text-primary);
 }
 
 /* Button sizes */
@@ -1267,6 +1270,13 @@ button.link-text {
   font-weight: 500;
 }
 
+button.link-back:hover,
+button.link-back:focus,
+button.link-text:hover,
+button.link-text:focus {
+  background: none;
+}
+
 /* --- Back link (left chevron + text) --- */
 .link-back {
   display: inline-flex;
@@ -1335,6 +1345,7 @@ button.link-text {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
+  margin-left: -4px;
   background-color: currentcolor;
   mask-image: url('/icons/chevron-right.svg');
   mask-repeat: no-repeat;
