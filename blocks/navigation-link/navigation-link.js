@@ -8,14 +8,20 @@ function getCellLink(cell) {
 }
 
 export default function decorate(block) {
-  if (block.dataset.aueResource) return;
-
   const rows = [...block.children].filter((r) => r.tagName === 'DIV');
   const label = getCellText(rows[0]?.children[0]);
   const link = getCellLink(rows[1]?.children[0]);
   if (!label) return;
 
   const li = document.createElement('li');
+
+  // Preserve data-aue-* and class attributes on the li for Universal Editor support
+  [...block.attributes].forEach((attr) => {
+    if (attr.name.startsWith('data-aue-') || attr.name === 'class') {
+      li.setAttribute(attr.name, attr.value);
+    }
+  });
+
   const anchor = document.createElement('a');
   anchor.href = link || '#';
   anchor.textContent = label;
@@ -32,6 +38,14 @@ export default function decorate(block) {
       if (!subLabel) return;
 
       const subLi = document.createElement('li');
+
+      // Preserve data-aue-* and class attributes on sub-li for Universal Editor support
+      [...subRow.attributes].forEach((attr) => {
+        if (attr.name.startsWith('data-aue-') || attr.name === 'class') {
+          subLi.setAttribute(attr.name, attr.value);
+        }
+      });
+
       const subAnchor = document.createElement('a');
       subAnchor.href = subLink || '#';
       subAnchor.textContent = subLabel;
