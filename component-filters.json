@@ -1,67 +1,46 @@
 [
   {
     "id": "main",
-    "components": [
-      "section"
-    ]
+    "components": ["section"]
   },
   {
     "id": "section",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title",
-      "hero",
-      "cards",
-      "columns",
-      "fragment"
-    ]
+    "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment"]
   },
   {
     "id": "cards",
-    "components": [
-      "card"
-    ]
+    "components": ["card"]
   },
   {
     "id": "columns",
-    "components": [
-      "column"
-    ]
+    "components": ["column"]
   },
   {
     "id": "column",
-    "components": [
-      "text",
-      "image",
-      "button",
-      "title",
-      "product-card"
-    ]
+    "components": ["text", "image", "button", "title", "product-card"]
   },
   {
     "id": "header",
-    "components": [
-      "navigation"
-    ]
+    "components": ["navigation"]
   },
   {
     "id": "nav",
-    "components": [
-      "navigation"
-    ]
+    "components": ["navigation"]
   },
   {
     "id": "navigation",
-    "components": [
-      "navigation-link"
-    ]
+    "components": ["navigation-link"]
   },
   {
     "id": "navigation-link",
-    "components": [
-      "navigation-sub-link"
-    ]
+    "components": ["navigation-sub-link"]
+  },
+  {
+    "id": "navigation-sub-link",
+    "components": []
+  },
+  {
+    "id": "product-card",
+    "components": []
   }
 ]
