@@ -66,7 +66,7 @@ export default function decorate(block) {
       if (src) {
         const img = document.createElement('img');
         img.src = src;
-        img.alt = '';
+        img.alt = anchor?.textContent?.trim() || '';
         img.loading = 'lazy';
         picture = document.createElement('picture');
         picture.append(img);
