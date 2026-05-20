@@ -375,5 +375,60 @@
         "description": "Optional icon name, e.g. external-link"
       }
     ]
+  },
+  {
+    "id": "product-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tags",
+        "label": "Badge Tags",
+        "description": "Comma-separated badge labels. Supported: new, best-seller"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "name",
+        "label": "Product Name"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "price",
+        "label": "Price",
+        "description": "Format: £##.##"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "rating",
+        "label": "Rating",
+        "description": "Numeric score, e.g. 4.9"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Product Image",
+        "multi": false
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cta-primary",
+        "value": "",
+        "label": "Primary CTA",
+        "description": "Create a hyperlink — the link text becomes the button label"
+      },
+      {
+        "component": "richtext",
+        "valueType": "string",
+        "name": "cta-secondary",
+        "value": "",
+        "label": "Secondary CTA",
+        "description": "Create a hyperlink — the link text becomes the secondary link label"
+      }
+    ]
   }
 ]
