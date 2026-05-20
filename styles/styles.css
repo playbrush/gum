@@ -1255,6 +1255,18 @@ main > .section[data-width='inset'] > div {
   text-decoration: none;
 }
 
+/* Reset default button chrome when link classes are applied to <button> */
+button.link-back,
+button.link-text {
+  background: none;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  min-width: 0;
+  width: auto;
+  font-weight: 500;
+}
+
 /* --- Back link (left chevron + text) --- */
 .link-back {
   display: inline-flex;
