@@ -18,8 +18,6 @@ function normalizeBadgeClass(tag) {
 }
 
 export default function decorate(block) {
-  if (block.dataset.aueResource) return;
-
   const rows = [...block.children];
   const getCell = (row, idx = 0) => row?.children?.[idx];
 
@@ -41,14 +39,33 @@ export default function decorate(block) {
     headingIdx >= 0 ? contentChildren.slice(headingIdx + 1) : contentChildren
   ).filter((c) => c.tagName === 'P');
 
-  const tags = (beforeHeading[0]?.textContent.trim() || '')
-    .split(',')
-    .map((t) => t.trim())
+  // Boolean badge fields: content_isNew (index 0), content_isBestSeller (index 1)
+  const BADGE_LABELS = ['New', 'Best Seller'];
+  const tags = beforeHeading
+    .slice(0, BADGE_LABELS.length)
+    .map((el, i) => {
+      const v = el.textContent.trim().toLowerCase();
+      return v === 'true' || v === 'on' ? BADGE_LABELS[i] : null;
+    })
     .filter(Boolean);
   const name = headingEl?.textContent.trim() || '';
   const price = afterHeading[0]?.textContent.trim() || '';
   const rating = afterHeading[1]?.textContent.trim() || '';
+
+  // Image: picture/img from field collapse, or URL string from editor reference field
+  let imgSrc = '';
+  let imgAlt = '';
   const imgEl = getCell(imageRow)?.querySelector('picture, img');
+  if (imgEl) {
+    const img = imgEl.tagName === 'IMG' ? imgEl : imgEl.querySelector('img');
+    imgSrc = img?.src || '';
+    imgAlt = img?.alt || '';
+  } else {
+    const imgCell = getCell(imageRow);
+    const anchor = imgCell?.querySelector('a');
+    imgSrc = anchor?.href || imgCell?.textContent?.trim() || '';
+  }
+
   const primaryLink = getCell(primaryRow)?.querySelector('a');
   const secondaryLink = getCell(secondaryRow)?.querySelector('a');
 
@@ -73,7 +90,8 @@ export default function decorate(block) {
   }
 
   if (name) {
-    const heading = document.createElement('h3');
+    const tag = headingEl?.tagName?.toLowerCase() || 'h3';
+    const heading = document.createElement(tag);
     heading.className = 'product-card-name';
     heading.textContent = name;
     content.append(heading);
@@ -118,13 +136,10 @@ export default function decorate(block) {
   const bottom = document.createElement('div');
   bottom.className = 'product-card-bottom';
 
-  if (imgEl) {
+  if (imgSrc) {
     const media = document.createElement('div');
     media.className = 'product-card-media';
-    const img = imgEl.tagName === 'IMG' ? imgEl : imgEl.querySelector('img');
-    if (img) {
-      media.append(createOptimizedPicture(img.src, img.alt || '', false, [{ width: '600' }]));
-    }
+    media.append(createOptimizedPicture(imgSrc, imgAlt, false, [{ width: '600' }]));
     bottom.append(media);
   }
 
@@ -136,7 +151,7 @@ export default function decorate(block) {
       const btn = document.createElement('a');
       btn.href = primaryLink.href;
       btn.className = 'product-card-btn-primary';
-      btn.textContent = primaryLink.textContent.trim() || 'Add to cart';
+      btn.textContent = primaryLink.textContent.trim() || 'Button';
       buttons.append(btn);
     }
 
@@ -146,7 +161,7 @@ export default function decorate(block) {
       link.className = 'product-card-btn-secondary';
 
       const span = document.createElement('span');
-      span.textContent = secondaryLink.textContent.trim() || 'Buy in store';
+      span.textContent = secondaryLink.textContent.trim() || 'Button';
 
       const chevron = document.createElement('span');
       chevron.className = 'product-card-chevron';

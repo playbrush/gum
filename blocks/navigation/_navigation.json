@@ -52,14 +52,14 @@
       "id": "navigation-link",
       "fields": [
         {
-          "component": "text",
-          "name": "label",
-          "label": "Label"
-        },
-        {
           "component": "aem-content",
           "name": "link",
           "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "linkText",
+          "label": "Label"
         }
       ]
     },
@@ -67,14 +67,14 @@
       "id": "navigation-sub-link",
       "fields": [
         {
-          "component": "text",
-          "name": "label",
-          "label": "Label"
-        },
-        {
           "component": "aem-content",
           "name": "link",
           "label": "Link"
+        },
+        {
+          "component": "text",
+          "name": "linkText",
+          "label": "Label"
         },
         {
           "component": "text",

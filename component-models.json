@@ -344,14 +344,14 @@
     "id": "navigation-link",
     "fields": [
       {
-        "component": "text",
-        "name": "label",
-        "label": "Label"
-      },
-      {
         "component": "aem-content",
         "name": "link",
         "label": "Link"
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Label"
       }
     ]
   },
@@ -359,14 +359,14 @@
     "id": "navigation-sub-link",
     "fields": [
       {
-        "component": "text",
-        "name": "label",
-        "label": "Label"
-      },
-      {
         "component": "aem-content",
         "name": "link",
         "label": "Link"
+      },
+      {
+        "component": "text",
+        "name": "linkText",
+        "label": "Label"
       },
       {
         "component": "text",
@@ -380,11 +380,14 @@
     "id": "product-card",
     "fields": [
       {
-        "component": "text",
-        "valueType": "string",
-        "name": "content_badges",
-        "label": "Badge Labels",
-        "description": "Comma-separated: new, best-seller"
+        "component": "boolean",
+        "name": "content_isNew",
+        "label": "New"
+      },
+      {
+        "component": "boolean",
+        "name": "content_isBestSeller",
+        "label": "Best Seller"
       },
       {
         "component": "text",

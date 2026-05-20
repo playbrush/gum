@@ -2,15 +2,13 @@ function getCellText(cell) {
   return cell?.textContent?.trim() || '';
 }
 
-function getCellLink(cell) {
-  const link = cell?.querySelector('a');
-  return link?.href || '';
-}
-
 export default function decorate(block) {
   const rows = [...block.children].filter((r) => r.tagName === 'DIV');
-  const label = getCellText(rows[0]?.children[0]);
-  const link = getCellLink(rows[1]?.children[0]);
+
+  // Row 0: navigation-link content — link + linkText field-collapsed into a single <a>
+  const mainAnchor = rows[0]?.children[0]?.querySelector('a');
+  const label = mainAnchor?.textContent.trim() || '';
+  const link = mainAnchor?.href || '';
   if (!label) return;
 
   const li = document.createElement('li');
@@ -27,14 +25,16 @@ export default function decorate(block) {
   anchor.textContent = label;
   li.append(anchor);
 
-  const subRows = rows.slice(2);
+  // Rows 1+: navigation-sub-link items — cell 0 = collapsed <a>, cell 1 = icon
+  const subRows = rows.slice(1);
   if (subRows.length) {
     const subUl = document.createElement('ul');
     subRows.forEach((subRow) => {
       const cols = [...subRow.children].filter((c) => c.tagName === 'DIV');
-      const subLabel = getCellText(cols[0]);
-      const subLink = getCellLink(cols[1]);
-      const icon = getCellText(cols[2]);
+      const subAnchor = cols[0]?.querySelector('a');
+      const subLabel = subAnchor?.textContent.trim() || '';
+      const subLink = subAnchor?.href || '';
+      const icon = getCellText(cols[1]);
       if (!subLabel) return;
 
       const subLi = document.createElement('li');
@@ -46,11 +46,11 @@ export default function decorate(block) {
         }
       });
 
-      const subAnchor = document.createElement('a');
-      subAnchor.href = subLink || '#';
-      subAnchor.textContent = subLabel;
-      if (icon) subAnchor.dataset.icon = icon;
-      subLi.append(subAnchor);
+      const subLinkEl = document.createElement('a');
+      subLinkEl.href = subLink || '#';
+      subLinkEl.textContent = subLabel;
+      if (icon) subLinkEl.dataset.icon = icon;
+      subLi.append(subLinkEl);
       subUl.append(subLi);
     });
     if (subUl.children.length) li.append(subUl);

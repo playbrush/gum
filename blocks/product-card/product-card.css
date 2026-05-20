@@ -55,7 +55,10 @@
   background: var(--label-best-seller, #f2c6ff);
 }
 
-/* Product Name */
+/* Product Name — normalize h2/h3/h4 to same visual size */
+.product-card-inner h2,
+.product-card-inner h3,
+.product-card-inner h4,
 .product-card-name {
   margin: 0;
   font-size: var(--font-size-h6-mobile, 22px);
@@ -230,6 +233,9 @@
     gap: 0;
   }
 
+  .product-card-inner h2,
+  .product-card-inner h3,
+  .product-card-inner h4,
   .product-card-name {
     font-size: var(--font-size-h6, 24px);
   }
