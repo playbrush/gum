@@ -160,7 +160,7 @@ export default function decorate(block) {
     if (buyInStore) {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.className = 'secondary';
+      btn.className = 'link-text';
       btn.textContent = 'Buy in Store';
       buttons.append(btn);
     }

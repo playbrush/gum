@@ -167,6 +167,16 @@
   margin: 0;
 }
 
+/* "Buy in Store" uses link-text style — no globe icon in this context */
+.product-card-buttons .link-text::before {
+  content: none;
+}
+
+.product-card-buttons .link-text {
+  width: auto;
+  justify-content: center;
+}
+
 /* ── Desktop (≥ 900px) ───────────────────────────────────────────────────── */
 
 @media (width >= 900px) {
