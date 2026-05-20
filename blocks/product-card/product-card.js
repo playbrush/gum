@@ -1,5 +1,3 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-
 const STAR_PATH =
   'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
 
@@ -52,18 +50,28 @@ export default function decorate(block) {
   const price = afterHeading[0]?.textContent.trim() || '';
   const rating = afterHeading[1]?.textContent.trim() || '';
 
-  // Image: picture/img from field collapse, or URL string from editor reference field
-  let imgSrc = '';
-  let imgAlt = '';
-  const imgEl = getCell(imageRow)?.querySelector('picture, img');
-  if (imgEl) {
-    const img = imgEl.tagName === 'IMG' ? imgEl : imgEl.querySelector('img');
-    imgSrc = img?.src || '';
-    imgAlt = img?.alt || '';
-  } else {
+  // Image: on live delivery the reference field renders as <picture>; move it directly.
+  // In UE the reference renders as <a href="url"> — create a plain <img> from the full URL.
+  let picture = getCell(imageRow)?.querySelector('picture');
+  if (!picture) {
     const imgCell = getCell(imageRow);
-    const anchor = imgCell?.querySelector('a');
-    imgSrc = anchor?.href || imgCell?.textContent?.trim() || '';
+    const imgEl = imgCell?.querySelector('img');
+    if (imgEl) {
+      // bare <img> without <picture> wrapper — wrap it
+      picture = document.createElement('picture');
+      picture.append(imgEl);
+    } else {
+      const anchor = imgCell?.querySelector('a');
+      const src = anchor?.href || imgCell?.textContent?.trim() || '';
+      if (src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        img.loading = 'lazy';
+        picture = document.createElement('picture');
+        picture.append(img);
+      }
+    }
   }
 
   const primaryLink = getCell(primaryRow)?.querySelector('a');
@@ -136,10 +144,10 @@ export default function decorate(block) {
   const bottom = document.createElement('div');
   bottom.className = 'product-card-bottom';
 
-  if (imgSrc) {
+  if (picture) {
     const media = document.createElement('div');
     media.className = 'product-card-media';
-    media.append(createOptimizedPicture(imgSrc, imgAlt, false, [{ width: '600' }]));
+    media.append(picture);
     bottom.append(media);
   }
 
