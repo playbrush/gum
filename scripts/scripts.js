@@ -1,6 +1,7 @@
 import {
   loadHeader,
   loadFooter,
+  decorateBlock,
   decorateButtons,
   decorateIcons,
   decorateSections,
@@ -115,6 +116,13 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  // Decorate blocks nested inside layout blocks (e.g. product-card inside columns)
+  // so that loadSections can discover and load them via div.block selector
+  main.querySelectorAll('.block > div > div > div').forEach((el) => {
+    if (el.classList.length > 0 && !el.dataset.blockStatus) {
+      decorateBlock(el);
+    }
+  });
   decorateTitleHeadings(main);
   observeTitleHeadingUpdates(main);
 }
