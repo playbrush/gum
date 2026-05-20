@@ -113,6 +113,14 @@ function observeTitleHeadingUpdates(main) {
 export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
+  // Wrap button label text in <span> so inner padding (spacing-1-5) can be applied independently
+  main.querySelectorAll('a.button').forEach((btn) => {
+    if (!btn.querySelector('span') && btn.childNodes.length) {
+      const span = document.createElement('span');
+      btn.childNodes.forEach((n) => span.appendChild(n.cloneNode(true)));
+      btn.replaceChildren(span);
+    }
+  });
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);

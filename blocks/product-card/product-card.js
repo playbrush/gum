@@ -153,7 +153,9 @@ export default function decorate(block) {
     if (addToCart) {
       const btn = document.createElement('button');
       btn.type = 'button';
-      btn.textContent = 'Add to Cart';
+      const label = document.createElement('span');
+      label.textContent = 'Add to Cart';
+      btn.append(label);
       buttons.append(btn);
     }
 

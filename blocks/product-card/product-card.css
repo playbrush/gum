@@ -183,8 +183,6 @@
   .product-card-inner {
     padding: var(--spacing-8, 32px);
     min-height: 577px;
-    justify-content: space-between;
-    gap: 0;
   }
 
   .product-card-inner h2,
@@ -192,5 +190,17 @@
   .product-card-inner h4,
   .product-card-name {
     font-size: var(--font-size-h6, 24px);
+  }
+
+  /* Bottom section grows to fill remaining card height */
+  .product-card-bottom {
+    flex: 1;
+  }
+
+  /* Image fills remaining space inside bottom; aspect-ratio released */
+  .product-card-media {
+    flex: 1;
+    aspect-ratio: unset;
+    min-height: 180px;
   }
 }

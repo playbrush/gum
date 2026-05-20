@@ -560,6 +560,12 @@ button {
   transition: all 0.2s ease;
 }
 
+/* Inner text label — adds spacing-1-5 (6px) on each side so visual inline gap = spacing-3 + spacing-1-5 */
+button > span,
+a.button > span {
+  padding-inline: var(--spacing-1-5);
+}
+
 a.button:hover,
 a.button:focus,
 button:hover,
@@ -1267,6 +1273,7 @@ button.link-text {
   padding: 0;
   border-radius: 0;
   min-width: 0;
+  min-height: unset;
   width: auto;
   font-weight: 500;
 }
