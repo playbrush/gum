@@ -1,0 +1,42 @@
+/* ── Product Slider Block ────────────────────────────────────────────────── *
+ *
+ * Empty container block. On delivery wraps its child slider-product-card     *
+ * blocks in a horizontally scrollable track (.ps-track).                    *
+ * In Universal Editor the block acts as a section-level container;           *
+ * only slider-product-card blocks may be inserted inside it.                 *
+ */
+
+/* ── Outer wrapper ───────────────────────────────────────────────────────── */
+
+.product-slider {
+  overflow: hidden;
+}
+
+/* ── Scroll track ────────────────────────────────────────────────────────── */
+
+.ps-track {
+  display: flex;
+  gap: var(--spacing-6, 24px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox */
+  padding-bottom: var(--spacing-2, 8px); /* room for focus rings */
+}
+
+.ps-track::-webkit-scrollbar {
+  display: none; /* Chrome / Safari */
+}
+
+/* ── Card slot ───────────────────────────────────────────────────────────── */
+
+.ps-track > .slider-product-card {
+  scroll-snap-align: start;
+  flex: 0 0 240px; /* mobile: show ~1.2 cards at once */
+}
+
+@media (width >= 900px) {
+  .ps-track > .slider-product-card {
+    flex: 0 0 306px; /* desktop: col-3 = 306 px */
+  }
+}

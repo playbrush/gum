@@ -58,7 +58,12 @@
           "valueType": "string",
           "name": "content_title",
           "value": "",
-          "label": "Product Title"
+          "label": "Product Title",
+          "required": true,
+          "validation": {
+            "maxLength": 50,
+            "customErrorMsg": "Maximum 50 characters."
+          }
         },
         {
           "component": "select",
@@ -77,7 +82,12 @@
           "valueType": "string",
           "name": "content_description",
           "label": "Description",
-          "value": ""
+          "value": "",
+          "required": true,
+          "validation": {
+            "maxLength": 80,
+            "customErrorMsg": "Maximum 80 characters."
+          }
         },
         {
           "component": "text",
@@ -111,7 +121,8 @@
           "valueType": "string",
           "name": "imageAlt",
           "label": "Image Alt Text",
-          "value": ""
+          "value": "",
+          "required": true
         }
       ]
     }

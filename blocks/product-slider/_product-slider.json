@@ -1,0 +1,31 @@
+{
+  "definitions": [
+    {
+      "title": "Product Slider",
+      "id": "product-slider",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/section/v1/section",
+            "template": {
+              "name": "Product Slider",
+              "filter": "product-slider"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "product-slider",
+      "fields": []
+    }
+  ],
+  "filters": [
+    {
+      "id": "product-slider",
+      "components": ["slider-product-card"]
+    }
+  ]
+}

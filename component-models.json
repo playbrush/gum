@@ -588,7 +588,12 @@
         "valueType": "string",
         "name": "content_title",
         "value": "",
-        "label": "Product Title"
+        "label": "Product Title",
+        "required": true,
+        "validation": {
+          "maxLength": 50,
+          "customErrorMsg": "Maximum 50 characters."
+        }
       },
       {
         "component": "select",
@@ -616,7 +621,12 @@
         "valueType": "string",
         "name": "content_description",
         "label": "Description",
-        "value": ""
+        "value": "",
+        "required": true,
+        "validation": {
+          "maxLength": 80,
+          "customErrorMsg": "Maximum 80 characters."
+        }
       },
       {
         "component": "text",
@@ -650,7 +660,8 @@
         "valueType": "string",
         "name": "imageAlt",
         "label": "Image Alt Text",
-        "value": ""
+        "value": "",
+        "required": true
       }
     ]
   },
@@ -751,6 +762,110 @@
         "valueType": "string",
         "name": "imageAlt",
         "label": "Image Alt Text",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "product-slider",
+    "fields": []
+  },
+  {
+    "id": "slider-product-card",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_badge",
+        "label": "Badge Label",
+        "description": "e.g. New, Best Seller",
+        "value": "",
+        "required": true,
+        "validation": {
+          "maxLength": 20,
+          "customErrorMsg": "Maximum 20 characters."
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_name",
+        "label": "Product Name",
+        "value": "",
+        "required": true,
+        "validation": {
+          "maxLength": 40,
+          "customErrorMsg": "Maximum 40 characters."
+        }
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "content_nameType",
+        "label": "Name Heading Level",
+        "value": "h3",
+        "options": [
+          {
+            "name": "H2",
+            "value": "h2"
+          },
+          {
+            "name": "H3",
+            "value": "h3"
+          },
+          {
+            "name": "H4",
+            "value": "h4"
+          }
+        ]
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_description",
+        "label": "Description",
+        "value": "",
+        "required": true,
+        "validation": {
+          "maxLength": 120,
+          "customErrorMsg": "Maximum 120 characters."
+        }
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_rating",
+        "label": "Rating",
+        "description": "Numeric score e.g. 4.9",
+        "value": "",
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "content_ctaLabel",
+        "label": "CTA Button Label",
+        "description": "Shown on hover. Leave empty to hide the button.",
+        "value": "",
+        "validation": {
+          "maxLength": 20,
+          "customErrorMsg": "Maximum 20 characters."
+        }
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Product Image",
+        "multi": false,
+        "required": true
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": "",
         "required": true
       }
     ]

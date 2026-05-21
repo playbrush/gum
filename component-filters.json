@@ -66,5 +66,11 @@
     "components": [
       "navigation-sub-link"
     ]
+  },
+  {
+    "id": "product-slider",
+    "components": [
+      "slider-product-card"
+    ]
   }
 ]
