@@ -1,7 +1,9 @@
 [
   {
     "id": "main",
-    "components": ["section"]
+    "components": [
+      "section"
+    ]
   },
   {
     "id": "section",
@@ -13,17 +15,20 @@
       "hero",
       "cards",
       "columns",
-      "fragment",
-      "product-slider"
+      "fragment"
     ]
   },
   {
     "id": "cards",
-    "components": ["card"]
+    "components": [
+      "card"
+    ]
   },
   {
     "id": "columns",
-    "components": ["column"]
+    "components": [
+      "column"
+    ]
   },
   {
     "id": "column",
@@ -40,22 +45,32 @@
   },
   {
     "id": "header",
-    "components": ["navigation"]
+    "components": [
+      "navigation"
+    ]
   },
   {
     "id": "nav",
-    "components": ["navigation"]
+    "components": [
+      "navigation"
+    ]
   },
   {
     "id": "navigation",
-    "components": ["navigation-link"]
+    "components": [
+      "navigation-link"
+    ]
   },
   {
     "id": "navigation-link",
-    "components": ["navigation-sub-link"]
+    "components": [
+      "navigation-sub-link"
+    ]
   },
   {
     "id": "product-slider",
-    "components": ["slider-product-card"]
+    "components": [
+      "slider-product-card"
+    ]
   }
 ]
