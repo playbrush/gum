@@ -201,7 +201,8 @@
         "valueType": "string",
         "name": "content_tag",
         "label": "Tag / Category (e.g. Tips & Tricks)",
-        "value": ""
+        "value": "",
+        "maxLength": 30
       },
       {
         "component": "text",

@@ -13,8 +13,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  aspect-ratio: 326 / 483;
-  min-height: 240px;
+  width: 326px;
+  height: 483px;
   padding: 16px 15px 34px 23px;
   border-radius: var(--radius-s, 34px);
   background: var(--card-fill-no-image-card-1, #3dcfff);
@@ -99,7 +99,8 @@
 /* ── Mini variant ────────────────────────────────────────────────────────── */
 
 .article-card.mini .ac-inner {
-  aspect-ratio: 200 / 240;
+  width: 200px;
+  height: 240px;
   padding: 20px;
 }
 
