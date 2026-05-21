@@ -140,19 +140,23 @@
   /* reset global button */
   margin: 0;
   min-height: unset;
+
   /* sizing */
   width: 100%; /* full-width on mobile */
   max-height: 42px;
   padding: var(--spacing-3, 12px) var(--spacing-9, 36px);
   border-radius: var(--radius-l, 88px); /* 88 px mobile → 160 px desktop */
+
   /* colours — secondary style */
   background-color: white;
   border: 1px solid var(--text-primary, #154734);
   color: var(--text-primary, #154734);
+
   /* typography */
   font-size: var(--font-size-default, 16px);
   font-weight: 600;
   line-height: var(--line-height-body-default, 1.12);
+
   /* misc */
   cursor: pointer;
   overflow: hidden;
@@ -211,8 +215,7 @@
 @media (width >= 900px) {
   .product-card-highlight .pch-inner {
     grid-template-columns: 248px 1fr;
-    column-gap: var(--spacing-6, 24px); /* gap between left and right cols */
-    row-gap: var(--spacing-5, 20px); /* gap between content and cta rows */
+    gap: var(--spacing-5, 20px) var(--spacing-6, 24px); /* row-gap col-gap */
     align-content: center; /* vertically centre the row track group */
     padding: var(--spacing-20, 80px) var(--spacing-8, 32px);
     min-height: 510px;
