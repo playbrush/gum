@@ -72,7 +72,8 @@
         "title",
         "product-card",
         "product-card-highlight",
-        "article-image-card"
+        "article-image-card",
+        "article-card"
       ]
     }
   ]

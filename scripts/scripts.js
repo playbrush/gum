@@ -128,7 +128,7 @@ export function decorateMain(main) {
   // Decorate nested blocks (e.g. product-card inside columns) so loadSection can pick them up
   main
     .querySelectorAll(
-      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block), .columns .article-image-card:not(.block)'
+      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block), .columns .article-image-card:not(.block), .columns .article-card:not(.block)'
     )
     .forEach(decorateBlock);
   decorateTitleHeadings(main);
@@ -144,7 +144,7 @@ export async function loadNestedBlocks(root = document.querySelector('main')) {
   if (!root) return;
   const blocks = [
     ...root.querySelectorAll(
-      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block), .columns .article-image-card:not(.block)'
+      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block), .columns .article-image-card:not(.block), .columns .article-card:not(.block)'
     ),
   ];
   blocks.forEach(decorateBlock);

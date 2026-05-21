@@ -87,6 +87,21 @@
       "id": "blocks",
       "components": [
         {
+          "title": "Article Card",
+          "id": "article-card",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Article Card",
+                  "model": "article-card"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Article Image Card",
           "id": "article-image-card",
           "plugins": {

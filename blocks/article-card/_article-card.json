@@ -1,0 +1,75 @@
+{
+  "definitions": [
+    {
+      "title": "Article Card",
+      "id": "article-card",
+      "plugins": {
+        "xwalk": {
+          "page": {
+            "resourceType": "core/franklin/components/block/v1/block",
+            "template": {
+              "name": "Article Card",
+              "model": "article-card"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "article-card",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "content_tag",
+          "label": "Tag / Category (e.g. Tips & Tricks)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "content_title",
+          "label": "Headline / Label",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "valueType": "string",
+          "name": "content_titleType",
+          "label": "Heading Level",
+          "value": "h3",
+          "options": [
+            { "name": "H2", "value": "h2" },
+            { "name": "H3", "value": "h3" }
+          ]
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "content_readTime",
+          "label": "Read Time (e.g. 5 min read)",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "content_link",
+          "label": "Card Link (URL)",
+          "value": ""
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Style",
+          "options": [
+            { "name": "Mini", "value": "mini" },
+            { "name": "Color 2 (lime)", "value": "color-2" }
+          ]
+        }
+      ]
+    }
+  ],
+  "filters": []
+}

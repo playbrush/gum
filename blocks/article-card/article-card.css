@@ -1,0 +1,130 @@
+/* ── Article Card ────────────────────────────────────────────────────────── */
+
+/* Link wrapper — makes the entire card clickable */
+.article-card .ac-link {
+  display: block;
+  text-decoration: none;
+}
+
+/* Card container */
+.article-card .ac-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  aspect-ratio: 326 / 483;
+  min-height: 240px;
+  padding: 16px 15px 34px 23px;
+  border-radius: var(--radius-s, 34px);
+  background: var(--card-fill-no-image-card-1, #3dcfff);
+  overflow: hidden;
+}
+
+/* Hover gradient overlay (radial green bloom at top-left) */
+.article-card .ac-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(ellipse 50% 40% at 11% 9%, rgb(0 234 139 / 85%) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.article-card .ac-link:hover .ac-inner::before,
+.article-card .ac-inner.ac-link:hover::before {
+  opacity: 1;
+}
+
+/* Chevron-in-circle */
+.article-card .ac-chevron {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 1;
+  transition: transform 0.25s ease;
+}
+
+/* Content area */
+.article-card .ac-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: var(--spacing-6, 24px);
+  z-index: 1;
+}
+
+/* Tag / category label */
+.article-card .ac-tag {
+  margin: 0;
+  font-size: var(--font-size-default, 16px) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  color: var(--text-primary, #154734) !important;
+}
+
+/* Headline */
+.article-card .ac-title {
+  margin: 0;
+  font-size: var(--font-size-h5, 28px) !important;
+  font-weight: 700 !important;
+  line-height: 1.1 !important;
+  color: var(--text-primary, #154734) !important;
+}
+
+/* Read time row */
+.article-card .ac-readtime {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.article-card .ac-readtime p {
+  margin: 0;
+  font-size: var(--font-size-default, 16px) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  color: var(--text-primary, #154734) !important;
+}
+
+/* ── Color variant 2 (lime green background) ─────────────────────────────── */
+
+.article-card.color-2 .ac-inner {
+  background: var(--card-fill-no-image-card-2, #a5dc43);
+}
+
+/* ── Mini variant ────────────────────────────────────────────────────────── */
+
+.article-card.mini .ac-inner {
+  aspect-ratio: 200 / 240;
+  padding: 20px;
+}
+
+.article-card.mini .ac-content {
+  gap: var(--spacing-1-5, 6px);
+  padding-bottom: 0;
+}
+
+.article-card.mini .ac-title {
+  font-size: var(--font-size-default, 16px) !important;
+  font-weight: 600 !important;
+  line-height: 1.12 !important;
+}
+
+/* ── Hover: rotate chevron + underline title ─────────────────────────────── *
+ * Must come after variant blocks (mini, color-2) to respect                  *
+ * no-descending-specificity order.                                            *
+ */
+
+.article-card .ac-link:hover .ac-chevron,
+.article-card .ac-inner.ac-link:hover .ac-chevron {
+  transform: rotate(-45deg);
+}
+
+.article-card .ac-link:hover .ac-title,
+.article-card .ac-inner.ac-link:hover .ac-title {
+  text-decoration: underline;
+}
