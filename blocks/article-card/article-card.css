@@ -60,9 +60,6 @@
 /* Tag / category label */
 .article-card .ac-tag {
   margin: 0;
-  font-size: var(--font-size-default, 16px) !important;
-  font-weight: 400 !important;
-  line-height: 1.12 !important;
   color: var(--text-primary, #154734) !important;
   max-width: 100%;
   overflow: hidden;
@@ -73,9 +70,6 @@
 /* Headline */
 .article-card .ac-title {
   margin: 0;
-  font-size: var(--font-size-h5, 28px) !important;
-  font-weight: 700 !important;
-  line-height: 1.1 !important;
   color: var(--text-primary, #154734) !important;
 }
 
@@ -88,9 +82,6 @@
 
 .article-card .ac-readtime p {
   margin: 0;
-  font-size: var(--font-size-default, 16px) !important;
-  font-weight: 400 !important;
-  line-height: 1.12 !important;
   color: var(--text-primary, #154734) !important;
 }
 
@@ -111,12 +102,6 @@
 .article-card.mini .ac-content {
   gap: var(--spacing-1-5, 6px);
   padding-bottom: 0;
-}
-
-.article-card.mini .ac-title {
-  font-size: var(--font-size-default, 16px) !important;
-  font-weight: 600 !important;
-  line-height: 1.12 !important;
 }
 
 /* ── Hover: rotate chevron + underline title ─────────────────────────────── *

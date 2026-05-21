@@ -89,14 +89,14 @@ export default function decorate(block) {
 
   if (titleText) {
     const heading = document.createElement(titleTag);
-    heading.className = 'pch-title';
+    heading.className = 'pch-title type-h4';
     heading.textContent = titleText;
     content.append(heading);
   }
 
   if (description) {
     const desc = document.createElement('p');
-    desc.className = 'pch-description';
+    desc.className = 'pch-description type-body-default-regular';
     desc.textContent = description;
     content.append(desc);
   }
@@ -107,7 +107,7 @@ export default function decorate(block) {
     ratingPill.setAttribute('aria-label', `${ratingScore} out of 5 stars`);
 
     const score = document.createElement('span');
-    score.className = 'pch-rating-score';
+    score.className = 'pch-rating-score type-body-small-semibold';
     score.setAttribute('aria-hidden', 'true');
     score.textContent = ratingScore;
 

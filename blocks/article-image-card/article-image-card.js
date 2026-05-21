@@ -74,7 +74,7 @@ export default function decorate(block) {
   // Eyebrow (article type + read time)
   if (articleType || readTime) {
     const eyebrow = document.createElement('div');
-    eyebrow.className = 'aic-eyebrow';
+    eyebrow.className = 'aic-eyebrow type-body-small-medium';
 
     if (articleType) {
       const typeSpan = document.createElement('span');
@@ -106,7 +106,7 @@ export default function decorate(block) {
   // Headline
   if (titleText) {
     const heading = document.createElement(titleTag);
-    heading.className = 'aic-title';
+    heading.className = 'aic-title type-body-xl-medium';
     heading.textContent = titleText;
     content.append(heading);
   }
@@ -114,7 +114,7 @@ export default function decorate(block) {
   // Body copy
   if (body) {
     const bodyEl = document.createElement('p');
-    bodyEl.className = 'aic-body';
+    bodyEl.className = 'aic-body type-body-default-regular';
     bodyEl.textContent = body;
     content.append(bodyEl);
   }

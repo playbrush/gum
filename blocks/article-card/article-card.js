@@ -53,14 +53,14 @@ export default function decorate(block) {
 
   if (!isMini && tag) {
     const tagEl = document.createElement('p');
-    tagEl.className = 'ac-tag';
+    tagEl.className = 'ac-tag type-body-default-regular';
     tagEl.textContent = tag;
     content.append(tagEl);
   }
 
   if (titleText) {
     const titleEl = document.createElement(titleTag);
-    titleEl.className = 'ac-title';
+    titleEl.className = `ac-title ${isMini ? 'type-body-default-semibold' : 'type-h5'}`;
     titleEl.textContent = titleText;
     content.append(titleEl);
   }
@@ -68,7 +68,7 @@ export default function decorate(block) {
   if (!isMini && readTime) {
     const readTimeEl = document.createElement('div');
     readTimeEl.className = 'ac-readtime';
-    readTimeEl.innerHTML = `${CLOCK_SVG}<p>${readTime}</p>`;
+    readTimeEl.innerHTML = `${CLOCK_SVG}<p class="type-body-default-regular">${readTime}</p>`;
     content.append(readTimeEl);
   }
 

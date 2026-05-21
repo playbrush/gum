@@ -1565,3 +1565,131 @@ button.link-text:focus {
   font-weight: 500;
   line-height: 1;
 }
+
+/* ── Typography Utilities ────────────────────────────────────────────────── *
+ * One class per style in the Figma type scale. Apply to individual text     *
+ * elements; only add color overrides in each component's own CSS.           *
+ * Font sizes use the mobile-first tokens that resolve at the 900px bp.      *
+ */
+
+/* Headline */
+.type-display {
+  font-size: var(--font-size-display-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-display) !important;
+  letter-spacing: var(--letter-spacing-display) !important;
+}
+
+.type-h1 {
+  font-size: var(--font-size-h1-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-headline-lg) !important;
+  letter-spacing: var(--letter-spacing-display) !important;
+}
+
+.type-h2 {
+  font-size: var(--font-size-h2-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-headline-lg) !important;
+  letter-spacing: var(--letter-spacing-h2) !important;
+}
+
+.type-h3 {
+  font-size: var(--font-size-h3-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-headline) !important;
+}
+
+.type-h4 {
+  font-size: var(--font-size-h4-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-headline) !important;
+}
+
+.type-h5 {
+  font-size: var(--font-size-h5-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-headline) !important;
+}
+
+.type-h6 {
+  font-size: var(--font-size-h6-mobile) !important;
+  font-weight: 700 !important;
+  line-height: var(--line-height-headline) !important;
+}
+
+/* Body */
+.type-body-quote {
+  font-size: var(--font-size-h5-mobile) !important;
+  font-weight: 600 !important;
+  line-height: var(--line-height-link) !important;
+}
+
+.type-body-xl-semibold {
+  font-size: var(--font-size-h6-mobile) !important;
+  font-weight: 600 !important;
+  line-height: var(--line-height-body-lg) !important;
+}
+
+.type-body-xl-medium {
+  font-size: var(--font-size-h6-mobile) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-lg) !important;
+}
+
+.type-body-l-semibold {
+  font-size: var(--font-size-large) !important;
+  font-weight: 600 !important;
+  line-height: var(--line-height-body-lg) !important;
+}
+
+.type-body-l-medium {
+  font-size: var(--font-size-large) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-lg) !important;
+}
+
+.type-body-default-semibold {
+  font-size: var(--font-size-default) !important;
+  font-weight: 600 !important;
+  line-height: var(--line-height-body-default) !important;
+}
+
+.type-body-default-medium {
+  font-size: var(--font-size-default) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-default) !important;
+}
+
+.type-body-default-regular {
+  font-size: var(--font-size-default) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-body-default) !important;
+}
+
+.type-body-small-semibold {
+  font-size: var(--font-size-small) !important;
+  font-weight: 600 !important;
+  line-height: var(--line-height-body-sm) !important;
+}
+
+.type-body-small-medium {
+  font-size: var(--font-size-small) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-sm) !important;
+}
+
+/* Link */
+.type-link-default {
+  font-size: var(--font-size-default) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-link) !important;
+  text-decoration: underline;
+}
+
+.type-link-small {
+  font-size: var(--font-size-small) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-lg) !important;
+  text-decoration: underline;
+}

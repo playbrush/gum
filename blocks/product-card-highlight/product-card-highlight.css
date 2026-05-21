@@ -41,12 +41,9 @@
   gap: var(--spacing-3, 12px); /* mobile: 12 px */
 }
 
-/* Title (H4) */
+/* Title (H4) — font scale via .type-h4 utility class */
 .product-card-highlight .pch-title {
   margin: 0;
-  font-size: var(--font-size-h4, 35px);
-  font-weight: 700;
-  line-height: var(--line-height-headline, 1.1);
   color: var(--text-primary, #154734);
   overflow-wrap: break-word;
 }
@@ -56,12 +53,9 @@
   color: var(--text-primary, #154734);
 }
 
-/* Description — locked with !important so parent column/section rules cannot override */
+/* Description — font scale via .type-body-default-regular utility class */
 .product-card-highlight .pch-description {
   margin: 0;
-  font-size: var(--font-size-default, 16px) !important;
-  font-weight: 400 !important;
-  line-height: var(--line-height-body-default, 1.12) !important;
   color: var(--text-primary, #154734) !important;
 }
 
@@ -78,13 +72,10 @@
   width: fit-content;
 }
 
+/* Rating score — font scale via .type-body-small-semibold utility class */
 .product-card-highlight .pch-rating-score {
-  font-size: var(--font-size-small, 14px);
-  font-weight: 600;
-  line-height: var(--line-height-body-sm, 1.1);
   color: var(--text-primary, #154734);
   white-space: nowrap;
-  letter-spacing: var(--letter-spacing-body-sm, 0);
 }
 
 .product-card-highlight .pch-stars {

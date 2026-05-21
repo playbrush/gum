@@ -31,9 +31,6 @@
 .product-card-inner h4,
 .product-card-name {
   margin: 0;
-  font-size: var(--font-size-h6-mobile, 22px);
-  font-weight: 500;
-  line-height: var(--line-height-body-lg, 1.14);
   color: var(--text-primary, #154734);
   overflow-wrap: break-word;
 }
@@ -54,9 +51,6 @@
 }
 
 .product-card-price {
-  font-size: var(--font-size-large, 18px);
-  font-weight: 600;
-  line-height: var(--line-height-body-lg, 1.14);
   color: var(--text-secondary, #006341);
   white-space: nowrap;
 }
@@ -76,12 +70,8 @@
 }
 
 .product-card-rating-score {
-  font-size: var(--font-size-small, 14px);
-  font-weight: 600;
-  line-height: var(--line-height-body-sm, 1.1);
   color: var(--text-primary, #154734);
   white-space: nowrap;
-  letter-spacing: var(--letter-spacing-body-sm, 0);
 }
 
 .product-card-stars {
@@ -148,13 +138,6 @@
   .product-card-inner {
     padding: var(--spacing-8, 32px);
     min-height: 577px;
-  }
-
-  .product-card-inner h2,
-  .product-card-inner h3,
-  .product-card-inner h4,
-  .product-card-name {
-    font-size: var(--font-size-h6, 24px);
   }
 
   /* Bottom section grows to fill remaining card height */

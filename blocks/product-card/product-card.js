@@ -95,7 +95,7 @@ export default function decorate(block) {
   if (name) {
     const tag = headingEl?.tagName?.toLowerCase() || 'h3';
     const heading = document.createElement(tag);
-    heading.className = 'product-card-name';
+    heading.className = 'product-card-name type-body-xl-medium';
     heading.textContent = name;
     content.append(heading);
   }
@@ -106,7 +106,7 @@ export default function decorate(block) {
 
     if (price) {
       const priceEl = document.createElement('span');
-      priceEl.className = 'product-card-price';
+      priceEl.className = 'product-card-price type-body-l-semibold';
       priceEl.textContent = price;
       meta.append(priceEl);
     }
@@ -117,7 +117,7 @@ export default function decorate(block) {
       pill.setAttribute('aria-label', `${rating} out of 5 stars`);
 
       const score = document.createElement('span');
-      score.className = 'product-card-rating-score';
+      score.className = 'product-card-rating-score type-body-small-semibold';
       score.setAttribute('aria-hidden', 'true');
       score.textContent = rating;
 

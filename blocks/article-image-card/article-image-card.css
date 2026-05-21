@@ -77,10 +77,6 @@
   align-items: center;
   gap: 10px;
   height: 24px;
-  font-size: var(--font-size-small, 14px) !important;
-  font-weight: 500 !important;
-  line-height: var(--line-height-body-sm, 1.1) !important;
-  letter-spacing: var(--letter-spacing-body-sm, 0);
   color: var(--text-primary, #154734) !important;
   white-space: nowrap;
 }
@@ -99,9 +95,6 @@
 
 .article-image-card .aic-title {
   margin: 0;
-  font-size: var(--font-size-h6, 24px) !important;
-  font-weight: 500 !important;
-  line-height: var(--line-height-body-lg, 1.14) !important;
   color: var(--text-primary, #154734) !important;
   overflow-wrap: break-word;
 }
@@ -110,9 +103,6 @@
 
 .article-image-card .aic-body {
   margin: 0;
-  font-size: var(--font-size-default, 16px) !important;
-  font-weight: 400 !important;
-  line-height: var(--line-height-body-default, 1.12) !important;
   color: var(--text-primary, #154734) !important;
 }
 
