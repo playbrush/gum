@@ -80,6 +80,11 @@
   gap: var(--spacing-0-5, 2px);
 }
 
+/* No gap between content and image when there are no CTA buttons */
+.product-card-inner:not(:has(.product-card-buttons)) {
+  gap: 0;
+}
+
 /* ── Bottom (image + buttons) ────────────────────────────────────────────── */
 
 .product-card-bottom {
