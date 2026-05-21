@@ -202,6 +202,7 @@
         "name": "content_tag",
         "label": "Tag / Category (e.g. Tips & Tricks)",
         "value": "",
+        "required": true,
         "validation": {
           "maxLength": 30,
           "customErrorMsg": "Maximum 30 characters."
@@ -212,7 +213,12 @@
         "valueType": "string",
         "name": "content_title",
         "label": "Headline / Label",
-        "value": ""
+        "value": "",
+        "required": true,
+        "validation": {
+          "maxLength": 60,
+          "customErrorMsg": "Maximum 60 characters."
+        }
       },
       {
         "component": "select",
