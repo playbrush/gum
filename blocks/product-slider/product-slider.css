@@ -8,44 +8,40 @@
 /* ── Outer wrapper ───────────────────────────────────────────────────────── */
 
 .product-slider {
+  position: relative;
   overflow: hidden;
+  background: var(--color-primary-900, #006b45);
+  padding: var(--spacing-20, 80px) var(--spacing-8, 32px);
 }
 
-/* ── Scroll track ────────────────────────────────────────────────────────── */
+.product-slider .ps-shell {
+  position: relative;
+  max-width: var(--grid-container-width, 1200px);
+  margin: 0 auto;
+}
 
-.ps-track {
+.product-slider .ps-track {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-8, 32px);
+}
+
+.product-slider .ps-shell.is-slider .ps-track {
   display: flex;
-  gap: var(--spacing-6, 24px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox */
-  padding-bottom: var(--spacing-2, 8px); /* room for focus rings */
+  scrollbar-width: none;
 }
 
-.ps-track::-webkit-scrollbar {
-  display: none; /* Chrome / Safari */
+.product-slider .ps-shell.is-slider .ps-track::-webkit-scrollbar {
+  display: none;
 }
 
-/* ── Card slot ───────────────────────────────────────────────────────────── */
-
-.ps-track > .slider-product-card {
+.product-slider .slider-product-card {
+  min-width: 306px;
   scroll-snap-align: start;
-  flex: 0 0 240px; /* mobile: ~1.2 cards visible */
 }
-
-@media (width >= 900px) {
-  .ps-track > .slider-product-card {
-    flex: 0 0 306px; /* desktop: col-3 = 306px */
-  }
-}
-
-/* ════════════════════════════════════════════════════════════════════════════
-   Slider Product Card — internal component styles
-   All rules scoped to .slider-product-card so they can't leak.
-   ════════════════════════════════════════════════════════════════════════════ */
-
-/* ── Inner container ─────────────────────────────────────────────────────── */
 
 .slider-product-card .spc-inner {
   display: flex;
@@ -53,137 +49,131 @@
   align-items: center;
   gap: var(--spacing-9, 36px);
   width: 100%;
-  cursor: pointer;
-  transition: gap 0.2s ease;
 }
-
-.slider-product-card .spc-inner:hover {
-  gap: var(--spacing-6, 24px);
-}
-
-/* ── Image block ─────────────────────────────────────────────────────────── */
 
 .slider-product-card .spc-image-block {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-9, 36px);
-  align-items: flex-start;
   width: 100%;
 }
 
-/* Badge — full-width bar, centered text, radial white overlay */
 .slider-product-card .spc-badge {
   width: 100%;
-  height: 24px;
+  min-height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-primary, #154734);
-  background: radial-gradient(ellipse at center, rgb(255 255 255 / 75%) 0%, transparent 100%);
-  white-space: nowrap;
+  background: radial-gradient(ellipse at center, rgb(255 255 255 / 75%) 0%, transparent 75%);
 }
 
-/* Product image — square, object-fit cover */
 .slider-product-card .spc-media {
   width: 100%;
   aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
 }
 
-.slider-product-card .spc-media picture {
+.slider-product-card .spc-media picture,
+.slider-product-card .spc-media img {
   display: block;
   width: 100%;
   height: 100%;
 }
 
 .slider-product-card .spc-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  display: block;
+  object-fit: contain;
 }
-
-/* ── Content block ───────────────────────────────────────────────────────── */
 
 .slider-product-card .spc-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
-  width: 100%;
-}
-
-.slider-product-card .spc-name {
-  margin: 0;
+  gap: var(--spacing-4, 16px);
   text-align: center;
   color: var(--text-primary, #154734);
-  overflow-wrap: break-word;
 }
 
+.slider-product-card .spc-name,
 .slider-product-card .spc-description {
   margin: 0;
-  text-align: center;
-  color: var(--text-primary, #154734);
 }
 
-/* Rating pill */
 .slider-product-card .spc-rating {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-1, 4px);
-  padding: var(--spacing-1-5, 6px) var(--spacing-2, 8px);
-  background: white;
-  border: 1px solid var(--color-neutral-100, #f5f5f5);
+  padding: var(--spacing-1, 4px) var(--spacing-2, 8px);
+  background: var(--background-primary, #fff);
   border-radius: var(--radius-l, 88px);
-  overflow: hidden;
-}
-
-.slider-product-card .spc-rating-score {
-  color: var(--text-primary, #154734);
-  white-space: nowrap;
 }
 
 .slider-product-card .spc-stars {
   display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-0-5, 2px);
-  color: #e6007e;
+  color: var(--color-secondary-500, #e6007e);
 }
 
-/* ── CTA Button — XS Secondary, hover only ───────────────────────────────── */
-
-.slider-product-card .spc-cta {
+.slider-product-card .spc-card-cta {
   display: none;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  min-height: unset;
-  padding: 4px var(--spacing-3, 12px);
-  border-radius: var(--radius-l, 88px);
-  background-color: white;
+  padding: var(--spacing-1, 4px) var(--spacing-3, 12px);
   border: 1px solid var(--text-primary, #154734);
+  border-radius: var(--radius-l, 88px);
+  background: transparent;
   color: var(--text-primary, #154734);
+}
+
+.slider-product-card:hover .spc-card-cta {
+  display: inline-flex;
+}
+
+.product-slider .ps-arrow {
+  position: absolute;
+  top: 38%;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-round, 999px);
+  background: var(--color-primary-700, #008f6b);
+  color: var(--background-primary, #fff);
+  font-size: 32px;
   cursor: pointer;
-  overflow: hidden;
-  white-space: nowrap;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
 }
 
-.slider-product-card .spc-cta:hover,
-.slider-product-card .spc-cta:focus {
-  background-color: var(--text-primary, #154734);
-  border-color: var(--text-primary, #154734);
-  color: white;
+.product-slider .ps-arrow-prev {
+  left: var(--spacing-4, 16px);
 }
 
-.slider-product-card .spc-cta:focus-visible {
-  outline: 2px solid var(--text-primary, #154734);
-  outline-offset: 2px;
+.product-slider .ps-arrow-next {
+  right: var(--spacing-4, 16px);
 }
 
-.slider-product-card .spc-inner:hover .spc-cta {
-  display: flex;
+.product-slider .ps-cta {
+  position: absolute;
+  right: var(--spacing-8, 32px);
+  bottom: var(--spacing-8, 32px);
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-3, 12px) var(--spacing-5, 20px);
+  border-radius: var(--radius-l, 88px);
+  background: var(--color-secondary-500, #9bd732);
+  color: var(--text-primary, #154734);
+  text-decoration: none;
+}
+
+@media (width < 768px) {
+  .product-slider .ps-track,
+  .product-slider .ps-shell.is-slider .ps-track {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .product-slider .slider-product-card {
+    min-width: 260px;
+  }
+
+  .product-slider .ps-cta {
+    position: static;
+    margin-top: var(--spacing-6, 24px);
+  }
 }

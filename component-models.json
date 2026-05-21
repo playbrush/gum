@@ -768,7 +768,24 @@
   },
   {
     "id": "product-slider",
-    "fields": []
+    "fields": [
+      {
+        "component": "text",
+        "name": "ctaText",
+        "label": "CTA Text",
+        "valueType": "string",
+        "validation": {
+          "maxLength": 30,
+          "customErrorMsg": "Maximum 30 characters."
+        }
+      },
+      {
+        "component": "aem-content",
+        "name": "ctaLink",
+        "label": "CTA Link",
+        "valueType": "string"
+      }
+    ]
   },
   {
     "id": "slider-product-card",

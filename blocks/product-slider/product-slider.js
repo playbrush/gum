@@ -5,38 +5,44 @@ function starSvg() {
   return `<svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="${STAR_PATH}" fill="currentColor"></path></svg>`;
 }
 
-function readField(card, name) {
-  const el = card.querySelector(`[data-aue-prop="${name}"]`);
-  return el?.textContent?.trim() || '';
+function field(card, name) {
+  return card.querySelector(`[data-aue-prop="${name}"]`);
 }
 
-function readImage(card) {
-  const imageProp = card.querySelector('[data-aue-prop="image"]');
-  const picture = imageProp?.querySelector('picture');
-  const img = imageProp?.querySelector('img');
+function text(card, name) {
+  return field(card, name)?.textContent?.trim() || '';
+}
 
+function image(card) {
+  const el = field(card, 'image');
+  if (!el) return null;
+
+  const picture = el.querySelector('picture');
   if (picture) return picture;
-  if (img) return img;
 
-  const src = imageProp?.textContent?.trim();
+  const existingImg = el.querySelector('img');
+  if (existingImg) return existingImg;
+
+  const a = el.querySelector('a');
+  const src = a?.href || el.textContent.trim();
+
   if (!src) return null;
 
-  const newImg = document.createElement('img');
-  newImg.src = src;
-  newImg.alt = readField(card, 'imageAlt');
-  newImg.loading = 'lazy';
-  return newImg;
+  const img = document.createElement('img');
+  img.src = src;
+  img.alt = text(card, 'imageAlt');
+  img.loading = 'lazy';
+
+  return img;
 }
 
-function buildCard(card) {
-  if (card.dataset.productSliderCardDecorated === 'true') return;
-
-  const badge = readField(card, 'content_badge');
-  const name = readField(card, 'content_name');
-  const description = readField(card, 'content_description');
-  const rating = readField(card, 'content_rating');
-  const ctaLabel = readField(card, 'content_ctaLabel');
-  const image = readImage(card);
+function makeCard(card) {
+  const badge = text(card, 'content_badge');
+  const name = text(card, 'content_name');
+  const desc = text(card, 'content_description');
+  const rating = text(card, 'content_rating');
+  const ctaLabel = text(card, 'content_ctaLabel');
+  const media = image(card);
 
   const article = document.createElement('article');
   article.className = 'spc-inner';
@@ -46,30 +52,34 @@ function buildCard(card) {
       ${badge ? `<div class="spc-badge type-body-small-medium">${badge}</div>` : ''}
       <div class="spc-media"></div>
     </div>
+
     <div class="spc-content">
       ${name ? `<h3 class="spc-name type-h5">${name}</h3>` : ''}
-      ${description ? `<p class="spc-description type-body-default-regular">${description}</p>` : ''}
+      ${desc ? `<p class="spc-description type-body-default-regular">${desc}</p>` : ''}
       ${
         rating
           ? `
         <div class="spc-rating" aria-label="${rating} out of 5 stars">
           <span class="spc-rating-score type-body-small-semibold">${rating}</span>
-          <span class="spc-stars" aria-hidden="true">${starSvg().repeat(5)}</span>
+          <span class="spc-stars">${starSvg().repeat(5)}</span>
         </div>
       `
           : ''
       }
-      ${ctaLabel ? `<button type="button" class="spc-cta type-body-default-semibold">${ctaLabel}</button>` : ''}
+      ${ctaLabel ? `<button type="button" class="spc-card-cta type-body-default-semibold">${ctaLabel}</button>` : ''}
     </div>
   `;
 
-  if (image) {
-    article.querySelector('.spc-media').append(image);
-  }
+  if (media) article.querySelector('.spc-media').append(media);
 
-  card.replaceChildren(article);
   card.classList.add('slider-product-card');
-  card.dataset.productSliderCardDecorated = 'true';
+  card.replaceChildren(article);
+}
+
+function scroll(track, direction) {
+  const card = track.querySelector('.slider-product-card');
+  const amount = card ? card.offsetWidth + 24 : 320;
+  track.scrollBy({ left: amount * direction, behavior: 'smooth' });
 }
 
 export default function decorate(block) {
@@ -77,12 +87,48 @@ export default function decorate(block) {
     ...block.querySelectorAll('[data-aue-model="slider-product-card"], .slider-product-card'),
   ];
 
-  cards.forEach(buildCard);
+  cards.forEach(makeCard);
+
+  const slider = document.createElement('div');
+  slider.className = 'ps-shell';
 
   const track = document.createElement('div');
   track.className = 'ps-track';
 
   cards.forEach((card) => track.append(card));
+  slider.append(track);
 
-  block.replaceChildren(track);
+  if (cards.length > 2) {
+    slider.classList.add('is-slider');
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'ps-arrow ps-arrow-prev';
+    prev.setAttribute('aria-label', 'Previous product');
+    prev.innerHTML = '‹';
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'ps-arrow ps-arrow-next';
+    next.setAttribute('aria-label', 'Next product');
+    next.innerHTML = '›';
+
+    prev.addEventListener('click', () => scroll(track, -1));
+    next.addEventListener('click', () => scroll(track, 1));
+
+    slider.append(prev, next);
+  }
+
+  const ctaLabel = text(block, 'ctaText') || text(block, 'ctaLabel');
+  const ctaLink = text(block, 'ctaLink');
+
+  if (ctaLabel && ctaLink) {
+    const cta = document.createElement('a');
+    cta.className = 'ps-cta type-body-default-semibold';
+    cta.href = ctaLink;
+    cta.textContent = ctaLabel;
+    slider.append(cta);
+  }
+
+  block.replaceChildren(slider);
 }
