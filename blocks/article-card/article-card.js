@@ -10,8 +10,6 @@ const CHEVRON_SMALL =
   '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="var(--button-primary, #154734)"/><polyline points="11.5,9 19,15 11.5,21" fill="none" stroke="var(--button-fill-primary, #a5dc43)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 export default function decorate(block) {
-  if (block.dataset.aueResource) return;
-
   const isMini = block.classList.contains('mini');
   const contentCell = block.children[0]?.children[0];
 
