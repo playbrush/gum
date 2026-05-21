@@ -1,0 +1,170 @@
+/* ── Article Image Card Block ─────────────────────────────────────────────── *
+ *
+ * Three visual variants controlled by a modifier class on the block:
+ *   (default)  on-light  — no card bg; dark-green headline, eyebrow & body
+ *   .on-dark             — no card bg; cyan headline, white eyebrow & body
+ *                          also auto-applied inside section[data-background='dark']
+ *   .container           — white card bg, border-radius, padding
+ *
+ * Hover state: headline gains text-decoration: underline
+ */
+
+/* ── Card link wrapper ───────────────────────────────────────────────────── */
+
+.article-image-card .aic-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Inner container ─────────────────────────────────────────────────────── */
+
+.article-image-card .aic-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-7, 28px);
+}
+
+/* Container variant */
+.article-image-card.container .aic-inner {
+  background: var(--background-primary-inverse, white);
+  border-radius: var(--radius-s, 34px);
+  padding: var(--spacing-5, 20px);
+  gap: var(--spacing-4, 16px);
+}
+
+/* ── Image ───────────────────────────────────────────────────────────────── */
+
+.article-image-card .aic-media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-s, 34px);
+  overflow: hidden;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.article-image-card .aic-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.article-image-card .aic-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Content column ──────────────────────────────────────────────────────── */
+
+.article-image-card .aic-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 12px);
+  padding-right: var(--spacing-11, 44px);
+}
+
+.article-image-card.container .aic-content {
+  gap: var(--spacing-1-5, 6px);
+}
+
+/* ── Eyebrow (article type + read time) ──────────────────────────────────── */
+
+.article-image-card .aic-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 24px;
+  font-size: var(--font-size-small, 14px) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-sm, 1.1) !important;
+  letter-spacing: var(--letter-spacing-body-sm, 0);
+  color: var(--text-primary, #154734) !important;
+  white-space: nowrap;
+}
+
+.article-image-card .aic-eyebrow-time {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1-5, 6px);
+}
+
+.article-image-card .aic-eyebrow-time svg {
+  flex-shrink: 0;
+}
+
+/* ── Headline ────────────────────────────────────────────────────────────── */
+
+.article-image-card .aic-title {
+  margin: 0;
+  font-size: var(--font-size-h6, 24px) !important;
+  font-weight: 500 !important;
+  line-height: var(--line-height-body-lg, 1.14) !important;
+  color: var(--text-primary, #154734) !important;
+  overflow-wrap: break-word;
+}
+
+/* ── Body copy ───────────────────────────────────────────────────────────── */
+
+.article-image-card .aic-body {
+  margin: 0;
+  font-size: var(--font-size-default, 16px) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-body-default, 1.12) !important;
+  color: var(--text-primary, #154734) !important;
+}
+
+/* ── On dark variant (explicit .on-dark class) ───────────────────────────── */
+
+.article-image-card.on-dark .aic-eyebrow {
+  color: var(--text-secondary-inverse, white) !important;
+}
+
+.article-image-card.on-dark .aic-title {
+  color: var(--text-secondary-highlight, #3dcfff) !important;
+}
+
+.article-image-card.on-dark .aic-body {
+  color: var(--text-secondary-inverse, white) !important;
+}
+
+/* ── Container variant text colors ──────────────────────────────────────── */
+
+.article-image-card.container .aic-eyebrow {
+  color: var(--text-secondary, #006341) !important;
+}
+
+.article-image-card.container .aic-title {
+  color: var(--text-primary, #154734) !important;
+}
+
+.article-image-card.container .aic-body {
+  color: var(--text-secondary, #006341) !important;
+}
+
+/* ── Hover: underline headline ───────────────────────────────────────────── */
+
+.article-image-card .aic-link:hover .aic-title,
+.article-image-card .aic-inner:hover .aic-title {
+  text-decoration: underline;
+}
+
+/* ── On dark auto-detect from section[data-background='dark'] ────────────── *
+ * Placed last — higher specificity (0,5,0) than container/hover rules so    *
+ * stylelint no-descending-specificity is satisfied.                          *
+ * Container cards are excluded via :not(.container).                         *
+ */
+
+.section[data-background='dark'] .article-image-card:not(.container) .aic-eyebrow {
+  color: var(--text-secondary-inverse, white) !important;
+}
+
+.section[data-background='dark'] .article-image-card:not(.container) .aic-title {
+  color: var(--text-secondary-highlight, #3dcfff) !important;
+}
+
+.section[data-background='dark'] .article-image-card:not(.container) .aic-body {
+  color: var(--text-secondary-inverse, white) !important;
+}

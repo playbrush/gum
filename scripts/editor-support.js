@@ -139,7 +139,7 @@ const nestedBlockObserver = new MutationObserver(() => {
   if (
     !main ||
     !main.querySelector(
-      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block)'
+      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block), .columns .article-image-card:not(.block)'
     )
   )
     return;

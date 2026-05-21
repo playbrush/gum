@@ -65,7 +65,15 @@
     },
     {
       "id": "column",
-      "components": ["text", "image", "button", "title", "product-card", "product-card-highlight"]
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title",
+        "product-card",
+        "product-card-highlight",
+        "article-image-card"
+      ]
     }
   ]
 }
