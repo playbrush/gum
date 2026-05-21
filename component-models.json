@@ -679,7 +679,12 @@
         "component": "text",
         "valueType": "string",
         "name": "content_name",
-        "label": "Product Name"
+        "label": "Product Name",
+        "required": true,
+        "validation": {
+          "maxLength": 60,
+          "customErrorMsg": "Maximum 60 characters."
+        }
       },
       {
         "component": "select",
@@ -745,7 +750,8 @@
         "component": "text",
         "valueType": "string",
         "name": "imageAlt",
-        "label": "Image Alt Text"
+        "label": "Image Alt Text",
+        "required": true
       }
     ]
   }
