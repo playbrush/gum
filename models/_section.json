@@ -92,7 +92,17 @@
   "filters": [
     {
       "id": "section",
-      "components": ["text", "image", "button", "title", "hero", "cards", "columns", "fragment"]
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title",
+        "hero",
+        "cards",
+        "columns",
+        "fragment",
+        "product-slider"
+      ]
     }
   ]
 }
