@@ -1,0 +1,248 @@
+/* ── Product Card Highlight Block ────────────────────────────────────────── *
+ *
+ * Layout overview
+ * ───────────────
+ * Mobile  (< 900px): single-column stack — content → image → CTA button
+ * Desktop (≥ 900px): two-column CSS Grid — left col: content + CTA button
+ *                                          right col: image (spans both rows)
+ *
+ * The outer .pch-inner uses display:grid on both breakpoints so that the CTA
+ * button (a direct sibling of .pch-content and .pch-media) naturally appears
+ * after the image on mobile and inside the left content column on desktop.
+ */
+
+/* ── Inner container ─────────────────────────────────────────────────────── */
+
+.product-card-highlight .pch-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-6, 24px);
+  padding: var(--spacing-6, 24px);
+  border-radius: var(--radius-s, 34px);
+  overflow: hidden; /* clip image / children to card corners */
+  background: linear-gradient(
+    -55deg,
+    var(--color-blue-100, #9adbe8) 45.875%,
+    var(--color-teal-100, #47d7ac) 87.228%
+  );
+  box-sizing: border-box;
+  transition: box-shadow 0.2s ease;
+}
+
+.product-card-highlight .pch-inner:hover {
+  box-shadow: var(--shadow-1, 0 12px 60px 0 rgb(0 0 0 / 18%));
+}
+
+/* ── Content column ──────────────────────────────────────────────────────── */
+
+.product-card-highlight .pch-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3, 12px); /* mobile: 12 px */
+}
+
+/* Badge */
+.product-card-highlight .pch-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 var(--spacing-2, 8px);
+  border-radius: 6px;
+  font-size: var(--font-size-small, 14px);
+  font-weight: 500;
+  line-height: var(--line-height-body-sm, 1.1);
+  color: var(--text-primary, #154734);
+  white-space: nowrap;
+  letter-spacing: var(--letter-spacing-body-sm, 0);
+}
+
+.product-card-highlight .pch-badge-new {
+  background: var(--label-new, #71ffd7);
+}
+
+.product-card-highlight .pch-badge-best-seller {
+  background: var(--label-best-seller, #f2c6ff);
+}
+
+.product-card-highlight .pch-badge-online-only {
+  background: var(--label-online-only, #ffa1a3);
+}
+
+.product-card-highlight .pch-badge-featured-product,
+.product-card-highlight .pch-badge-featured {
+  background: var(--label-featured, #ffd26f);
+}
+
+.product-card-highlight .pch-badge-recommended {
+  background: var(--label-recommended, #ffb867);
+}
+
+/* Title (H4) */
+.product-card-highlight .pch-title {
+  margin: 0;
+  font-size: var(--font-size-h4, 35px);
+  font-weight: 700;
+  line-height: var(--line-height-headline, 1.1);
+  color: var(--text-primary, #154734);
+  overflow-wrap: break-word;
+}
+
+/* Keep title color unchanged when section has a dark background */
+.section[data-background='dark'] .product-card-highlight .pch-title {
+  color: var(--text-primary, #154734);
+}
+
+/* Description */
+.product-card-highlight .pch-description {
+  margin: 0;
+  font-size: var(--font-size-default, 16px);
+  font-weight: 400;
+  line-height: var(--line-height-body-default, 1.12);
+  color: var(--text-primary, #154734);
+}
+
+/* Rating pill */
+.product-card-highlight .pch-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1, 4px);
+  padding: var(--spacing-1-5, 6px) var(--spacing-2, 8px);
+  background: white;
+  border: 1px solid var(--color-neutral-100, #f5f5f5);
+  border-radius: var(--radius-l, 88px); /* 88 px mobile → 160 px desktop via token override */
+  overflow: hidden;
+  width: fit-content;
+}
+
+.product-card-highlight .pch-rating-score {
+  font-size: var(--font-size-small, 14px);
+  font-weight: 600;
+  line-height: var(--line-height-body-sm, 1.1);
+  color: var(--text-primary, #154734);
+  white-space: nowrap;
+  letter-spacing: var(--letter-spacing-body-sm, 0);
+}
+
+.product-card-highlight .pch-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-0-5, 2px);
+}
+
+/* ── CTA Button ──────────────────────────────────────────────────────────── *
+ * Overrides global button defaults (yellow-green bg, 52 px min-height, margin).
+ * Default:  white bg  + dark border + dark text
+ * Hover:    dark bg   + dark border + white text
+ */
+
+.product-card-highlight .pch-cta {
+  /* reset global button */
+  margin: 0;
+  min-height: unset;
+  /* sizing */
+  width: 100%; /* full-width on mobile */
+  max-height: 42px;
+  padding: var(--spacing-3, 12px) var(--spacing-9, 36px);
+  border-radius: var(--radius-l, 88px); /* 88 px mobile → 160 px desktop */
+  /* colours — secondary style */
+  background-color: white;
+  border: 1px solid var(--text-primary, #154734);
+  color: var(--text-primary, #154734);
+  /* typography */
+  font-size: var(--font-size-default, 16px);
+  font-weight: 600;
+  line-height: var(--line-height-body-default, 1.12);
+  /* misc */
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.product-card-highlight .pch-cta:hover,
+.product-card-highlight .pch-cta:focus {
+  background-color: var(--text-primary, #154734);
+  border-color: var(--text-primary, #154734);
+  color: white;
+}
+
+.product-card-highlight .pch-cta:focus-visible {
+  outline: 2px solid var(--text-primary, #154734);
+  outline-offset: 2px;
+}
+
+/* ── Media ───────────────────────────────────────────────────────────────── */
+
+.product-card-highlight .pch-media {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.product-card-highlight .pch-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.product-card-highlight .pch-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+/* ── Desktop (≥ 900 px) ──────────────────────────────────────────────────── *
+ *
+ * CSS Grid placement:
+ *
+ *   col →  [  248px       ]  [  1fr     ]
+ *   row 1  .pch-content      .pch-media  (spans rows 1–2)
+ *   row 2  .pch-cta          .pch-media
+ *
+ * align-content:center centres the two-row track group vertically within
+ * the card so the content+button block is visually centred on the gradient.
+ */
+
+@media (width >= 900px) {
+  .product-card-highlight .pch-inner {
+    grid-template-columns: 248px 1fr;
+    column-gap: var(--spacing-6, 24px); /* gap between left and right cols */
+    row-gap: var(--spacing-5, 20px); /* gap between content and cta rows */
+    align-content: center; /* vertically centre the row track group */
+    padding: var(--spacing-20, 80px) var(--spacing-8, 32px);
+    min-height: 510px;
+    background: linear-gradient(
+      -28.14deg,
+      var(--color-blue-100, #9adbe8) 45.875%,
+      var(--color-teal-100, #47d7ac) 87.228%
+    );
+  }
+
+  .product-card-highlight .pch-content {
+    grid-column: 1;
+    grid-row: 1;
+    gap: var(--spacing-5, 20px); /* desktop: 20 px between content items */
+  }
+
+  .product-card-highlight .pch-media {
+    grid-column: 2;
+    grid-row: 1 / span 2; /* span both rows so image fills the right column */
+    align-self: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 0; /* card's overflow:hidden already clips corners */
+  }
+
+  .product-card-highlight .pch-cta {
+    grid-column: 1;
+    grid-row: 2;
+    width: auto; /* shrink to content on desktop */
+    max-height: 42px;
+    min-height: unset;
+  }
+}

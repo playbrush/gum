@@ -377,6 +377,84 @@
     ]
   },
   {
+    "id": "product-card-highlight",
+    "fields": [
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "badge",
+        "label": "Badge",
+        "value": "Best Seller",
+        "options": [
+          {
+            "name": "None",
+            "value": ""
+          },
+          {
+            "name": "New",
+            "value": "New"
+          },
+          {
+            "name": "Best Seller",
+            "value": "Best Seller"
+          },
+          {
+            "name": "Featured Product",
+            "value": "Featured Product"
+          },
+          {
+            "name": "Online Only",
+            "value": "Online Only"
+          },
+          {
+            "name": "Recommended",
+            "value": "Recommended"
+          }
+        ]
+      },
+      {
+        "component": "richtext",
+        "name": "title",
+        "value": "",
+        "label": "Product Title",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "description",
+        "label": "Description",
+        "value": ""
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "rating",
+        "label": "Rating (e.g. 4.9)",
+        "value": ""
+      },
+      {
+        "component": "boolean",
+        "name": "addToCart",
+        "label": "Show Add to Cart Button"
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Product Image",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Image Alt Text",
+        "value": ""
+      }
+    ]
+  },
+  {
     "id": "product-card",
     "fields": [
       {

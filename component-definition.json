@@ -225,6 +225,21 @@
           }
         },
         {
+          "title": "Product Card Highlight",
+          "id": "product-card-highlight",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block",
+                "template": {
+                  "name": "Product Card Highlight",
+                  "model": "product-card-highlight"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Product Card",
           "id": "product-card",
           "plugins": {
