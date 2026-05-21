@@ -64,6 +64,10 @@
   font-weight: 400 !important;
   line-height: 1.12 !important;
   color: var(--text-primary, #154734) !important;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* Headline */
