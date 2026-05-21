@@ -1,13 +1,13 @@
 const CLOCK_SVG =
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="7.5"/><polyline points="9,5 9,9 11.5,11.5"/></svg>';
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 18" width="18" height="18" fill="none" stroke="var(--icon-primary, #006341)" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="7.5"/><polyline points="9,5 9,9 11.5,11.5"/></svg>';
 
-// Chevron-in-circle: Large (Default size — 61px total: 8px pad + 45px icon + 8px pad)
+// Chevron-in-circle: Large (61px — from /icons/chevron-large.svg)
 const CHEVRON_LARGE =
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 61 61" width="61" height="61" aria-hidden="true"><circle cx="30.5" cy="30.5" r="30.5" fill="var(--button-primary, #154734)"/><polyline points="24,20 37,30.5 24,41" fill="none" stroke="var(--button-fill-primary, #a5dc43)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  '<svg width="61" height="61" viewBox="0 0 61 61" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="61" height="61" rx="30.5" fill="#154734"/><path d="M25.4243 18.4243C26.1565 17.6921 27.3434 17.6921 28.0757 18.4243L39.3257 29.6743C40.0579 30.4065 40.0579 31.5934 39.3257 32.3257L28.0757 43.5757C27.3434 44.3079 26.1565 44.3079 25.4243 43.5757C24.6921 42.8434 24.6921 41.6565 25.4243 40.9243L35.3486 31L25.4243 21.0757C24.6921 20.3434 24.6921 19.1565 25.4243 18.4243Z" fill="#00EA8B"/></svg>';
 
-// Chevron-in-circle: Small (Mini size — 30px total: 3px pad + 24px icon + 3px pad)
+// Chevron-in-circle: Small (30px — from /icons/chevron.svg)
 const CHEVRON_SMALL =
-  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" aria-hidden="true"><circle cx="15" cy="15" r="15" fill="var(--button-primary, #154734)"/><polyline points="11.5,9 19,15 11.5,21" fill="none" stroke="var(--button-fill-primary, #a5dc43)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  '<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="30" height="30" rx="15" fill="#154734"/><path d="M12.293 8.29295C12.6835 7.90243 13.3165 7.90243 13.707 8.29295L19.707 14.293C20.0975 14.6835 20.0975 15.3165 19.707 15.707L13.707 21.707C13.3165 22.0975 12.6835 22.0975 12.293 21.707C11.9024 21.3165 11.9024 20.6835 12.293 20.293L17.5859 15L12.293 9.70702C11.9024 9.31649 11.9024 8.68348 12.293 8.29295Z" fill="#00EA8B"/></svg>';
 
 export default function decorate(block) {
   const isMini = block.classList.contains('mini');
