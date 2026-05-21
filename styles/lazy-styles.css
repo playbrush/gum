@@ -1,1 +1,50 @@
 /* add global styles that can be loaded post LCP here */
+
+/* ── Shared Badge Component ─────────────────────────────────────────────── *
+ * Used by product-card, product-card-highlight, and any future block that   *
+ * needs label/badge pills. Import once, use everywhere via class names:     *
+ *   wrapper → .badge-wrapper                                                *
+ *   pill    → .badge .badge-{type}                                          *
+ */
+
+.badge-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1, 4px);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 22px;
+  padding: 0 var(--spacing-2, 8px);
+  border-radius: 6px;
+  font-size: var(--font-size-small, 14px);
+  font-weight: 500;
+  line-height: var(--line-height-body-sm, 1.1);
+  color: var(--text-primary, #154734);
+  white-space: nowrap;
+  letter-spacing: var(--letter-spacing-body-sm, 0);
+}
+
+.badge-new {
+  background: var(--label-new, #71ffd7);
+}
+
+.badge-best-seller {
+  background: var(--label-best-seller, #f2c6ff);
+}
+
+.badge-online-only {
+  background: var(--label-online-only, #ffa1a3);
+}
+
+.badge-featured,
+.badge-featured-product {
+  background: var(--label-featured, #ffd26f);
+}
+
+.badge-recommended {
+  background: var(--label-recommended, #ffb867);
+}

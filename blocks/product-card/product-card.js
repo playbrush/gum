@@ -82,10 +82,10 @@ export default function decorate(block) {
 
   if (tags.length) {
     const labelsEl = document.createElement('div');
-    labelsEl.className = 'product-card-labels';
+    labelsEl.className = 'badge-wrapper';
     tags.forEach((tag) => {
       const badge = document.createElement('span');
-      badge.className = `product-card-badge product-card-badge-${normalizeBadgeClass(tag)}`;
+      badge.className = `badge badge-${normalizeBadgeClass(tag)}`;
       badge.textContent = tag;
       labelsEl.append(badge);
     });

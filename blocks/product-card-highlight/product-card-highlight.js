@@ -77,10 +77,10 @@ export default function decorate(block) {
 
   if (tags.length) {
     const labelsEl = document.createElement('div');
-    labelsEl.className = 'pch-badges';
+    labelsEl.className = 'badge-wrapper';
     tags.forEach((tag) => {
       const badge = document.createElement('span');
-      badge.className = `pch-badge pch-badge-${tag.toLowerCase().trim().replace(/\s+/g, '-')}`;
+      badge.className = `badge badge-${tag.toLowerCase().trim().replace(/\s+/g, '-')}`;
       badge.textContent = tag;
       labelsEl.append(badge);
     });

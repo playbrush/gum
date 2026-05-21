@@ -25,49 +25,6 @@
   gap: var(--spacing-3, 12px);
 }
 
-/* Labels / Badges */
-.product-card-labels {
-  display: flex;
-  gap: var(--spacing-2, 8px);
-  flex-wrap: wrap;
-}
-
-.product-card-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 22px;
-  padding: 0 var(--spacing-2, 8px);
-  border-radius: 6px;
-  font-size: var(--font-size-small, 14px);
-  font-weight: 500;
-  line-height: var(--line-height-body-sm, 1.1);
-  color: var(--text-primary, #154734);
-  white-space: nowrap;
-  letter-spacing: var(--letter-spacing-body-sm, 0);
-}
-
-.product-card-badge-new {
-  background: var(--label-new, #71ffd7);
-}
-
-.product-card-badge-best-seller {
-  background: var(--label-best-seller, #f2c6ff);
-}
-
-.product-card-badge-online-only {
-  background: var(--label-online-only, #ffa1a3);
-}
-
-.product-card-badge-featured,
-.product-card-badge-featured-product {
-  background: var(--label-featured, #ffd26f);
-}
-
-.product-card-badge-recommended {
-  background: var(--label-recommended, #ffb867);
-}
-
 /* Product Name — normalize h2/h3/h4 to same visual size */
 .product-card-inner h2,
 .product-card-inner h3,

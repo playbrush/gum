@@ -41,50 +41,6 @@
   gap: var(--spacing-3, 12px); /* mobile: 12 px */
 }
 
-/* Badges wrapper */
-.product-card-highlight .pch-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-1, 4px);
-}
-
-/* Badge */
-.product-card-highlight .pch-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 22px;
-  padding: 0 var(--spacing-2, 8px);
-  border-radius: 6px;
-  font-size: var(--font-size-small, 14px);
-  font-weight: 500;
-  line-height: var(--line-height-body-sm, 1.1);
-  color: var(--text-primary, #154734);
-  white-space: nowrap;
-  letter-spacing: var(--letter-spacing-body-sm, 0);
-}
-
-.product-card-highlight .pch-badge-new {
-  background: var(--label-new, #71ffd7);
-}
-
-.product-card-highlight .pch-badge-best-seller {
-  background: var(--label-best-seller, #f2c6ff);
-}
-
-.product-card-highlight .pch-badge-online-only {
-  background: var(--label-online-only, #ffa1a3);
-}
-
-.product-card-highlight .pch-badge-featured-product,
-.product-card-highlight .pch-badge-featured {
-  background: var(--label-featured, #ffd26f);
-}
-
-.product-card-highlight .pch-badge-recommended {
-  background: var(--label-recommended, #ffb867);
-}
-
 /* Title (H4) */
 .product-card-highlight .pch-title {
   margin: 0;
@@ -100,13 +56,13 @@
   color: var(--text-primary, #154734);
 }
 
-/* Description */
+/* Description — locked with !important so parent column/section rules cannot override */
 .product-card-highlight .pch-description {
   margin: 0;
-  font-size: var(--font-size-default, 16px);
-  font-weight: 400;
-  line-height: var(--line-height-body-default, 1.12);
-  color: var(--text-primary, #154734);
+  font-size: var(--font-size-default, 16px) !important;
+  font-weight: 400 !important;
+  line-height: var(--line-height-body-default, 1.12) !important;
+  color: var(--text-primary, #154734) !important;
 }
 
 /* Rating pill */
