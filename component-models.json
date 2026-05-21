@@ -421,11 +421,32 @@
         ]
       },
       {
-        "component": "richtext",
+        "component": "text",
+        "valueType": "string",
         "name": "content_title",
         "value": "",
-        "label": "Product Title",
-        "valueType": "string"
+        "label": "Product Title"
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "content_titleType",
+        "label": "Title Heading Level",
+        "value": "h4",
+        "options": [
+          {
+            "name": "H2",
+            "value": "h2"
+          },
+          {
+            "name": "H3",
+            "value": "h3"
+          },
+          {
+            "name": "H4",
+            "value": "h4"
+          }
+        ]
       },
       {
         "component": "text",
