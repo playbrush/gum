@@ -37,7 +37,8 @@
       "image",
       "button",
       "title",
-      "product-card"
+      "product-card",
+      "product-card-highlight"
     ]
   },
   {
