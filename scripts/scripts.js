@@ -126,7 +126,11 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   // Decorate nested blocks (e.g. product-card inside columns) so loadSection can pick them up
-  main.querySelectorAll('.columns .product-card:not(.block)').forEach(decorateBlock);
+  main
+    .querySelectorAll(
+      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block)'
+    )
+    .forEach(decorateBlock);
   decorateTitleHeadings(main);
   observeTitleHeadingUpdates(main);
 }
@@ -138,7 +142,11 @@ export function decorateMain(main) {
  */
 export async function loadNestedBlocks(root = document.querySelector('main')) {
   if (!root) return;
-  const blocks = [...root.querySelectorAll('.columns .product-card:not(.block)')];
+  const blocks = [
+    ...root.querySelectorAll(
+      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block)'
+    ),
+  ];
   blocks.forEach(decorateBlock);
   await Promise.all(blocks.filter((b) => b.dataset.blockName).map(loadBlock));
 }

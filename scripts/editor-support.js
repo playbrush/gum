@@ -136,7 +136,13 @@ observer.observe(document, { attributeFilter: ['data-richtext-prop'], subtree: t
 // The :not(.block) guard in loadNestedBlocks prevents double-processing.
 const nestedBlockObserver = new MutationObserver(() => {
   const main = document.querySelector('main');
-  if (!main || !main.querySelector('.columns .product-card:not(.block)')) return;
+  if (
+    !main ||
+    !main.querySelector(
+      '.columns .product-card:not(.block), .columns .product-card-highlight:not(.block)'
+    )
+  )
+    return;
   loadNestedBlocks(main);
 });
 const ueMain = document.querySelector('main');
