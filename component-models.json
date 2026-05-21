@@ -249,22 +249,12 @@
         "value": ""
       },
       {
-        "component": "select",
-        "valueType": "string",
+        "component": "multiselect",
         "name": "classes",
-        "label": "Style Variant",
-        "value": "",
+        "label": "Style",
         "options": [
           {
-            "name": "Default (on light)",
-            "value": ""
-          },
-          {
-            "name": "On Dark",
-            "value": "on-dark"
-          },
-          {
-            "name": "Container (on white)",
+            "name": "Container",
             "value": "container"
           }
         ]
