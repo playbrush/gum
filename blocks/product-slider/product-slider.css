@@ -148,6 +148,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-0-5, 2px);
+  color: #e6007e;
 }
 
 /* ── CTA Button — XS Secondary, hover only ───────────────────────────────── */
