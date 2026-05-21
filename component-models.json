@@ -249,6 +249,27 @@
         "value": ""
       },
       {
+        "component": "select",
+        "valueType": "string",
+        "name": "classes",
+        "label": "Style Variant",
+        "value": "",
+        "options": [
+          {
+            "name": "Default (on light)",
+            "value": ""
+          },
+          {
+            "name": "On Dark",
+            "value": "on-dark"
+          },
+          {
+            "name": "Container (on white)",
+            "value": "container"
+          }
+        ]
+      },
+      {
         "component": "reference",
         "valueType": "string",
         "name": "image",
