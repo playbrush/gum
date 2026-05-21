@@ -148,6 +148,25 @@
   right: var(--spacing-4, 16px);
 }
 
+.product-slider .ps-deco {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.product-slider .ps-deco picture,
+.product-slider .ps-deco img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .product-slider .ps-cta {
   position: absolute;
   right: var(--spacing-8, 32px);
@@ -175,5 +194,9 @@
   .product-slider .ps-cta {
     position: static;
     margin-top: var(--spacing-6, 24px);
+  }
+
+  .product-slider .ps-deco {
+    display: none;
   }
 }

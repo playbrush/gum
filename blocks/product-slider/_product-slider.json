@@ -36,6 +36,19 @@
           "name": "ctaLink",
           "label": "CTA Link",
           "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "decorativeImage",
+          "label": "Decorative Image",
+          "description": "Optional photo shown on the right side of the slider (e.g. person holding product)"
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "decorativeImageAlt",
+          "label": "Decorative Image Alt Text"
         }
       ]
     }

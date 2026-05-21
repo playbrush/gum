@@ -13,10 +13,7 @@ function text(card, name) {
   return field(card, name)?.textContent?.trim() || '';
 }
 
-function image(card) {
-  const el = field(card, 'image');
-  if (!el) return null;
-
+function imageFromEl(el, alt) {
   const picture = el.querySelector('picture');
   if (picture) return picture;
 
@@ -25,15 +22,28 @@ function image(card) {
 
   const a = el.querySelector('a');
   const src = a?.href || el.textContent.trim();
-
   if (!src) return null;
 
   const img = document.createElement('img');
   img.src = src;
-  img.alt = text(card, 'imageAlt');
+  img.alt = alt || '';
   img.loading = 'lazy';
-
   return img;
+}
+
+function image(card) {
+  // UE mode: field element has data-aue-prop="image"
+  const el = field(card, 'image');
+  if (el) {
+    const media = imageFromEl(el, text(card, 'imageAlt'));
+    if (media) return media;
+  }
+
+  // Delivery mode fallback: picture rendered directly in the card's DOM
+  const picture = card.querySelector('picture');
+  if (picture) return picture;
+
+  return null;
 }
 
 function makeCard(card) {
@@ -120,7 +130,8 @@ export default function decorate(block) {
   }
 
   const ctaLabel = text(block, 'ctaText') || text(block, 'ctaLabel');
-  const ctaLink = text(block, 'ctaLink');
+  const ctaLinkEl = field(block, 'ctaLink');
+  const ctaLink = ctaLinkEl?.querySelector('a')?.href || text(block, 'ctaLink');
 
   if (ctaLabel && ctaLink) {
     const cta = document.createElement('a');
@@ -130,5 +141,16 @@ export default function decorate(block) {
     slider.append(cta);
   }
 
+  // Decorative image (right-side photo)
+  const decoEl = field(block, 'decorativeImage');
+  const decoMedia = decoEl ? imageFromEl(decoEl, text(block, 'decorativeImageAlt')) : null;
+
   block.replaceChildren(slider);
+
+  if (decoMedia) {
+    const deco = document.createElement('div');
+    deco.className = 'ps-deco';
+    deco.append(decoMedia);
+    block.append(deco);
+  }
 }
