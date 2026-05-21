@@ -23,8 +23,8 @@
       "fields": [
         {
           "component": "text",
-          "name": "ctaText",
-          "label": "CTA Text",
+          "name": "ctaLabel",
+          "label": "CTA Label",
           "valueType": "string",
           "validation": {
             "maxLength": 30,
