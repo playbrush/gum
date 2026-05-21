@@ -6,9 +6,6 @@ function createStarSvg() {
 }
 
 export default function decorate(block) {
-  // Guard: skip DOM transformation in Universal Editor author mode.
-  if (block.dataset.aueResource) return;
-
   const rows = [...block.children];
   const getCell = (row, idx = 0) => row?.children?.[idx];
 
