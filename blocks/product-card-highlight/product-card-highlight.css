@@ -41,6 +41,13 @@
   gap: var(--spacing-3, 12px); /* mobile: 12 px */
 }
 
+/* Badges wrapper */
+.product-card-highlight .pch-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1, 4px);
+}
+
 /* Badge */
 .product-card-highlight .pch-badge {
   display: inline-flex;

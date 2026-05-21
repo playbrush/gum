@@ -382,41 +382,33 @@
       {
         "component": "container",
         "name": "badges",
-        "label": "Badge",
+        "label": "Badges",
         "collapsible": false,
         "fields": [
           {
-            "component": "select",
-            "valueType": "string",
-            "name": "content_badge",
-            "label": "Badge Type",
-            "value": "Best Seller",
-            "options": [
-              {
-                "name": "None",
-                "value": ""
-              },
-              {
-                "name": "New",
-                "value": "New"
-              },
-              {
-                "name": "Best Seller",
-                "value": "Best Seller"
-              },
-              {
-                "name": "Featured Product",
-                "value": "Featured Product"
-              },
-              {
-                "name": "Online Only",
-                "value": "Online Only"
-              },
-              {
-                "name": "Recommended",
-                "value": "Recommended"
-              }
-            ]
+            "component": "boolean",
+            "name": "content_isNew",
+            "label": "New"
+          },
+          {
+            "component": "boolean",
+            "name": "content_isBestSeller",
+            "label": "Best Seller"
+          },
+          {
+            "component": "boolean",
+            "name": "content_isFeaturedProduct",
+            "label": "Featured Product"
+          },
+          {
+            "component": "boolean",
+            "name": "content_isOnlineOnly",
+            "label": "Online Only"
+          },
+          {
+            "component": "boolean",
+            "name": "content_isRecommended",
+            "label": "Recommended"
           }
         ]
       },

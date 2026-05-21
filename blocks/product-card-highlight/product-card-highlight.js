@@ -27,7 +27,14 @@ export default function decorate(block) {
     headingIdx >= 0 ? contentChildren.slice(headingIdx + 1) : contentChildren
   ).filter((c) => c.tagName === 'P');
 
-  const badgeLabel = beforeHeading[0]?.textContent.trim() || '';
+  const BADGE_LABELS = ['New', 'Best Seller', 'Featured Product', 'Online Only', 'Recommended'];
+  const tags = beforeHeading
+    .slice(0, BADGE_LABELS.length)
+    .map((el, i) => {
+      const v = el.textContent.trim().toLowerCase();
+      return v === 'true' || v === 'on' ? BADGE_LABELS[i] : null;
+    })
+    .filter(Boolean);
   const titleText = headingEl?.textContent.trim() || '';
   const titleTag = headingEl?.tagName?.toLowerCase() || 'h4';
   const description = afterHeading[0]?.textContent.trim() || '';
@@ -68,11 +75,16 @@ export default function decorate(block) {
   const content = document.createElement('div');
   content.className = 'pch-content';
 
-  if (badgeLabel) {
-    const badge = document.createElement('span');
-    badge.className = `pch-badge pch-badge-${badgeLabel.toLowerCase().trim().replace(/\s+/g, '-')}`;
-    badge.textContent = badgeLabel;
-    content.append(badge);
+  if (tags.length) {
+    const labelsEl = document.createElement('div');
+    labelsEl.className = 'pch-badges';
+    tags.forEach((tag) => {
+      const badge = document.createElement('span');
+      badge.className = `pch-badge pch-badge-${tag.toLowerCase().trim().replace(/\s+/g, '-')}`;
+      badge.textContent = tag;
+      labelsEl.append(badge);
+    });
+    content.append(labelsEl);
   }
 
   if (titleText) {
