@@ -81,6 +81,14 @@
   overflow-wrap: break-word;
 }
 
+/* Keep title color unchanged when section has a dark background */
+.section[data-background='dark'] .product-card-inner h2,
+.section[data-background='dark'] .product-card-inner h3,
+.section[data-background='dark'] .product-card-inner h4,
+.section[data-background='dark'] .product-card-name {
+  color: var(--text-primary, #154734);
+}
+
 /* Price + Rating row */
 .product-card-meta {
   display: flex;
