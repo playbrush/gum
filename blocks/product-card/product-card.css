@@ -142,7 +142,6 @@
 @media (width >= 900px) {
   .product-card-inner {
     padding: var(--spacing-8, 32px);
-    min-height: 577px;
   }
 
   /* Bottom section grows to fill remaining card height */
