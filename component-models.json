@@ -276,7 +276,11 @@
         "valueType": "string",
         "name": "content_category",
         "label": "Article Type (e.g. Tips & Tricks)",
-        "value": ""
+        "value": "",
+        "validation": {
+          "maxLength": 30,
+          "customErrorMsg": "Maximum 30 characters."
+        }
       },
       {
         "component": "text",
@@ -290,7 +294,12 @@
         "valueType": "string",
         "name": "content_title",
         "label": "Headline",
-        "value": ""
+        "value": "",
+        "required": true,
+        "validation": {
+          "maxLength": 60,
+          "customErrorMsg": "Maximum 60 characters."
+        }
       },
       {
         "component": "select",
@@ -313,8 +322,12 @@
         "component": "text",
         "valueType": "string",
         "name": "content_body",
-        "label": "Body Copy (optional, max ~160 chars)",
-        "value": ""
+        "label": "Body Copy",
+        "value": "",
+        "validation": {
+          "maxLength": 160,
+          "customErrorMsg": "Maximum 160 characters."
+        }
       },
       {
         "component": "text",
@@ -346,7 +359,8 @@
         "valueType": "string",
         "name": "imageAlt",
         "label": "Image Alt Text",
-        "value": ""
+        "value": "",
+        "required": true
       }
     ]
   },
