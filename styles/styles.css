@@ -791,11 +791,12 @@ button.xsmall {
 .badge-special {
   --badge-bg: var(--label-new);
 
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 24px;
-  padding: 8px 10px;
+  padding: 0 10px;
   font-family: var(--font-family-poppins);
   font-size: var(--font-size-small);
   font-weight: 500;

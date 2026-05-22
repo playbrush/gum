@@ -124,6 +124,7 @@
   font-size: var(--font-size-h5, 28px);
   font-weight: 700;
   line-height: 1.1;
+  color: var(--text-primary, #154734);
 }
 
 .slider-product-card .spc-description {
@@ -153,18 +154,18 @@
   color: var(--color-yellow-100, #ffd100);
 }
 
+/* Card CTA — uses global button.secondary.xsmall design-system styles.
+ * Visibility (not display) keeps the button in the flow at all times,
+ * so the card height never shifts on hover.
+ */
 .slider-product-card .spc-card-cta {
-  display: none;
-  padding: 4px 12px;
-  border: 1px solid var(--color-green-600, #154734);
-  border-radius: var(--radius-l, 160px);
-  background: transparent;
-  color: var(--color-green-600, #154734);
-  cursor: pointer;
+  visibility: hidden;
+  margin: 0;
+  min-height: 0;
 }
 
 .product-slider .slider-product-card.is-active:hover .spc-card-cta {
-  display: inline-flex;
+  visibility: visible;
 }
 
 /* ── Navigation arrows ────────────────────────────────────────────────────── */

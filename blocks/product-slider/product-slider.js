@@ -82,7 +82,7 @@ function makeCard(card) {
              </div>`
           : ''
       }
-      ${ctaLabel ? `<button type="button" class="spc-card-cta type-body-default-semibold">${ctaLabel}</button>` : ''}
+      ${ctaLabel ? `<button type="button" class="spc-card-cta secondary xsmall">${ctaLabel}</button>` : ''}
     </div>
   `;
 
