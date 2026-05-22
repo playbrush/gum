@@ -32,7 +32,13 @@ function getField(el, name) {
 
 function getFieldValue(field) {
   if (!field) return '';
+  const selectedOption = field.querySelector('option:checked');
+  const select = field.tagName === 'SELECT' ? field : field.querySelector('select');
+
   return (
+    select?.value ||
+    selectedOption?.value ||
+    selectedOption?.textContent?.trim() ||
     field.getAttribute('data-aue-value') ||
     field.getAttribute('value') ||
     field.getAttribute('href') ||
@@ -112,7 +118,6 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
 
   if (badgeField) {
     badgeField.hidden = true;
-    badgeField.style.display = 'none';
     badgeWrapper.append(badgeField);
 
     const observer = new MutationObserver(syncBadge);
@@ -121,7 +126,6 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
       childList: true,
       characterData: true,
       attributes: true,
-      attributeFilter: ['data-aue-value'],
     });
   }
 
@@ -184,7 +188,7 @@ function decorateCard(card) {
   let decorativePicture;
 
   if (isUE) {
-    badge = getFieldValue(badgeField) || 'New';
+    badge = getFieldValue(badgeField);
     name = getText(card, 'content_name');
     nameType = getText(card, 'content_nameType') || 'h3';
     description = getText(card, 'content_description');
@@ -324,7 +328,7 @@ function decorateCard(card) {
 }
 
 export default function decorate(block) {
-  const cards = [
+  let cards = [
     ...block.querySelectorAll('[data-aue-model="slider-product-card"], .slider-product-card'),
   ];
 
@@ -336,40 +340,32 @@ export default function decorate(block) {
   const track = document.createElement('div');
   track.className = 'ps-track';
 
-  cards.forEach((card) => track.append(card));
   shell.append(track);
 
   const deco = document.createElement('div');
   deco.className = 'ps-deco';
   shell.append(deco);
 
-  let activeIndex = 0;
-
-  function goTo(index) {
+  function render() {
     if (!cards.length) return;
 
-    activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+    track.replaceChildren(...cards);
 
     cards.forEach((card, i) => {
-      card.classList.toggle('is-active', i === activeIndex);
+      card.classList.toggle('is-active', i === 0);
     });
 
     deco.replaceChildren();
-    const decorativePicture = cards[activeIndex]?.psDecorativePicture;
+    const decorativePicture = cards[0]?.psDecorativePicture;
     deco.hidden = !decorativePicture;
     if (decorativePicture) {
       deco.append(decorativePicture);
     }
-
-    const cardWidth = cards[0].offsetWidth || 306;
-    const gap = 36;
-    const offset = block.offsetWidth / 2 - cardWidth / 2 - activeIndex * (cardWidth + gap);
-
-    track.style.transform = `translateX(${offset}px)`;
   }
 
   if (cards.length > 1) {
     shell.classList.add('is-slider');
+    shell.classList.toggle('is-pair', cards.length === 2);
 
     const prev = document.createElement('button');
     prev.type = 'button';
@@ -383,8 +379,14 @@ export default function decorate(block) {
     next.setAttribute('aria-label', 'Next product');
     next.innerHTML = createChevronSvg('right');
 
-    prev.addEventListener('click', () => goTo((activeIndex - 1 + cards.length) % cards.length));
-    next.addEventListener('click', () => goTo((activeIndex + 1) % cards.length));
+    prev.addEventListener('click', () => {
+      cards = [cards.at(-1), ...cards.slice(0, -1)];
+      render();
+    });
+    next.addEventListener('click', () => {
+      cards = [...cards.slice(1), cards[0]];
+      render();
+    });
 
     shell.append(prev, next);
   }
@@ -402,5 +404,5 @@ export default function decorate(block) {
 
   block.replaceChildren(shell);
 
-  requestAnimationFrame(() => goTo(0));
+  requestAnimationFrame(render);
 }
