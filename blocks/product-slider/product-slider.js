@@ -23,7 +23,10 @@ function getField(el, name) {
 }
 
 function getText(el, name) {
-  return getField(el, name)?.textContent?.trim() || '';
+  const field = getField(el, name);
+  if (!field) return '';
+  // UE stores select/reference values in data-aue-value; text fields use textContent
+  return field.getAttribute('data-aue-value') || field.textContent?.trim() || '';
 }
 
 function getLink(el, name) {
@@ -47,10 +50,14 @@ function getCardImage(card) {
       picture = document.createElement('picture');
       picture.append(imgEl);
     } else {
-      // In UE a reference field can render as the <a> element itself
-      const anchor =
-        imageField?.tagName === 'A' ? imageField : imageField?.querySelector('a[href]');
-      const src = anchor?.href || imageField?.textContent?.trim() || '';
+      // In UE a reference field can render as the <a> element itself.
+      // Use getAttribute('href') — .href auto-expands "" to the page URL (truthy but wrong).
+      const anchor = imageField?.tagName === 'A' ? imageField : imageField?.querySelector('a');
+      const src =
+        anchor?.getAttribute('href') ||
+        imageField?.getAttribute('data-aue-value') ||
+        imageField?.textContent?.trim() ||
+        '';
 
       if (src) {
         const img = document.createElement('img');
@@ -122,7 +129,8 @@ function decorateCard(card) {
         pic.append(imgEl);
       } else {
         const anchor = imageCell?.querySelector('a');
-        const src = anchor?.href || imageCell?.textContent?.trim() || '';
+        // Use getAttribute('href') — .href auto-expands "" to the page URL
+        const src = anchor?.getAttribute('href') || imageCell?.textContent?.trim() || '';
         if (src) {
           const img = document.createElement('img');
           img.src = src;
