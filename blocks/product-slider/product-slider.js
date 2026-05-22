@@ -10,6 +10,13 @@ function starSvg() {
   return `<svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="${STAR_PATH}" fill="currentColor"></path></svg>`;
 }
 
+const BADGE_TYPE_MAP = {
+  new: 'new',
+  'best seller': 'best-seller',
+  'online only': 'online-only',
+  'featured product': 'featured',
+};
+
 function field(el, name) {
   return el.querySelector(`[data-aue-prop="${name}"]`);
 }
@@ -61,7 +68,7 @@ function makeCard(card) {
 
   article.innerHTML = `
     <div class="spc-image-block">
-      <div class="spc-badge type-body-small-medium">${badge || ''}</div>
+      <div class="spc-badge badge-special${BADGE_TYPE_MAP[badge?.toLowerCase()] ? ` badge-special-${BADGE_TYPE_MAP[badge.toLowerCase()]}` : ''}">${badge || ''}</div>
       <div class="spc-media"></div>
     </div>
     <div class="spc-content">

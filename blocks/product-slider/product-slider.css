@@ -65,10 +65,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-green-600, #154734);
-  font-size: var(--font-size-small, 14px);
-  font-weight: 500;
-  background: radial-gradient(ellipse at center, rgb(255 255 255 / 75%) 0%, transparent 75%);
 }
 
 /* ── Card media (image slot) ──────────────────────────────────────────────── */
