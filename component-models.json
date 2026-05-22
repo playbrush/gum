@@ -804,17 +804,29 @@
     "id": "slider-product-card",
     "fields": [
       {
-        "component": "text",
+        "component": "select",
         "valueType": "string",
         "name": "content_badge",
-        "label": "Badge Label",
-        "description": "e.g. New, Best Seller",
-        "value": "",
-        "required": true,
-        "validation": {
-          "maxLength": 20,
-          "customErrorMsg": "Maximum 20 characters."
-        }
+        "label": "Badge Type",
+        "value": "New",
+        "options": [
+          {
+            "name": "New",
+            "value": "New"
+          },
+          {
+            "name": "Best Seller",
+            "value": "Best Seller"
+          },
+          {
+            "name": "Online Only",
+            "value": "Online Only"
+          },
+          {
+            "name": "Featured Product",
+            "value": "Featured Product"
+          }
+        ]
       },
       {
         "component": "text",

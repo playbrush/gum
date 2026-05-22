@@ -789,7 +789,7 @@ button.xsmall {
 
 /* Special product type badge */
 .badge-special {
-  position: relative;
+  --badge-bg: var(--label-new);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -801,42 +801,22 @@ button.xsmall {
   line-height: var(--line-height-body-sm);
   letter-spacing: var(--letter-spacing-body-sm);
   color: var(--text-primary);
-  background-color: var(--label-new);
+  background:
+    radial-gradient(ellipse at center, rgb(255 255 255 / 75%) 0%, transparent 100%), var(--badge-bg);
   white-space: nowrap;
-  overflow: hidden;
-}
-
-.badge-special::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at center,
-    rgb(255 255 255 / 75%) 0%,
-    rgb(255 255 255 / 0%) 100%
-  );
-  pointer-events: none;
-}
-
-.badge-special > * {
-  position: relative;
-  z-index: 1;
 }
 
 .badge-special-new {
-  background-color: var(--label-new);
+  --badge-bg: var(--label-new);
 }
-
 .badge-special-best-seller {
-  background-color: var(--label-best-seller);
+  --badge-bg: var(--label-best-seller);
 }
-
 .badge-special-online-only {
-  background-color: var(--label-online-only);
+  --badge-bg: var(--label-online-only);
 }
-
 .badge-special-featured {
-  background-color: var(--label-featured);
+  --badge-bg: var(--label-featured);
 }
 
 /* Rating */
