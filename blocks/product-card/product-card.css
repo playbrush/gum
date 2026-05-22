@@ -55,29 +55,8 @@
   white-space: nowrap;
 }
 
-/* Rating pill */
-.product-card-rating {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-1, 4px);
-  padding: var(--spacing-1-5, 6px) var(--spacing-2, 8px);
-  background: white;
-  border: 1px solid var(--color-neutral-100, #f5f5f5);
-  border-radius: var(--radius-l, 88px);
-  overflow: hidden;
+.product-card-meta .rating {
   flex-shrink: 0;
-}
-
-.product-card-rating-score {
-  color: var(--text-primary, #154734);
-  white-space: nowrap;
-}
-
-.product-card-stars {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-0-5, 2px);
 }
 
 /* No gap between content and image when there are no CTA buttons */

@@ -1,34 +1,9 @@
-const STAR_PATH =
-  'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
-
-// className maps to the global .badge-special-* rules used by slider product cards.
-const BADGES = {
-  New: { label: 'New', className: 'badge-special badge-special-new' },
-  'Best Seller': { label: 'Best Seller', className: 'badge-special badge-special-best-seller' },
-  'Online Only': { label: 'Online Only', className: 'badge-special badge-special-online-only' },
-  'Featured Product': {
-    label: 'Featured Product',
-    className: 'badge-special badge-special-featured',
-  },
-};
+import { createBadge, createRating, getBadgeData } from '../../scripts/labels-rating.js';
 
 const FIELD_ALIASES = {
   content_badge: ['content_badge', 'badge', 'label', 'content_label'],
   image: ['image', 'content_image', 'productImage', 'product_image'],
 };
-
-const BADGE_ALIASES = {
-  new: 'New',
-  bestseller: 'Best Seller',
-  best: 'Best Seller',
-  onlineonly: 'Online Only',
-  featured: 'Featured Product',
-  featuredproduct: 'Featured Product',
-};
-
-function createStarSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12" fill="currentColor" aria-hidden="true"><path d="${STAR_PATH}"/></svg>`;
-}
 
 function createChevronSvg(direction = 'right') {
   const path = direction === 'left' ? 'M15 18l-6-6 6-6' : 'M9 6l6 6-6 6';
@@ -77,22 +52,6 @@ function getLink(el, name) {
   return field?.querySelector('a')?.href || field?.textContent?.trim() || '';
 }
 
-function normalizeBadgeValue(value) {
-  const cleanValue = `${value || ''}`
-    .trim()
-    .replace(/^badge-product-/i, '')
-    .replace(/^badge-/i, '');
-
-  if (BADGES[cleanValue]) return cleanValue;
-
-  const key = cleanValue.toLowerCase().replace(/[^a-z0-9]/g, '');
-  return BADGE_ALIASES[key] || '';
-}
-
-function getBadge(value) {
-  return BADGES[normalizeBadgeValue(value)] || null;
-}
-
 function getBadgeField(card) {
   return (
     getField(card, 'content_badge') ||
@@ -125,27 +84,29 @@ function isImageReference(el) {
   return /\.(avif|gif|jpe?g|png|svg|webp)(\?.*)?$/i.test(src) || src.includes('/content/dam/');
 }
 
-function createBadgeWrapper(badgeField, initialValue) {
+function createLiveBadgeWrapper(badgeField, initialValue) {
   const badgeWrapper = document.createElement('div');
   badgeWrapper.className = 'badge-wrapper';
 
-  const badgeEl = document.createElement('span');
+  let badgeEl;
 
   const syncBadge = () => {
-    const badgeData = getBadge(getFieldValue(badgeField) || initialValue);
-    if (!badgeData) {
+    const badgeValue = getFieldValue(badgeField) || initialValue;
+    const nextBadge = createBadge(badgeValue, 'special');
+
+    if (badgeEl) badgeEl.remove();
+
+    badgeEl = nextBadge;
+
+    if (!badgeEl) {
       badgeWrapper.hidden = true;
-      badgeEl.className = 'badge';
-      badgeEl.textContent = '';
       return;
     }
 
     badgeWrapper.hidden = false;
-    badgeEl.className = `badge ${badgeData.className}`;
-    badgeEl.textContent = badgeData.label;
+    badgeWrapper.prepend(badgeEl);
   };
 
-  badgeWrapper.append(badgeEl);
   syncBadge();
 
   if (badgeField) {
@@ -271,7 +232,7 @@ function decorateCard(card) {
     picture = pic;
   }
 
-  const badgeData = getBadge(badge);
+  const badgeData = getBadgeData(badge, 'special');
 
   const article = document.createElement('article');
   article.className = 'spc-inner';
@@ -280,7 +241,7 @@ function decorateCard(card) {
   imageBlock.className = 'spc-image-block';
 
   if (badgeData || badgeField) {
-    imageBlock.append(createBadgeWrapper(badgeField, badge));
+    imageBlock.append(createLiveBadgeWrapper(badgeField, badge));
   }
 
   const media = document.createElement('div');
@@ -313,21 +274,7 @@ function decorateCard(card) {
   }
 
   if (rating) {
-    const pill = document.createElement('div');
-    pill.className = 'spc-rating';
-    pill.setAttribute('aria-label', `${rating} out of 5 stars`);
-
-    const score = document.createElement('span');
-    score.className = 'spc-rating-score type-body-small-semibold';
-    score.textContent = rating;
-
-    const stars = document.createElement('span');
-    stars.className = 'spc-stars';
-    stars.setAttribute('aria-hidden', 'true');
-    stars.innerHTML = createStarSvg().repeat(5);
-
-    pill.append(score, stars);
-    content.append(pill);
+    content.append(createRating(rating));
   }
 
   if (ctaLabel) {

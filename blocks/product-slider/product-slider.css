@@ -185,7 +185,7 @@
   letter-spacing: 0;
 }
 
-.slider-product-card .spc-rating {
+.slider-product-card .rating {
   display: inline-flex;
   align-items: center;
   gap: 4px;
@@ -196,13 +196,13 @@
   border-radius: var(--radius-l, 160px);
 }
 
-.slider-product-card .spc-rating-score {
+.slider-product-card .rating-value {
   font-size: var(--font-size-small, 14px);
   font-weight: 600;
   color: var(--color-green-600, #154734);
 }
 
-.slider-product-card .spc-stars {
+.slider-product-card .rating-stars {
   display: inline-flex;
   gap: 2px;
   color: var(--color-pink, #ea0089);

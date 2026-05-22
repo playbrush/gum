@@ -1,13 +1,4 @@
-const STAR_PATH =
-  'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
-
-function createStarSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12" fill="var(--color-pink,#ea0089)" aria-hidden="true"><path d="${STAR_PATH}"/></svg>`;
-}
-
-function normalizeBadgeClass(tag) {
-  return tag.toLowerCase().trim().replace(/\s+/g, '-');
-}
+import { createBadgeWrapper, createRating } from '../../scripts/labels-rating.js';
 
 export default function decorate(block) {
   const rows = [...block.children];
@@ -81,14 +72,7 @@ export default function decorate(block) {
   content.className = 'product-card-content';
 
   if (tags.length) {
-    const labelsEl = document.createElement('div');
-    labelsEl.className = 'badge-wrapper';
-    tags.forEach((tag) => {
-      const badge = document.createElement('span');
-      badge.className = `badge badge-${normalizeBadgeClass(tag)}`;
-      badge.textContent = tag;
-      labelsEl.append(badge);
-    });
+    const labelsEl = createBadgeWrapper(tags, 'product');
     content.append(labelsEl);
   }
 
@@ -112,22 +96,7 @@ export default function decorate(block) {
     }
 
     if (rating) {
-      const pill = document.createElement('div');
-      pill.className = 'product-card-rating';
-      pill.setAttribute('aria-label', `${rating} out of 5 stars`);
-
-      const score = document.createElement('span');
-      score.className = 'product-card-rating-score type-body-small-semibold';
-      score.setAttribute('aria-hidden', 'true');
-      score.textContent = rating;
-
-      const stars = document.createElement('span');
-      stars.className = 'product-card-stars';
-      stars.setAttribute('aria-hidden', 'true');
-      stars.innerHTML = createStarSvg().repeat(5);
-
-      pill.append(score, stars);
-      meta.append(pill);
+      meta.append(createRating(rating));
     }
 
     content.append(meta);

@@ -59,29 +59,8 @@
   color: var(--text-primary, #154734) !important;
 }
 
-/* Rating pill */
-.product-card-highlight .pch-rating {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-1, 4px);
-  padding: var(--spacing-1-5, 6px) var(--spacing-2, 8px);
-  background: white;
-  border: 1px solid var(--color-neutral-100, #f5f5f5);
-  border-radius: var(--radius-l, 88px); /* 88 px mobile → 160 px desktop via token override */
-  overflow: hidden;
+.product-card-highlight .rating {
   width: fit-content;
-}
-
-/* Rating score — font scale via .type-body-small-semibold utility class */
-.product-card-highlight .pch-rating-score {
-  color: var(--text-primary, #154734);
-  white-space: nowrap;
-}
-
-.product-card-highlight .pch-stars {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-0-5, 2px);
 }
 
 /* ── CTA Button ──────────────────────────────────────────────────────────── *
