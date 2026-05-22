@@ -790,6 +790,7 @@ button.xsmall {
 /* Special product type badge */
 .badge-special {
   --badge-bg: var(--label-new);
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -809,12 +810,15 @@ button.xsmall {
 .badge-special-new {
   --badge-bg: var(--label-new);
 }
+
 .badge-special-best-seller {
   --badge-bg: var(--label-best-seller);
 }
+
 .badge-special-online-only {
   --badge-bg: var(--label-online-only);
 }
+
 .badge-special-featured {
   --badge-bg: var(--label-featured);
 }
