@@ -15,13 +15,12 @@
     var(--color-blue-100, #9adbe8) 45.875%,
     var(--color-teal-100, #47d7ac) 87.228%
   );
-  padding: 52px 0 0;
+  padding: var(--spacer-l, 60px) 0;
 }
 
 .product-slider .ps-shell {
   position: relative;
   width: 100%;
-  min-height: 610px;
 }
 
 /* ── Slider track ─────────────────────────────────────────────────────────── */
@@ -31,13 +30,13 @@
   z-index: 2;
   display: flex;
   justify-content: center;
-  gap: 64px;
+  gap: 36px;
 }
 
 /* ── Cards ────────────────────────────────────────────────────────────────── */
 
 .product-slider .slider-product-card {
-  width: 548px;
+  width: 306px;
   flex-shrink: 0;
   opacity: 0.2;
   transition: opacity 0.3s ease;
@@ -51,9 +50,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 48px;
+  gap: 36px;
   width: 100%;
-  min-height: 690px;
+  min-height: 593px;
   transition: gap 0.2s ease;
 }
 
@@ -75,26 +74,26 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 44px;
-  margin-bottom: 32px;
+  min-height: 24px;
+  margin-bottom: 12px;
 }
 
 .slider-product-card .spc-image-block .badge-special {
-  width: 548px;
+  width: 248px;
   max-width: 100%;
-  height: 44px;
-  padding: 0 12px;
+  height: 24px;
+  padding: 0 10px;
   border-radius: 0;
   color: var(--text-primary, #154734);
-  font-size: 28px;
+  font-size: var(--font-size-small, 14px);
   font-weight: 500;
-  line-height: 1.1;
+  line-height: var(--line-height-body-sm, 1.1);
   background-color: transparent;
   background-image: radial-gradient(
     ellipse at center,
-    rgb(255 255 255 / 58%) 0%,
-    rgb(255 255 255 / 36%) 42%,
-    rgb(255 255 255 / 14%) 68%,
+    rgb(255 255 255 / 70%) 0%,
+    rgb(255 255 255 / 48%) 42%,
+    rgb(255 255 255 / 18%) 68%,
     transparent 100%
   );
 }
@@ -102,8 +101,8 @@
 /* ── Card media (image slot) ──────────────────────────────────────────────── */
 
 .slider-product-card .spc-media {
-  width: 548px;
-  height: 520px;
+  width: 306px;
+  height: 306px;
   position: relative;
   overflow: visible;
 }
@@ -112,10 +111,10 @@
   content: '';
   position: absolute;
   left: 50%;
-  bottom: 24px;
+  bottom: 21px;
   z-index: 0;
-  width: 456px;
-  height: 54px;
+  width: 253px;
+  height: 28px;
   border: 1px solid rgb(255 255 255 / 78%);
   border-radius: 50%;
   box-shadow: inset 0 0 18px rgb(255 255 255 / 42%);
@@ -129,8 +128,8 @@
 .product-slider .slider-product-card.is-active:hover .spc-media::after,
 .product-slider .slider-product-card.is-active:focus-within .spc-media::after {
   bottom: 18px;
-  width: 504px;
-  height: 64px;
+  width: 290px;
+  height: 34px;
 }
 
 /*
@@ -170,7 +169,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   text-align: center;
   color: var(--color-green-600, #154734);
   width: 100%;
@@ -182,7 +181,7 @@
 }
 
 .slider-product-card .spc-name {
-  max-width: 548px;
+  max-width: 306px;
   font-family: var(--font-family-poppins, inherit);
   font-size: 28px;
   font-weight: 700;
@@ -198,7 +197,7 @@
 }
 
 .slider-product-card .spc-description {
-  max-width: 310px;
+  max-width: 240px;
   font-family: var(--font-family-poppins, inherit);
   font-size: 16px;
   line-height: 1.08;
@@ -255,13 +254,13 @@
   position: absolute;
 
   /*
-   * Vertically: center on the product image area.
+   * Vertically: center on the product image area (306 px).
    */
-  top: 310px;
+  top: calc(24px + 153px);
   transform: translateY(-50%);
   z-index: 3;
-  width: 80px;
-  height: 80px;
+  width: 42px;
+  height: 42px;
   border: 0;
   border-radius: 999px;
   background: var(--color-teal-300, #00b388);
@@ -270,7 +269,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px;
+  padding: 5.5px;
   transition: opacity 0.2s ease;
 }
 
@@ -282,19 +281,19 @@
  * Horizontally: flank the centred active card.
  */
 .product-slider .ps-arrow-prev {
-  left: calc(50% - 274px - 80px - 64px);
+  left: calc(50% - 153px - 16px - 42px);
 }
 
 .product-slider .ps-arrow-next {
-  left: calc(50% + 274px + 64px);
+  left: calc(50% + 153px + 16px);
 }
 
 .product-slider .ps-shell.is-pair .ps-arrow-prev {
-  left: calc(50% - 306px - 274px - 80px - 64px);
+  left: calc(50% - 171px - 153px - 16px - 42px);
 }
 
 .product-slider .ps-shell.is-pair .ps-arrow-next {
-  left: calc(50% - 306px + 274px + 64px);
+  left: calc(50% - 171px + 153px + 16px);
 }
 
 /* ── CTA button ───────────────────────────────────────────────────────────── */

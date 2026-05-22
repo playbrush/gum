@@ -8,7 +8,7 @@ const FIELD_ALIASES = {
 
 function createChevronSvg(direction = 'right') {
   const path = direction === 'left' ? 'M15 18l-6-6 6-6' : 'M9 6l6 6-6 6';
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true"><path d="${path}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${path}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
 function getField(el, name) {
@@ -99,7 +99,7 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
 
   const syncBadge = () => {
     const badgeValue = getFieldValue(badgeField) || initialValue;
-    const nextBadge = createBadge(badgeValue, 'special');
+    const nextBadge = createBadge(badgeValue, 'special') || createBadge('New', 'special');
 
     if (badgeEl) badgeEl.remove();
 
@@ -188,7 +188,7 @@ function decorateCard(card) {
   let decorativePicture;
 
   if (isUE) {
-    badge = getFieldValue(badgeField);
+    badge = getFieldValue(badgeField) || 'New';
     name = getText(card, 'content_name');
     nameType = getText(card, 'content_nameType') || 'h3';
     description = getText(card, 'content_description');
