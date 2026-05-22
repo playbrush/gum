@@ -9,6 +9,11 @@ const BADGES = {
   'Featured Product': { label: 'Featured Product', className: 'badge-product-featured' },
 };
 
+const FIELD_ALIASES = {
+  content_badge: ['content_badge', 'badge', 'label', 'content_label'],
+  image: ['image', 'content_image', 'productImage', 'product_image'],
+};
+
 function createStarSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="${STAR_PATH}"/></svg>`;
 }
@@ -19,12 +24,34 @@ function createChevronSvg(direction = 'right') {
 }
 
 function getField(el, name) {
-  return el.querySelector(`[data-aue-prop="${name}"]`);
+  const names = FIELD_ALIASES[name] || [name];
+  const exact = names
+    .map((fieldName) => el.querySelector(`[data-aue-prop="${fieldName}"]`))
+    .find(Boolean);
+
+  if (exact) return exact;
+
+  const normalizedNames = names.map((fieldName) => fieldName.toLowerCase());
+  return (
+    [...el.querySelectorAll('[data-aue-prop]')].find((field) => {
+      const prop = field.getAttribute('data-aue-prop')?.toLowerCase();
+      return normalizedNames.some(
+        (fieldName) => prop === fieldName || prop.endsWith(`_${fieldName}`)
+      );
+    }) || null
+  );
 }
 
 function getFieldValue(field) {
   if (!field) return '';
-  return field.getAttribute('data-aue-value') || field.textContent?.trim() || '';
+  return (
+    field.getAttribute('data-aue-value') ||
+    field.getAttribute('value') ||
+    field.getAttribute('href') ||
+    field.getAttribute('src') ||
+    field.textContent?.trim() ||
+    ''
+  );
 }
 
 function getText(el, name) {
@@ -40,6 +67,26 @@ function getLink(el, name) {
 
 function getBadge(value) {
   return BADGES[value] || null;
+}
+
+function getReferenceHref(el) {
+  if (!el) return '';
+
+  const anchor = el.tagName === 'A' ? el : el.querySelector('a[href]');
+  const img = el.tagName === 'IMG' ? el : el.querySelector('img[src]');
+
+  return (
+    anchor?.getAttribute('href') ||
+    img?.getAttribute('src') ||
+    el.getAttribute('data-aue-value') ||
+    el.textContent?.trim() ||
+    ''
+  );
+}
+
+function isImageReference(el) {
+  const src = getReferenceHref(el);
+  return /\.(avif|gif|jpe?g|png|svg|webp)(\?.*)?$/i.test(src) || src.includes('/content/dam/');
 }
 
 function createBadgeWrapper(badgeField, initialValue) {
@@ -83,7 +130,12 @@ function createBadgeWrapper(badgeField, initialValue) {
 }
 
 function getCardImage(card) {
-  const imageField = getField(card, 'image');
+  const imageField =
+    getField(card, 'image') ||
+    [...card.querySelectorAll('[data-aue-label], [data-aue-prop], a[href]')].find((el) => {
+      const label = el.getAttribute('data-aue-label')?.toLowerCase() || '';
+      return label.includes('image') || isImageReference(el);
+    });
 
   let picture = imageField?.querySelector('picture') || card.querySelector('picture');
 
@@ -94,19 +146,12 @@ function getCardImage(card) {
       picture = document.createElement('picture');
       picture.append(imgEl);
     } else {
-      // In UE a reference field can render as the <a> element itself.
-      // Use getAttribute('href') — .href auto-expands "" to the page URL (truthy but wrong).
-      const anchor = imageField?.tagName === 'A' ? imageField : imageField?.querySelector('a');
-      const src =
-        anchor?.getAttribute('href') ||
-        imageField?.getAttribute('data-aue-value') ||
-        imageField?.textContent?.trim() ||
-        '';
+      const src = getReferenceHref(imageField);
 
       if (src) {
         const img = document.createElement('img');
         img.src = src;
-        img.alt = getText(card, 'imageAlt') || anchor?.textContent?.trim() || '';
+        img.alt = getText(card, 'imageAlt') || imageField?.textContent?.trim() || '';
         img.loading = 'lazy';
 
         picture = document.createElement('picture');
