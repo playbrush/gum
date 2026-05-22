@@ -8,7 +8,7 @@ const FIELD_ALIASES = {
 
 function createChevronSvg(direction = 'right') {
   const path = direction === 'left' ? 'M15 18l-6-6 6-6' : 'M9 6l6 6-6 6';
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${path}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="44" height="44" aria-hidden="true"><path d="${path}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
 function getField(el, name) {
@@ -391,14 +391,15 @@ export default function decorate(block) {
     shell.append(prev, next);
   }
 
-  const sliderCtaLabel = getText(block, 'ctaLabel') || getText(block, 'ctaText');
+  const sliderCtaLabel =
+    getText(block, 'ctaLabel') || getText(block, 'ctaText') || 'Explore all products';
   const sliderCtaHref = getLink(block, 'ctaLink');
 
   if (sliderCtaLabel && sliderCtaHref) {
     const cta = document.createElement('a');
     cta.className = 'ps-cta primary small';
     cta.href = sliderCtaHref;
-    cta.innerHTML = `<span>${sliderCtaLabel}</span>${createChevronSvg('right')}`;
+    cta.innerHTML = `<span>${sliderCtaLabel}</span><span class="ps-cta-icon">${createChevronSvg('right')}</span>`;
     shell.append(cta);
   }
 

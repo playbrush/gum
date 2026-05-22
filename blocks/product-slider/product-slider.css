@@ -15,12 +15,13 @@
     var(--color-blue-100, #9adbe8) 45.875%,
     var(--color-teal-100, #47d7ac) 87.228%
   );
-  padding: var(--spacer-l, 60px) 0;
+  padding: 52px 0 0;
 }
 
 .product-slider .ps-shell {
   position: relative;
   width: 100%;
+  min-height: 610px;
 }
 
 /* ── Slider track ─────────────────────────────────────────────────────────── */
@@ -30,13 +31,13 @@
   z-index: 2;
   display: flex;
   justify-content: center;
-  gap: 36px;
+  gap: 64px;
 }
 
 /* ── Cards ────────────────────────────────────────────────────────────────── */
 
 .product-slider .slider-product-card {
-  width: 306px;
+  width: 548px;
   flex-shrink: 0;
   opacity: 0.2;
   transition: opacity 0.3s ease;
@@ -50,9 +51,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 36px;
+  gap: 48px;
   width: 100%;
-  min-height: 593px;
+  min-height: 690px;
   transition: gap 0.2s ease;
 }
 
@@ -71,25 +72,29 @@
 /* Badge wrapper sits above the image slot (same structure as product-card) */
 .slider-product-card .spc-image-block .badge-wrapper {
   display: flex;
+  align-items: center;
   justify-content: center;
   width: 100%;
-  min-height: 24px;
-  margin-bottom: 12px;
+  min-height: 44px;
+  margin-bottom: 32px;
 }
 
 .slider-product-card .spc-image-block .badge-special {
-  width: 248px;
+  width: 548px;
   max-width: 100%;
-  height: 24px;
+  height: 44px;
   padding: 0 12px;
   border-radius: 0;
   color: var(--text-primary, #154734);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.1;
   background-color: transparent;
   background-image: radial-gradient(
     ellipse at center,
-    var(--badge-bg) 0%,
-    rgb(255 255 255 / 55%) 38%,
-    rgb(255 255 255 / 18%) 62%,
+    rgb(255 255 255 / 58%) 0%,
+    rgb(255 255 255 / 36%) 42%,
+    rgb(255 255 255 / 14%) 68%,
     transparent 100%
   );
 }
@@ -97,8 +102,8 @@
 /* ── Card media (image slot) ──────────────────────────────────────────────── */
 
 .slider-product-card .spc-media {
-  width: 306px;
-  height: 306px;
+  width: 548px;
+  height: 520px;
   position: relative;
   overflow: visible;
 }
@@ -107,10 +112,10 @@
   content: '';
   position: absolute;
   left: 50%;
-  bottom: 21px;
+  bottom: 24px;
   z-index: 0;
-  width: 253px;
-  height: 28px;
+  width: 456px;
+  height: 54px;
   border: 1px solid rgb(255 255 255 / 78%);
   border-radius: 50%;
   box-shadow: inset 0 0 18px rgb(255 255 255 / 42%);
@@ -124,8 +129,8 @@
 .product-slider .slider-product-card.is-active:hover .spc-media::after,
 .product-slider .slider-product-card.is-active:focus-within .spc-media::after {
   bottom: 18px;
-  width: 290px;
-  height: 34px;
+  width: 504px;
+  height: 64px;
 }
 
 /*
@@ -141,15 +146,6 @@
   inset: 0;
   display: block;
   z-index: 1;
-}
-
-.slider-product-card .spc-image-block .badge-wrapper > [data-aue-prop] {
-  position: absolute !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  clip-path: inset(50%) !important;
-  white-space: nowrap !important;
 }
 
 .slider-product-card .spc-media picture {
@@ -174,7 +170,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   text-align: center;
   color: var(--color-green-600, #154734);
   width: 100%;
@@ -186,7 +182,7 @@
 }
 
 .slider-product-card .spc-name {
-  max-width: 306px;
+  max-width: 548px;
   font-family: var(--font-family-poppins, inherit);
   font-size: 28px;
   font-weight: 700;
@@ -202,7 +198,7 @@
 }
 
 .slider-product-card .spc-description {
-  max-width: 240px;
+  max-width: 310px;
   font-family: var(--font-family-poppins, inherit);
   font-size: 16px;
   line-height: 1.08;
@@ -259,14 +255,13 @@
   position: absolute;
 
   /*
-   * Vertically: center on the product image area (306 px).
-   * Badge wrapper (24 px) sits above the image, so image centre = 24 + 153 = 177 px.
+   * Vertically: center on the product image area.
    */
-  top: calc(24px + 153px);
+  top: 310px;
   transform: translateY(-50%);
   z-index: 3;
-  width: 42px;
-  height: 42px;
+  width: 80px;
+  height: 80px;
   border: 0;
   border-radius: 999px;
   background: var(--color-teal-300, #00b388);
@@ -275,7 +270,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5.5px;
+  padding: 18px;
   transition: opacity 0.2s ease;
 }
 
@@ -284,24 +279,22 @@
 }
 
 /*
- * Horizontally: flank the centred active card (306 px wide) with 16 px gap.
- *   prev left edge = 50% - 153px (half-card) - 16px (gap) - 42px (arrow)
- *   next left edge = 50% + 153px + 16px
+ * Horizontally: flank the centred active card.
  */
 .product-slider .ps-arrow-prev {
-  left: calc(50% - 153px - 16px - 42px);
+  left: calc(50% - 274px - 80px - 64px);
 }
 
 .product-slider .ps-arrow-next {
-  left: calc(50% + 153px + 16px);
+  left: calc(50% + 274px + 64px);
 }
 
 .product-slider .ps-shell.is-pair .ps-arrow-prev {
-  left: calc(50% - 171px - 153px - 16px - 42px);
+  left: calc(50% - 306px - 274px - 80px - 64px);
 }
 
 .product-slider .ps-shell.is-pair .ps-arrow-next {
-  left: calc(50% - 171px + 153px + 16px);
+  left: calc(50% - 306px + 274px + 64px);
 }
 
 /* ── CTA button ───────────────────────────────────────────────────────────── */
@@ -313,7 +306,7 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 12px 12px 18px;
+  padding: 8px 8px 8px 18px;
   border: 1px solid var(--color-yellow-green-100, #a5dc43);
   border-radius: var(--radius-l, 160px);
   background: var(--color-yellow-green-100, #a5dc43);
@@ -340,6 +333,11 @@
   background: var(--color-green-600, #154734);
   color: var(--color-white, #fff);
   flex-shrink: 0;
+}
+
+.product-slider .ps-cta-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 /* ── Decorative image ─────────────────────────────────────────────────────── */
