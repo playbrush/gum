@@ -631,6 +631,8 @@ button.small {
 
 a.button.xsmall,
 button.xsmall {
+  min-height: 0;
+  margin: 0;
   padding: 0.25em 0.8em;
   font-size: 12px;
 }
@@ -803,8 +805,8 @@ button.xsmall {
   line-height: var(--line-height-body-sm);
   letter-spacing: var(--letter-spacing-body-sm);
   color: var(--text-primary);
-  background:
-    radial-gradient(ellipse at center, rgb(255 255 255 / 75%) 0%, transparent 100%), var(--badge-bg);
+  background-color: var(--badge-bg);
+  background-image: radial-gradient(ellipse at center, rgb(255 255 255 / 75%) 0%, transparent 100%);
   white-space: nowrap;
 }
 

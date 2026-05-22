@@ -64,10 +64,11 @@ function makeCard(card) {
   const fallbackMedia = !imageFieldEl ? card.querySelector('picture, img') : null;
 
   // UE mode: reference fields render as <a href="url"> instead of <picture>.
+  // The <a> may be the field element itself (data-aue-prop on the anchor) or a child.
   // Inject a <picture><img> from the href so the image actually renders.
   if (imageFieldEl && !imageFieldEl.querySelector('picture, img')) {
-    const anchor = imageFieldEl.querySelector('a');
-    const src = anchor?.getAttribute('href') || anchor?.href;
+    const anchor = imageFieldEl.tagName === 'A' ? imageFieldEl : imageFieldEl.querySelector('a');
+    const src = anchor?.getAttribute('href') || anchor?.href || imageFieldEl.textContent.trim();
     if (src) {
       const img = document.createElement('img');
       img.src = src;
@@ -82,10 +83,16 @@ function makeCard(card) {
   const article = document.createElement('article');
   article.className = 'spc-inner';
 
+  const badgeType = badge ? BADGE_TYPE_MAP[badge.toLowerCase()] : null;
+  const badgeHtml = badge
+    ? `<div class="spc-badge badge-special${badgeType ? ` badge-special-${badgeType}` : ''}">${badge}</div>`
+    : '';
+
   article.innerHTML = `
     <div class="spc-image-block">
-      <div class="spc-badge badge-special${BADGE_TYPE_MAP[badge?.toLowerCase()] ? ` badge-special-${BADGE_TYPE_MAP[badge.toLowerCase()]}` : ''}">${badge || ''}</div>
-      <div class="spc-media"></div>
+      <div class="spc-media">
+        ${badgeHtml}
+      </div>
     </div>
     <div class="spc-content">
       ${name ? `<h3 class="spc-name type-h5">${name}</h3>` : ''}
