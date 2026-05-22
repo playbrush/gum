@@ -63,6 +63,22 @@ function makeCard(card) {
   // Delivery mode: picture or img rendered directly in the card row structure
   const fallbackMedia = !imageFieldEl ? card.querySelector('picture, img') : null;
 
+  // UE mode: reference fields render as <a href="url"> instead of <picture>.
+  // Inject a <picture><img> from the href so the image actually renders.
+  if (imageFieldEl && !imageFieldEl.querySelector('picture, img')) {
+    const anchor = imageFieldEl.querySelector('a');
+    const src = anchor?.getAttribute('href') || anchor?.href;
+    if (src) {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = text(card, 'imageAlt');
+      img.loading = 'lazy';
+      const pic = document.createElement('picture');
+      pic.append(img);
+      imageFieldEl.replaceChildren(pic);
+    }
+  }
+
   const article = document.createElement('article');
   article.className = 'spc-inner';
 

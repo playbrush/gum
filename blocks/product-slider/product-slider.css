@@ -124,6 +124,16 @@
   font-size: var(--font-size-h5, 28px);
   font-weight: 700;
   line-height: 1.1;
+}
+
+/* Explicit color override — beats .section[data-background='dark'] h3 (specificity 0,2,1)
+ * by using three class selectors (0,3,0).
+ */
+.product-slider .slider-product-card .spc-name {
+  color: var(--text-primary, #154734);
+}
+
+.product-slider .slider-product-card .spc-badge {
   color: var(--text-primary, #154734);
 }
 
@@ -157,11 +167,14 @@
 /* Card CTA — uses global button.secondary.xsmall design-system styles.
  * Visibility (not display) keeps the button in the flow at all times,
  * so the card height never shifts on hover.
+ * Padding + font-size match Figma XSmall spec (4px/12px, Body/Small = 14px).
  */
 .slider-product-card .spc-card-cta {
   visibility: hidden;
   margin: 0;
   min-height: 0;
+  padding: 4px 12px;
+  font-size: var(--font-size-small, 14px);
 }
 
 .product-slider .slider-product-card.is-active:hover .spc-card-cta {
