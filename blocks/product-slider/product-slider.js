@@ -1,11 +1,12 @@
 const STAR_PATH =
   'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
 
+// className maps to the global .badge-product-* colour rules in styles.css
 const BADGES = {
-  New: { label: 'New', className: 'badge-new' },
-  'Best Seller': { label: 'Best Seller', className: 'badge-best-seller' },
-  'Online Only': { label: 'Online Only', className: 'badge-online-only' },
-  'Featured Product': { label: 'Featured Product', className: 'badge-featured-product' },
+  New: { label: 'New', className: 'badge-product-new' },
+  'Best Seller': { label: 'Best Seller', className: 'badge-product-best-seller' },
+  'Online Only': { label: 'Online Only', className: 'badge-product-online-only' },
+  'Featured Product': { label: 'Featured Product', className: 'badge-product-featured' },
 };
 
 function createStarSvg() {
@@ -46,7 +47,9 @@ function getCardImage(card) {
       picture = document.createElement('picture');
       picture.append(imgEl);
     } else {
-      const anchor = imageField?.querySelector('a[href]');
+      // In UE a reference field can render as the <a> element itself
+      const anchor =
+        imageField?.tagName === 'A' ? imageField : imageField?.querySelector('a[href]');
       const src = anchor?.href || imageField?.textContent?.trim() || '';
 
       if (src) {
@@ -65,14 +68,75 @@ function getCardImage(card) {
 }
 
 function decorateCard(card) {
-  const badge = getText(card, 'content_badge');
+  // Prefer data-aue-prop fields (Universal Editor); fall back to row/cell structure (delivery).
+  // Mirrors the same dual-mode approach used in product-card.js.
+  const isUE = !!getField(card, 'content_name');
+
+  let badge;
+  let name;
+  let nameType;
+  let description;
+  let rating;
+  let ctaLabel;
+  let picture;
+
+  if (isUE) {
+    badge = getText(card, 'content_badge');
+    name = getText(card, 'content_name');
+    nameType = getText(card, 'content_nameType') || 'h3';
+    description = getText(card, 'content_description');
+    rating = getText(card, 'content_rating');
+    ctaLabel = getText(card, 'content_ctaLabel');
+    picture = getCardImage(card);
+  } else {
+    // Delivery mode: same row/cell structure as product-card.
+    // Row 0 cell — heading = product name, <p> before heading = badge value,
+    //             <p> after heading = description / rating / ctaLabel in order.
+    // Row 1 cell — image (<picture>, bare <img>, or <a href>).
+    const rows = [...card.children];
+    const contentCell = rows[0]?.children[0];
+    const imageCell = rows[1]?.children[0];
+
+    const headingEl = contentCell?.querySelector('h1,h2,h3,h4,h5,h6');
+    const children = [...(contentCell?.children ?? [])];
+    const headingIdx = headingEl ? children.indexOf(headingEl) : -1;
+    const beforeH = (headingIdx > 0 ? children.slice(0, headingIdx) : []).filter(
+      (el) => el.tagName === 'P'
+    );
+    const afterH = children
+      .slice(headingIdx < 0 ? 0 : headingIdx + 1)
+      .filter((el) => el.tagName === 'P');
+
+    badge = beforeH[0]?.textContent.trim() || '';
+    name = headingEl?.textContent.trim() || '';
+    nameType = headingEl?.tagName.toLowerCase() || 'h3';
+    description = afterH[0]?.textContent.trim() || '';
+    rating = afterH[1]?.textContent.trim() || '';
+    ctaLabel = afterH[2]?.textContent.trim() || '';
+
+    let pic = imageCell?.querySelector('picture');
+    if (!pic) {
+      const imgEl = imageCell?.querySelector('img');
+      if (imgEl) {
+        pic = document.createElement('picture');
+        pic.append(imgEl);
+      } else {
+        const anchor = imageCell?.querySelector('a');
+        const src = anchor?.href || imageCell?.textContent?.trim() || '';
+        if (src) {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = anchor?.textContent?.trim() || '';
+          img.loading = 'lazy';
+          pic = document.createElement('picture');
+          pic.append(img);
+        }
+      }
+    }
+    picture = pic;
+  }
+
   const badgeData = getBadge(badge);
-  const name = getText(card, 'content_name');
-  const nameType = getText(card, 'content_nameType') || 'h3';
-  const description = getText(card, 'content_description');
-  const rating = getText(card, 'content_rating');
-  const ctaLabel = getText(card, 'content_ctaLabel');
-  const picture = getCardImage(card);
 
   const article = document.createElement('article');
   article.className = 'spc-inner';

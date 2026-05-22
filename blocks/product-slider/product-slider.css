@@ -54,16 +54,17 @@
 }
 
 .slider-product-card .spc-image-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
-/* Badge is absolutely overlaid at the top of the image slot (matches Figma design) */
-.slider-product-card .spc-badge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1;
+/* Badge wrapper sits above the image slot (same structure as product-card) */
+.slider-product-card .spc-image-block .badge-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
 }
 
 /* ── Card media (image slot) ──────────────────────────────────────────────── */
@@ -132,10 +133,6 @@
   color: var(--text-primary, #154734);
 }
 
-.product-slider .slider-product-card .spc-badge {
-  color: var(--text-primary, #154734);
-}
-
 .slider-product-card .spc-description {
   font-size: var(--font-size-default, 16px);
   line-height: 1.12;
@@ -167,11 +164,11 @@
  * Only visibility behaviour is overridden here; sizing comes from xsmall,
  * visual style comes from secondary — both defined in styles.css.
  */
-.slider-product-card .spc-card-cta {
+.slider-product-card .spc-cta {
   visibility: hidden;
 }
 
-.product-slider .slider-product-card.is-active:hover .spc-card-cta {
+.product-slider .slider-product-card.is-active:hover .spc-cta {
   visibility: visible;
 }
 
@@ -182,9 +179,9 @@
 
   /*
    * Vertically: center on the product image area (306 px).
-   * Badge is now overlaid inside the image slot, so no separate badge offset.
+   * Badge wrapper (24 px) sits above the image, so image centre = 24 + 153 = 177 px.
    */
-  top: 153px;
+  top: calc(24px + 153px);
   transform: translateY(-50%);
   z-index: 2;
   width: 42px;
