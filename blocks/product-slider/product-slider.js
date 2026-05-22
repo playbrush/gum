@@ -3,6 +3,7 @@ import { createBadge, createRating, getBadgeData } from '../../scripts/labels-ra
 const FIELD_ALIASES = {
   content_badge: ['content_badge', 'badge', 'label', 'content_label'],
   image: ['image', 'content_image', 'productImage', 'product_image'],
+  decorativeImage: ['decorativeImage', 'rightSideImage', 'secondaryImage', 'lifestyleImage'],
 };
 
 function createChevronSvg(direction = 'right') {
@@ -111,6 +112,7 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
 
   if (badgeField) {
     badgeField.hidden = true;
+    badgeField.style.display = 'none';
     badgeWrapper.append(badgeField);
 
     const observer = new MutationObserver(syncBadge);
@@ -126,18 +128,23 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
   return badgeWrapper;
 }
 
-function getCardImage(card) {
+function getCardImage(card, name = 'image', altName = 'imageAlt', allowGenericFallback = true) {
   const imageField =
-    getField(card, 'image') ||
-    [...card.querySelectorAll('[data-aue-label], [data-aue-prop], a[href]')].find((el) => {
-      const label = el.getAttribute('data-aue-label')?.toLowerCase() || '';
-      return label.includes('image') || isImageReference(el);
-    });
+    getField(card, name) ||
+    (allowGenericFallback
+      ? [...card.querySelectorAll('[data-aue-label], [data-aue-prop], a[href]')].find((el) => {
+          const label = el.getAttribute('data-aue-label')?.toLowerCase() || '';
+          return label.includes('image') || isImageReference(el);
+        })
+      : null);
 
-  let picture = imageField?.querySelector('picture') || card.querySelector('picture');
+  let picture =
+    imageField?.querySelector('picture') ||
+    (allowGenericFallback ? card.querySelector('picture') : null);
 
   if (!picture) {
-    const imgEl = imageField?.querySelector('img') || card.querySelector('img');
+    const imgEl =
+      imageField?.querySelector('img') || (allowGenericFallback ? card.querySelector('img') : null);
 
     if (imgEl) {
       picture = document.createElement('picture');
@@ -148,7 +155,7 @@ function getCardImage(card) {
       if (src) {
         const img = document.createElement('img');
         img.src = src;
-        img.alt = getText(card, 'imageAlt') || imageField?.textContent?.trim() || '';
+        img.alt = getText(card, altName) || imageField?.textContent?.trim() || '';
         img.loading = 'lazy';
 
         picture = document.createElement('picture');
@@ -174,6 +181,7 @@ function decorateCard(card) {
   let rating;
   let ctaLabel;
   let picture;
+  let decorativePicture;
 
   if (isUE) {
     badge = getFieldValue(badgeField) || 'New';
@@ -183,6 +191,7 @@ function decorateCard(card) {
     rating = getText(card, 'content_rating');
     ctaLabel = getText(card, 'content_ctaLabel');
     picture = getCardImage(card);
+    decorativePicture = getCardImage(card, 'decorativeImage', 'decorativeImageAlt', false);
   } else {
     // Delivery mode: same row/cell structure as product-card.
     // Row 0 cell — heading = product name, <p> before heading = badge value,
@@ -191,6 +200,7 @@ function decorateCard(card) {
     const rows = [...card.children];
     const contentCell = rows[0]?.children[0];
     const imageCell = rows[1]?.children[0];
+    const decorativeImageCell = rows[2]?.children[0];
 
     const headingEl = contentCell?.querySelector('h1,h2,h3,h4,h5,h6');
     const children = [...(contentCell?.children ?? [])];
@@ -230,6 +240,27 @@ function decorateCard(card) {
       }
     }
     picture = pic;
+
+    let decorativePic = decorativeImageCell?.querySelector('picture');
+    if (!decorativePic) {
+      const imgEl = decorativeImageCell?.querySelector('img');
+      if (imgEl) {
+        decorativePic = document.createElement('picture');
+        decorativePic.append(imgEl);
+      } else {
+        const anchor = decorativeImageCell?.querySelector('a');
+        const src = anchor?.getAttribute('href') || decorativeImageCell?.textContent?.trim() || '';
+        if (src) {
+          const img = document.createElement('img');
+          img.src = src;
+          img.alt = anchor?.textContent?.trim() || '';
+          img.loading = 'lazy';
+          decorativePic = document.createElement('picture');
+          decorativePic.append(img);
+        }
+      }
+    }
+    decorativePicture = decorativePic;
   }
 
   const badgeData = getBadgeData(badge, 'special');
@@ -288,6 +319,7 @@ function decorateCard(card) {
   article.append(imageBlock, content);
 
   card.classList.add('slider-product-card');
+  card.psDecorativePicture = decorativePicture;
   card.replaceChildren(article);
 }
 
@@ -307,6 +339,10 @@ export default function decorate(block) {
   cards.forEach((card) => track.append(card));
   shell.append(track);
 
+  const deco = document.createElement('div');
+  deco.className = 'ps-deco';
+  shell.append(deco);
+
   let activeIndex = 0;
 
   function goTo(index) {
@@ -318,6 +354,13 @@ export default function decorate(block) {
       card.classList.toggle('is-active', i === activeIndex);
     });
 
+    deco.replaceChildren();
+    const decorativePicture = cards[activeIndex]?.psDecorativePicture;
+    deco.hidden = !decorativePicture;
+    if (decorativePicture) {
+      deco.append(decorativePicture);
+    }
+
     const cardWidth = cards[0].offsetWidth || 306;
     const gap = 36;
     const offset = block.offsetWidth / 2 - cardWidth / 2 - activeIndex * (cardWidth + gap);
@@ -325,7 +368,7 @@ export default function decorate(block) {
     track.style.transform = `translateX(${offset}px)`;
   }
 
-  if (cards.length > 2) {
+  if (cards.length > 1) {
     shell.classList.add('is-slider');
 
     const prev = document.createElement('button');
@@ -340,8 +383,8 @@ export default function decorate(block) {
     next.setAttribute('aria-label', 'Next product');
     next.innerHTML = createChevronSvg('right');
 
-    prev.addEventListener('click', () => goTo(activeIndex - 1));
-    next.addEventListener('click', () => goTo(activeIndex + 1));
+    prev.addEventListener('click', () => goTo((activeIndex - 1 + cards.length) % cards.length));
+    next.addEventListener('click', () => goTo((activeIndex + 1) % cards.length));
 
     shell.append(prev, next);
   }

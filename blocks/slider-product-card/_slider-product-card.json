@@ -105,6 +105,21 @@
           "label": "Image Alt Text",
           "value": "",
           "required": true
+        },
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "decorativeImage",
+          "label": "Right Side Image",
+          "description": "Optional image shown on the right side of the slider for this product.",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "decorativeImageAlt",
+          "label": "Right Side Image Alt Text",
+          "value": ""
         }
       ]
     }

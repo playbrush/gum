@@ -26,6 +26,8 @@
 /* ── Slider track ─────────────────────────────────────────────────────────── */
 
 .product-slider .ps-track {
+  position: relative;
+  z-index: 2;
   display: flex;
   gap: 0;
   will-change: transform;
@@ -71,8 +73,13 @@
 .slider-product-card .spc-image-block .badge-wrapper {
   display: flex;
   justify-content: center;
+  width: fit-content;
   min-height: 24px;
   margin-bottom: 12px;
+}
+
+.slider-product-card .spc-image-block .badge-wrapper > [data-aue-prop] {
+  display: none !important;
 }
 
 .slider-product-card .spc-image-block .badge-special {
@@ -240,7 +247,7 @@
    */
   top: calc(24px + 153px);
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 3;
   width: 42px;
   height: 42px;
   border: 0;
@@ -288,7 +295,7 @@
   color: var(--color-green-600, #154734);
   text-decoration: none;
   min-height: 52px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .product-slider .ps-cta-label {
@@ -321,6 +328,10 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 1;
+}
+
+.product-slider .ps-deco[hidden] {
+  display: none;
 }
 
 .product-slider .ps-deco picture {
