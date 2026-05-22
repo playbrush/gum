@@ -15,7 +15,7 @@
     var(--color-blue-100, #9adbe8) 45.875%,
     var(--color-teal-100, #47d7ac) 87.228%
   );
-  padding: var(--spacer-l, 60px) 0;
+  padding: var(--spacing-15) 0;
 }
 
 .product-slider .ps-shell {
@@ -30,7 +30,7 @@
   z-index: 2;
   display: flex;
   justify-content: center;
-  gap: 36px;
+  gap: var(--spacing-9);
 }
 
 /* ── Cards ────────────────────────────────────────────────────────────────── */
@@ -50,32 +50,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 36px;
+  gap: var(--spacing-6);
   width: 100%;
+  height: 593px;
   box-sizing: border-box;
-  min-height: 593px;
-  transition: gap 0.2s ease;
-}
-
-.product-slider .slider-product-card.is-active:hover .spc-inner,
-.product-slider .slider-product-card.is-active:focus-within .spc-inner {
-  gap: 24px;
 }
 
 .slider-product-card .spc-image-block {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: var(--spacing-9);
   width: 100%;
+  height: 342px;
 }
 
-/* Badge wrapper sits above the image slot (same structure as product-card) */
 .slider-product-card .spc-image-block .badge-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 36px;
 }
 
 .slider-product-card .spc-image-block .badge-special {
@@ -84,10 +78,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: var(--spacing-1);
   width: 284px;
   height: 24px;
-  padding: 8px 10px;
+  padding: var(--spacing-2) calc(var(--spacing-2) + var(--spacing-0-5));
   border-radius: 0;
   color: var(--text-primary, #154734);
   font-size: var(--font-size-small, 14px);
@@ -105,7 +99,7 @@
 
 .slider-product-card .spc-media {
   width: 306px;
-  height: 306px;
+  height: 266px;
   position: relative;
   overflow: visible;
 }
@@ -130,9 +124,9 @@
 
 .product-slider .slider-product-card.is-active:hover .spc-media::after,
 .product-slider .slider-product-card.is-active:focus-within .spc-media::after {
-  bottom: 18px;
-  width: 290px;
-  height: 34px;
+  bottom: 21px;
+  width: 253px;
+  height: 28px;
 }
 
 /*
@@ -172,7 +166,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: var(--spacing-4);
   text-align: center;
   color: var(--color-green-600, #154734);
   width: 100%;
@@ -210,9 +204,9 @@
 .slider-product-card .rating {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--spacing-1);
   min-height: 28px;
-  padding: 5px 8px;
+  padding: var(--spacing-1-5) var(--spacing-2);
   background: var(--color-white, #fff);
   border: 1px solid var(--color-neutral-100, #f5f5f5);
   border-radius: var(--radius-l, 160px);
@@ -226,7 +220,7 @@
 
 .slider-product-card .rating-stars {
   display: inline-flex;
-  gap: 2px;
+  gap: var(--spacing-0-5);
   color: var(--color-pink, #ea0089);
 }
 
@@ -236,7 +230,7 @@
  */
 .slider-product-card .spc-cta {
   min-height: 30px;
-  padding: 5px 17px;
+  padding: var(--spacing-1-5) var(--spacing-4);
   border-color: var(--text-primary, #154734);
   color: var(--text-primary, #154734);
   opacity: 0;
@@ -273,7 +267,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 5.5px;
+  padding: var(--spacing-1-5);
   transition: opacity 0.2s ease;
 }
 
@@ -308,8 +302,8 @@
   bottom: 62px;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 8px 8px 18px;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-2) var(--spacing-2) var(--spacing-5);
   border: 1px solid var(--color-yellow-green-100, #a5dc43);
   border-radius: var(--radius-l, 160px);
   background: var(--color-yellow-green-100, #a5dc43);
@@ -381,7 +375,7 @@
 
 @media (width < 768px) {
   .product-slider {
-    padding: var(--spacer-m, 40px) 0;
+    padding: var(--spacing-10) 0;
   }
 
   .product-slider .slider-product-card {
