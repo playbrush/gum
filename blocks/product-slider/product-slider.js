@@ -1,9 +1,18 @@
-import { createBadge, createRating, getBadgeData } from '../../scripts/labels-rating.js';
+import { createRating } from '../../scripts/labels-rating.js';
 
 const FIELD_ALIASES = {
   content_badge: ['content_badge', 'badge', 'label', 'content_label'],
   image: ['image', 'content_image', 'productImage', 'product_image'],
   decorativeImage: ['decorativeImage', 'rightSideImage', 'secondaryImage', 'lifestyleImage'],
+};
+
+const SLIDER_BADGES = {
+  new: { label: 'New', className: 'badge-special-new' },
+  bestseller: { label: 'Best Seller', className: 'badge-special-best-seller' },
+  best: { label: 'Best Seller', className: 'badge-special-best-seller' },
+  onlineonly: { label: 'Online Only', className: 'badge-special-online-only' },
+  featured: { label: 'Featured Product', className: 'badge-special-featured' },
+  featuredproduct: { label: 'Featured Product', className: 'badge-special-featured' },
 };
 
 function createChevronSvg(direction = 'right') {
@@ -71,6 +80,28 @@ function getBadgeField(card) {
   );
 }
 
+function normalizeBadgeValue(value) {
+  return `${value || ''}`
+    .trim()
+    .replace(/^badge-special-/i, '')
+    .replace(/^badge-product-/i, '')
+    .replace(/^badge-/i, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, '');
+}
+
+function getSliderBadge(value) {
+  return SLIDER_BADGES[normalizeBadgeValue(value)] || SLIDER_BADGES.new;
+}
+
+function createSliderBadge(value) {
+  const badgeData = getSliderBadge(value);
+  const badge = document.createElement('span');
+  badge.className = `badge badge-special ${badgeData.className}`;
+  badge.textContent = badgeData.label;
+  return badge;
+}
+
 function getReferenceHref(el) {
   if (!el) return '';
 
@@ -99,7 +130,7 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
 
   const syncBadge = () => {
     const badgeValue = getFieldValue(badgeField) || initialValue;
-    const nextBadge = createBadge(badgeValue, 'special') || createBadge('New', 'special');
+    const nextBadge = createSliderBadge(badgeValue);
 
     if (badgeEl) badgeEl.remove();
 
@@ -117,7 +148,7 @@ function createLiveBadgeWrapper(badgeField, initialValue) {
   syncBadge();
 
   if (badgeField) {
-    badgeField.hidden = true;
+    badgeField.classList.add('spc-aue-badge-field');
     badgeWrapper.append(badgeField);
 
     const observer = new MutationObserver(syncBadge);
@@ -267,17 +298,13 @@ function decorateCard(card) {
     decorativePicture = decorativePic;
   }
 
-  const badgeData = getBadgeData(badge, 'special');
-
   const article = document.createElement('article');
   article.className = 'spc-inner';
 
   const imageBlock = document.createElement('div');
   imageBlock.className = 'spc-image-block';
 
-  if (badgeData || badgeField) {
-    imageBlock.append(createLiveBadgeWrapper(badgeField, badge));
-  }
+  imageBlock.append(createLiveBadgeWrapper(badgeField, badge));
 
   const media = document.createElement('div');
   media.className = 'spc-media';

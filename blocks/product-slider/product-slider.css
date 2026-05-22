@@ -62,10 +62,11 @@
   align-items: center;
   gap: var(--spacing-9);
   width: 100%;
-  height: 342px;
+  height: 366px;
 }
 
 .slider-product-card .spc-image-block .badge-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,13 +74,13 @@
 }
 
 .slider-product-card .spc-image-block .badge-special {
-  box-sizing: content-box;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-1);
-  width: 284px;
+  gap: var(--spacing-0-75);
+  width: 306px;
   height: 24px;
   padding: var(--spacing-2) calc(var(--spacing-2) + var(--spacing-0-5));
   border-radius: 0;
@@ -95,11 +96,20 @@
   );
 }
 
+.slider-product-card .spc-image-block .spc-aue-badge-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: transparent;
+  pointer-events: none;
+  opacity: 0;
+}
+
 /* ── Card media (image slot) ──────────────────────────────────────────────── */
 
 .slider-product-card .spc-media {
   width: 306px;
-  height: 266px;
+  height: 306px;
   position: relative;
   overflow: visible;
 }
