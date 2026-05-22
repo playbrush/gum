@@ -14,6 +14,15 @@ const FIELD_ALIASES = {
   image: ['image', 'content_image', 'productImage', 'product_image'],
 };
 
+const BADGE_ALIASES = {
+  new: 'New',
+  bestseller: 'Best Seller',
+  best: 'Best Seller',
+  onlineonly: 'Online Only',
+  featured: 'Featured Product',
+  featuredproduct: 'Featured Product',
+};
+
 function createStarSvg() {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="${STAR_PATH}"/></svg>`;
 }
@@ -65,8 +74,32 @@ function getLink(el, name) {
   return field?.querySelector('a')?.href || field?.textContent?.trim() || '';
 }
 
+function normalizeBadgeValue(value) {
+  const cleanValue = `${value || ''}`
+    .trim()
+    .replace(/^badge-product-/i, '')
+    .replace(/^badge-/i, '');
+
+  if (BADGES[cleanValue]) return cleanValue;
+
+  const key = cleanValue.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return BADGE_ALIASES[key] || '';
+}
+
 function getBadge(value) {
-  return BADGES[value] || null;
+  return BADGES[normalizeBadgeValue(value)] || null;
+}
+
+function getBadgeField(card) {
+  return (
+    getField(card, 'content_badge') ||
+    [...card.querySelectorAll('[data-aue-label], [data-aue-prop]')].find((el) => {
+      const label = el.getAttribute('data-aue-label')?.toLowerCase() || '';
+      const prop = el.getAttribute('data-aue-prop')?.toLowerCase() || '';
+      return label.includes('badge') || prop.includes('badge');
+    }) ||
+    null
+  );
 }
 
 function getReferenceHref(el) {
@@ -167,7 +200,7 @@ function decorateCard(card) {
   // Prefer data-aue-prop fields (Universal Editor); fall back to row/cell structure (delivery).
   // Mirrors the same dual-mode approach used in product-card.js.
   const isUE = !!getField(card, 'content_name');
-  const badgeField = isUE ? getField(card, 'content_badge') : null;
+  const badgeField = isUE ? getBadgeField(card) : null;
   const imageField = isUE ? getField(card, 'image') : null;
 
   let badge;
@@ -179,7 +212,7 @@ function decorateCard(card) {
   let picture;
 
   if (isUE) {
-    badge = getText(card, 'content_badge');
+    badge = getFieldValue(badgeField) || 'New';
     name = getText(card, 'content_name');
     nameType = getText(card, 'content_nameType') || 'h3';
     description = getText(card, 'content_description');
