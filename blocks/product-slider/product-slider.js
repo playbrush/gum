@@ -22,11 +22,15 @@ function getField(el, name) {
   return el.querySelector(`[data-aue-prop="${name}"]`);
 }
 
+function getFieldValue(field) {
+  if (!field) return '';
+  return field.getAttribute('data-aue-value') || field.textContent?.trim() || '';
+}
+
 function getText(el, name) {
   const field = getField(el, name);
-  if (!field) return '';
   // UE stores select/reference values in data-aue-value; text fields use textContent
-  return field.getAttribute('data-aue-value') || field.textContent?.trim() || '';
+  return getFieldValue(field);
 }
 
 function getLink(el, name) {
@@ -36,6 +40,46 @@ function getLink(el, name) {
 
 function getBadge(value) {
   return BADGES[value] || null;
+}
+
+function createBadgeWrapper(badgeField, initialValue) {
+  const badgeWrapper = document.createElement('div');
+  badgeWrapper.className = 'badge-wrapper';
+
+  const badgeEl = document.createElement('span');
+
+  const syncBadge = () => {
+    const badgeData = getBadge(getFieldValue(badgeField) || initialValue);
+    if (!badgeData) {
+      badgeWrapper.hidden = true;
+      badgeEl.className = 'badge';
+      badgeEl.textContent = '';
+      return;
+    }
+
+    badgeWrapper.hidden = false;
+    badgeEl.className = `badge ${badgeData.className}`;
+    badgeEl.textContent = badgeData.label;
+  };
+
+  badgeWrapper.append(badgeEl);
+  syncBadge();
+
+  if (badgeField) {
+    badgeField.hidden = true;
+    badgeWrapper.append(badgeField);
+
+    const observer = new MutationObserver(syncBadge);
+    observer.observe(badgeField, {
+      subtree: true,
+      childList: true,
+      characterData: true,
+      attributes: true,
+      attributeFilter: ['data-aue-value'],
+    });
+  }
+
+  return badgeWrapper;
 }
 
 function getCardImage(card) {
@@ -78,6 +122,8 @@ function decorateCard(card) {
   // Prefer data-aue-prop fields (Universal Editor); fall back to row/cell structure (delivery).
   // Mirrors the same dual-mode approach used in product-card.js.
   const isUE = !!getField(card, 'content_name');
+  const badgeField = isUE ? getField(card, 'content_badge') : null;
+  const imageField = isUE ? getField(card, 'image') : null;
 
   let badge;
   let name;
@@ -152,16 +198,8 @@ function decorateCard(card) {
   const imageBlock = document.createElement('div');
   imageBlock.className = 'spc-image-block';
 
-  if (badgeData) {
-    const badgeWrapper = document.createElement('div');
-    badgeWrapper.className = 'badge-wrapper';
-
-    const badgeEl = document.createElement('span');
-    badgeEl.className = `badge ${badgeData.className}`;
-    badgeEl.textContent = badgeData.label;
-
-    badgeWrapper.append(badgeEl);
-    imageBlock.append(badgeWrapper);
+  if (badgeData || badgeField) {
+    imageBlock.append(createBadgeWrapper(badgeField, badge));
   }
 
   const media = document.createElement('div');
@@ -169,6 +207,9 @@ function decorateCard(card) {
 
   if (picture) {
     media.append(picture);
+  } else if (imageField) {
+    // Preserve the live UE field node so AEM can still hydrate the image after decoration.
+    media.append(imageField);
   }
 
   imageBlock.append(media);
