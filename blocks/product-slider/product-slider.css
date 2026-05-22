@@ -73,29 +73,6 @@
   width: 100%;
 }
 
-.slider-product-card .spc-image-block .badge-special {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-0-75);
-  width: 306px;
-  height: 24px;
-  padding: var(--spacing-2) calc(var(--spacing-2) + var(--spacing-0-5));
-  border-radius: 0;
-  color: var(--text-primary, #154734);
-  font-size: var(--font-size-small, 14px);
-  font-weight: 500;
-  line-height: var(--line-height-body-sm, 1.1);
-  background-color: transparent;
-  background-image: radial-gradient(
-    734.45% 50% at 50% 50%,
-    rgb(255 255 255 / 75%) 0%,
-    rgb(255 255 255 / 0%) 100%
-  );
-}
-
 .slider-product-card .spc-image-block .spc-aue-badge-field {
   position: absolute;
   inset: 0;

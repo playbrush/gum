@@ -41,13 +41,23 @@ function getField(el, name) {
 
 function getFieldValue(field) {
   if (!field) return '';
-  const selectedOption = field.querySelector('option:checked');
   const select = field.tagName === 'SELECT' ? field : field.querySelector('select');
+  const selectedOption =
+    field.querySelector('option:checked') ||
+    field.querySelector('[aria-selected="true"]') ||
+    field.querySelector('[selected]') ||
+    field.querySelector('[data-selected="true"]') ||
+    field.querySelector('.is-selected, .selected');
+  const valuedChild = field.querySelector('[data-aue-value], [value]');
 
   return (
     select?.value ||
     selectedOption?.value ||
+    selectedOption?.getAttribute('data-aue-value') ||
+    selectedOption?.getAttribute('value') ||
     selectedOption?.textContent?.trim() ||
+    valuedChild?.getAttribute('data-aue-value') ||
+    valuedChild?.getAttribute('value') ||
     field.getAttribute('data-aue-value') ||
     field.getAttribute('value') ||
     field.getAttribute('href') ||
