@@ -1,120 +1,137 @@
 const STAR_PATH =
   'M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z';
 
-function chevronSvg(direction) {
-  const path = direction === 'left' ? 'M6 1L1 7l5 6' : 'M1 1l5 6-5 6';
-  return `<svg viewBox="0 0 7 14" width="7" height="14" fill="none" aria-hidden="true"><path d="${path}" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function createStarSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="${STAR_PATH}"/></svg>`;
 }
 
-function starSvg() {
-  return `<svg viewBox="0 0 20 20" width="12" height="12" aria-hidden="true"><path d="${STAR_PATH}" fill="currentColor"></path></svg>`;
+function createChevronSvg(direction = 'right') {
+  const path = direction === 'left' ? 'M15 18l-6-6 6-6' : 'M9 6l6 6-6 6';
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="${path}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 }
 
-const BADGE_TYPE_MAP = {
-  new: 'new',
-  'best seller': 'best-seller',
-  'online only': 'online-only',
-  'featured product': 'featured',
-};
-
-function field(el, name) {
+function getField(el, name) {
   return el.querySelector(`[data-aue-prop="${name}"]`);
 }
 
-function text(el, name) {
-  return field(el, name)?.textContent?.trim() || '';
+function getText(el, name) {
+  return getField(el, name)?.textContent?.trim() || '';
 }
 
-function imageFromEl(el, alt) {
-  if (!el) return null;
-
-  // If the element itself is the media element (data-aue-prop placed directly on picture/img)
-  if (el.tagName === 'PICTURE' || el.tagName === 'IMG') return el;
-
-  const picture = el.querySelector('picture');
-  if (picture) return picture;
-
-  const existingImg = el.querySelector('img');
-  if (existingImg) return existingImg;
-
-  const a = el.querySelector('a');
-  // Prefer getAttribute so relative paths stay relative (author instance resolves them correctly)
-  const src = a?.getAttribute('href') || a?.href || el.textContent.trim();
-  if (!src) return null;
-
-  const img = document.createElement('img');
-  img.src = src;
-  img.alt = alt || '';
-  img.loading = 'lazy';
-  return img;
+function getLink(el, name) {
+  const field = getField(el, name);
+  return field?.querySelector('a')?.href || field?.textContent?.trim() || '';
 }
 
-function makeCard(card) {
-  const badge = text(card, 'content_badge');
-  const name = text(card, 'content_name');
-  const desc = text(card, 'content_description');
-  const rating = text(card, 'content_rating');
-  const ctaLabel = text(card, 'content_ctaLabel');
+function normalizeClass(value) {
+  return value.toLowerCase().trim().replace(/\s+/g, '-');
+}
 
-  // Move the ENTIRE data-aue-prop="image" wrapper into spc-media.
-  // Keeping the wrapper in the DOM (not just extracting its contents) ensures the
-  // Universal Editor can still inject the image into it after decoration runs.
-  const imageFieldEl = field(card, 'image');
-  // Delivery mode: picture or img rendered directly in the card row structure
-  const fallbackMedia = !imageFieldEl ? card.querySelector('picture, img') : null;
+function getCardImage(card) {
+  const imageField = getField(card, 'image');
 
-  // UE mode: reference fields render as <a href="url"> instead of <picture>.
-  // The <a> may be the field element itself (data-aue-prop on the anchor) or a child.
-  // Inject a <picture><img> from the href so the image actually renders.
-  if (imageFieldEl && !imageFieldEl.querySelector('picture, img')) {
-    const anchor = imageFieldEl.tagName === 'A' ? imageFieldEl : imageFieldEl.querySelector('a');
-    const src = anchor?.getAttribute('href') || anchor?.href || imageFieldEl.textContent.trim();
-    if (src) {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = text(card, 'imageAlt');
-      img.loading = 'lazy';
-      const pic = document.createElement('picture');
-      pic.append(img);
-      imageFieldEl.replaceChildren(pic);
+  let picture = imageField?.querySelector('picture') || card.querySelector('picture');
+
+  if (!picture) {
+    const imgEl = imageField?.querySelector('img') || card.querySelector('img');
+
+    if (imgEl) {
+      picture = document.createElement('picture');
+      picture.append(imgEl);
+    } else {
+      const anchor = imageField?.querySelector('a[href]');
+      const src = anchor?.href || imageField?.textContent?.trim() || '';
+
+      if (src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = getText(card, 'imageAlt') || anchor?.textContent?.trim() || '';
+        img.loading = 'lazy';
+
+        picture = document.createElement('picture');
+        picture.append(img);
+      }
     }
   }
+
+  return picture;
+}
+
+function decorateCard(card) {
+  const badge = getText(card, 'content_badge');
+  const name = getText(card, 'content_name');
+  const nameType = getText(card, 'content_nameType') || 'h3';
+  const description = getText(card, 'content_description');
+  const rating = getText(card, 'content_rating');
+  const ctaLabel = getText(card, 'content_ctaLabel');
+  const picture = getCardImage(card);
 
   const article = document.createElement('article');
   article.className = 'spc-inner';
 
-  const badgeType = badge ? BADGE_TYPE_MAP[badge.toLowerCase()] : null;
-  const badgeHtml = badge
-    ? `<div class="spc-badge badge-special${badgeType ? ` badge-special-${badgeType}` : ''}">${badge}</div>`
-    : '';
+  const imageBlock = document.createElement('div');
+  imageBlock.className = 'spc-image-block';
 
-  article.innerHTML = `
-    <div class="spc-image-block">
-      <div class="spc-media">
-        ${badgeHtml}
-      </div>
-    </div>
-    <div class="spc-content">
-      ${name ? `<h3 class="spc-name type-h5">${name}</h3>` : ''}
-      ${desc ? `<p class="spc-description type-body-default-regular">${desc}</p>` : ''}
-      ${
-        rating
-          ? `<div class="spc-rating" aria-label="${rating} out of 5 stars">
-               <span class="spc-rating-score type-body-small-semibold">${rating}</span>
-               <span class="spc-stars">${starSvg().repeat(5)}</span>
-             </div>`
-          : ''
-      }
-      ${ctaLabel ? `<button type="button" class="spc-card-cta secondary xsmall">${ctaLabel}</button>` : ''}
-    </div>
-  `;
-
-  const mediaSlot = article.querySelector('.spc-media');
-  if (imageFieldEl) {
-    mediaSlot.append(imageFieldEl);
-  } else if (fallbackMedia) {
-    mediaSlot.append(fallbackMedia);
+  if (badge) {
+    const badgeEl = document.createElement('div');
+    badgeEl.className = `spc-badge badge badge-${normalizeClass(badge)}`;
+    badgeEl.textContent = badge;
+    imageBlock.append(badgeEl);
   }
+
+  const media = document.createElement('div');
+  media.className = 'spc-media';
+
+  if (picture) {
+    media.append(picture);
+  }
+
+  imageBlock.append(media);
+
+  const content = document.createElement('div');
+  content.className = 'spc-content';
+
+  if (name) {
+    const heading = document.createElement(nameType);
+    heading.className = 'spc-name type-h5';
+    heading.textContent = name;
+    content.append(heading);
+  }
+
+  if (description) {
+    const desc = document.createElement('p');
+    desc.className = 'spc-description type-body-default-regular';
+    desc.textContent = description;
+    content.append(desc);
+  }
+
+  if (rating) {
+    const pill = document.createElement('div');
+    pill.className = 'spc-rating';
+    pill.setAttribute('aria-label', `${rating} out of 5 stars`);
+
+    const score = document.createElement('span');
+    score.className = 'spc-rating-score type-body-small-semibold';
+    score.textContent = rating;
+
+    const stars = document.createElement('span');
+    stars.className = 'spc-stars';
+    stars.setAttribute('aria-hidden', 'true');
+    stars.innerHTML = createStarSvg().repeat(5);
+
+    pill.append(score, stars);
+    content.append(pill);
+  }
+
+  if (ctaLabel) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'spc-cta secondary xsmall';
+    button.textContent = ctaLabel;
+    content.append(button);
+  }
+
+  article.append(imageBlock, content);
 
   card.classList.add('slider-product-card');
   card.replaceChildren(article);
@@ -125,77 +142,68 @@ export default function decorate(block) {
     ...block.querySelectorAll('[data-aue-model="slider-product-card"], .slider-product-card'),
   ];
 
-  cards.forEach(makeCard);
+  cards.forEach(decorateCard);
 
   const shell = document.createElement('div');
   shell.className = 'ps-shell';
 
   const track = document.createElement('div');
   track.className = 'ps-track';
+
   cards.forEach((card) => track.append(card));
   shell.append(track);
 
   let activeIndex = 0;
 
   function goTo(index) {
-    activeIndex = Math.max(0, Math.min(cards.length - 1, index));
-    cards.forEach((card, i) => card.classList.toggle('is-active', i === activeIndex));
+    if (!cards.length) return;
 
-    const blockWidth = block.offsetWidth || 1200;
-    const cardWidth = cards[0]?.offsetWidth || 306;
-    // Translate the track so the active card is horizontally centered in the block
-    const offset = blockWidth / 2 - cardWidth / 2 - activeIndex * cardWidth;
+    activeIndex = Math.max(0, Math.min(cards.length - 1, index));
+
+    cards.forEach((card, i) => {
+      card.classList.toggle('is-active', i === activeIndex);
+    });
+
+    const cardWidth = cards[0].offsetWidth || 306;
+    const gap = 36;
+    const offset = block.offsetWidth / 2 - cardWidth / 2 - activeIndex * (cardWidth + gap);
+
     track.style.transform = `translateX(${offset}px)`;
   }
 
-  if (cards.length > 1) {
+  if (cards.length > 2) {
+    shell.classList.add('is-slider');
+
     const prev = document.createElement('button');
     prev.type = 'button';
     prev.className = 'ps-arrow ps-arrow-prev';
     prev.setAttribute('aria-label', 'Previous product');
-    prev.innerHTML = chevronSvg('left');
-    prev.addEventListener('click', () => goTo(activeIndex - 1));
+    prev.innerHTML = createChevronSvg('left');
 
     const next = document.createElement('button');
     next.type = 'button';
     next.className = 'ps-arrow ps-arrow-next';
     next.setAttribute('aria-label', 'Next product');
-    next.innerHTML = chevronSvg('right');
+    next.innerHTML = createChevronSvg('right');
+
+    prev.addEventListener('click', () => goTo(activeIndex - 1));
     next.addEventListener('click', () => goTo(activeIndex + 1));
 
     shell.append(prev, next);
   }
 
-  // CTA button with chevron icon
-  const ctaLabel = text(block, 'ctaLabel');
-  const ctaLinkEl = field(block, 'ctaLink');
-  const ctaHref =
-    ctaLinkEl?.querySelector('a')?.href ||
-    ctaLinkEl?.querySelector('a')?.getAttribute('href') ||
-    text(block, 'ctaLink');
+  const sliderCtaLabel = getText(block, 'ctaLabel') || getText(block, 'ctaText');
+  const sliderCtaHref = getLink(block, 'ctaLink');
 
-  // Decorative photo (right-side absolute image)
-  const decoEl = field(block, 'decorativeImage');
-  const decoMedia = decoEl ? imageFromEl(decoEl, text(block, 'decorativeImageAlt')) : null;
+  if (sliderCtaLabel && sliderCtaHref) {
+    const cta = document.createElement('a');
+    cta.className = 'ps-cta primary small';
+    cta.href = sliderCtaHref;
+    cta.innerHTML = `<span>${sliderCtaLabel}</span>${createChevronSvg('right')}`;
+    shell.append(cta);
+  }
 
   block.replaceChildren(shell);
 
-  if (ctaLabel && ctaHref) {
-    const cta = document.createElement('a');
-    cta.className = 'ps-cta type-body-default-semibold';
-    cta.href = ctaHref;
-    cta.innerHTML = `<span class="ps-cta-label">${ctaLabel}</span>
-      <span class="ps-cta-icon" aria-hidden="true">${chevronSvg('right')}</span>`;
-    block.append(cta);
-  }
-
-  if (decoMedia) {
-    const deco = document.createElement('div');
-    deco.className = 'ps-deco';
-    deco.append(decoMedia);
-    block.append(deco);
-  }
-
-  // Defer goTo(0) so offsetWidth values are available after layout
   requestAnimationFrame(() => goTo(0));
 }
